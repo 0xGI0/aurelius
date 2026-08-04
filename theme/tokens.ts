@@ -34,7 +34,7 @@ export function resolveTheme(pref: ThemePref, system: 'light' | 'dark' | null | 
 }
 
 export const fonts = {
-  quote: 'CormorantGaramond_500Medium',
-  quoteItalic: 'CormorantGaramond_500Medium_Italic',
+  quote: 'Fraunces_500Medium',
+  display: 'Fraunces_600SemiBold',
   greek: 'GFSDidot_400Regular',
 };

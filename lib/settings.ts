@@ -39,3 +39,23 @@ export async function setAnthropicKey(key: string): Promise<void> {
 export async function deleteAnthropicKey(): Promise<void> {
   await deleteItem(K_KEY);
 }
+
+const K_FAVS = 'aurelius.favorites';
+
+export async function getFavorites(): Promise<string[]> {
+  const v = await getItem(K_FAVS);
+  if (!v) return [];
+  try {
+    const parsed: unknown = JSON.parse(v);
+    return Array.isArray(parsed) ? parsed.filter((x): x is string => typeof x === 'string') : [];
+  } catch {
+    return [];
+  }
+}
+
+export async function toggleFavorite(id: string): Promise<string[]> {
+  const current = await getFavorites();
+  const next = current.includes(id) ? current.filter((x) => x !== id) : [...current, id];
+  await setItem(K_FAVS, JSON.stringify(next));
+  return next;
+}

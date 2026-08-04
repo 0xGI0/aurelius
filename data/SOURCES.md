@@ -17,3 +17,9 @@ Zählung: kanonisch nach der griechischen Edition. Die Abschnittszählung von De
 2. **6 bekannte Wortstellungs-Ausreißer im deutschen Text (pdftotext-Artefakt, Wortlaut vollständig).** Betroffen: Buch 4 §34, Buch 6 §5, Buch 7 §51, Buch 7 §65, Buch 8 §42, Buch 12 §10 (1,2 % der 487 deutschen Abschnitte). Ursache (in Task 3 verifiziert): `pdftotext -layout` reißt bei extrem justiertem Flattersatz (v. a. Verszitaten) das letzte Wort der ersten Zeile heraus und setzt es direkt hinter die Abschnittsnummer statt ans Satzende (z. B. Buch 12 §10: „Zweck. Prüfe die Beschaffenheit … und den" statt „Prüfe die Beschaffenheit … und den Zweck."). Verifiziert als generischer `pdftotext`-Rekonstruktionsfehler bei dieser PDF (tritt auch ohne `-layout` auf), kein Artefakt unserer Flag-Wahl. Kein Textverlust — nur die Wortstellung am Anfang der betroffenen Abschnitte ist vertauscht. Bewusst nicht automatisch behoben (Aufwand/Nutzen bei 6 von 487 Fällen); bei Bedarf leicht manuell nachbesserbar.
 
 Nicht alignierbare Abschnitte insgesamt: siehe `data-sources/alignment-report.txt` (1 von 487 möglichen Tripeln, nämlich 12-18 wie oben beschrieben).
+
+## Bilder
+
+| Bild | Quelle | Lizenz |
+|---|---|---|
+| Büste des Marc Aurel (Medaillon + Porträt in der App) | Glyptothek München; Foto: Bibi Saint-Pol, Wikimedia Commons („Marcus Aurelius Glyptothek Munich.jpg") | Gemeinfrei (Public Domain, vom Fotografen freigegeben) |

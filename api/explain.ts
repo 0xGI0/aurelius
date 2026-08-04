@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { GoogleGenAI } from '@google/genai';
-import { buildExplainPrompt, EXPLAIN_SYSTEM } from '../lib/ai/prompt';
+import { buildExplainPrompt, explainSystem, type ExplainLang } from '../lib/ai/prompt';
 
 // Websuche (2026-08-04, Task 10 Step 1): `gemini-2.5-flash` ist weiterhin der
 // korrekte Modellname und im Gemini-API-Free-Tier verfügbar (bestätigt über
@@ -18,11 +18,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.status(405).json({ error: 'nur POST' });
     return;
   }
-  const { text, reference } = (req.body ?? {}) as { text?: unknown; reference?: unknown };
+  const { text, reference, uiLang } = (req.body ?? {}) as {
+    text?: unknown;
+    reference?: unknown;
+    uiLang?: unknown;
+  };
   if (typeof text !== 'string' || text.length === 0 || text.length > 8000 || typeof reference !== 'string') {
     res.status(400).json({ error: 'ungültiger Body' });
     return;
   }
+  const lang: ExplainLang = uiLang === 'en' ? 'en' : 'de';
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     res.status(500).json({ error: 'GEMINI_API_KEY fehlt' });
@@ -32,8 +37,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const stream = await ai.models.generateContentStream({
       model: 'gemini-2.5-flash',
-      contents: buildExplainPrompt(text, reference),
-      config: { systemInstruction: EXPLAIN_SYSTEM, maxOutputTokens: 1024 },
+      contents: buildExplainPrompt(text, reference, lang),
+      config: { systemInstruction: explainSystem(lang), maxOutputTokens: 1024 },
     });
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
     res.setHeader('Cache-Control', 'no-store');

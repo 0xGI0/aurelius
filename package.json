@@ -5,8 +5,10 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",
     "@expo-google-fonts/cormorant-garamond": "^0.4.1",
+    "@expo-google-fonts/fraunces": "^0.4.1",
     "@expo-google-fonts/gfs-didot": "^0.4.1",
     "@expo/ui": "~57.0.9",
+    "@expo/vector-icons": "^15.0.2",
     "@google/genai": "^2.15.0",
     "expo": "~57.0.10",
     "expo-constants": "~57.0.9",

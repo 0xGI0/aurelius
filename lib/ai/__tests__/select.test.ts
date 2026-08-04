@@ -14,14 +14,20 @@ describe('getExplainStream', () => {
   it('nutzt Claude, wenn ein Key hinterlegt ist', async () => {
     mockKey.mockResolvedValue('sk-ant-abc');
     await getExplainStream(quote, 'de');
-    expect(mockClaude).toHaveBeenCalledWith('sk-ant-abc', quote, 'de');
+    expect(mockClaude).toHaveBeenCalledWith('sk-ant-abc', quote, 'de', 'de');
     expect(mockGemini).not.toHaveBeenCalled();
   });
   it('fällt ohne Key auf Gemini zurück', async () => {
     mockClaude.mockClear(); mockGemini.mockClear();
     mockKey.mockResolvedValue(null);
     await getExplainStream(quote, 'de');
-    expect(mockGemini).toHaveBeenCalledWith(quote, 'de');
+    expect(mockGemini).toHaveBeenCalledWith(quote, 'de', 'de');
     expect(mockClaude).not.toHaveBeenCalled();
+  });
+  it('reicht die UI-Sprache an den Provider durch', async () => {
+    mockClaude.mockClear(); mockGemini.mockClear();
+    mockKey.mockResolvedValue(null);
+    await getExplainStream(quote, 'grc', 'en');
+    expect(mockGemini).toHaveBeenCalledWith(quote, 'grc', 'en');
   });
 });

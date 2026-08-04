@@ -14,8 +14,13 @@ const Ctx = createContext<ThemeCtx>({ colors: palettes.light, pref: 'system', se
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const system = useColorScheme();
   const [pref, setPrefState] = useState<ThemePref>('system');
+  // Web-Static-Export: erzwingt nach der Hydration einen Client-Render, damit
+  // zustandslose Konsumenten (z. B. die Tab-Bar) nicht auf den beim Build
+  // vorgerenderten Hell-Styles sitzen bleiben.
+  const [, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     getThemePref().then(setPrefState);
   }, []);
 
