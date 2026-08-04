@@ -1,7 +1,7 @@
 import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { parseEn } from './parsers/en';
 
-const raw = readFileSync('data-sources/pg2680.txt', 'utf8');
+const raw = readFileSync('data-sources/pg-long.txt', 'utf8');
 const sections = parseEn(raw);
 
 const perBook = new Map<number, number>();
