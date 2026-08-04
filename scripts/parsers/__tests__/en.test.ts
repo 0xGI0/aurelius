@@ -1,212 +1,209 @@
 import { parseEn } from '../en';
 
-// Diese Fixtures dokumentieren das REALE Format von Project Gutenberg #2680
-// ("Meditations" von Marcus Aurelius, https://www.gutenberg.org/cache/epub/2680/pg2680.txt).
+// Diese Fixtures dokumentieren das REALE Format von Project Gutenberg #15877
+// ("Thoughts of Marcus Aurelius Antoninus", übersetzt von George Long,
+// https://www.gutenberg.org/cache/epub/15877/pg15877.txt). Die Spec
+// verlangt verbindlich Longs Übersetzung; die ursprünglich verwendete Datei
+// PG #2680 war fälschlich Casaubons Übersetzung (siehe Task-Report).
 //
-// Die ursprüngliche Brief-Annahme (Buchüberschriften "THE FIRST BOOK" ...
-// "THE TWELFTH BOOK", Abschnitte als "I. Text" am Zeilenanfang, Rahmen
-// "*** START OF ... ***" / "*** END OF ... ***") trifft für Buchüberschriften
-// und Abschnittsnummerierung tatsächlich zu — hier musste NICHTS angepasst
-// werden. Die reale Datei enthält aber zusätzliches Beiwerk, das die
-// ursprüngliche einfache Annahme nicht behandelt hätte:
-//
-//   - Zeilenenden sind CRLF (\r\n), nicht \n. `trim()` entfernt \r
-//     automatisch (wie im DE-Parser), keine zusätzliche Logik nötig, aber
-//     hier explizit mit einem CRLF-Fixture abgesichert.
-//   - Zwischen "*** START ***" und der ersten echten Buchüberschrift steht
-//     viel Beiwerk (Inhaltsverzeichnis, Einleitung, eine Widmung "HIS FIRST
-//     BOOK"). Das ist unproblematisch, weil keine dieser Zeilen exakt auf
-//     "THE (\w+) BOOK" passt ("FIRST BOOK" ohne "THE", "HIS FIRST BOOK" mit
-//     "HIS" statt "THE") — der Parser bleibt bis zur ersten echten
-//     Buchüberschrift im book===0-Zustand und verwirft alles.
-//   - NACH "THE TWELFTH BOOK" folgt vor dem "*** END ***"-Marker ein
-//     "APPENDIX" (Briefwechsel mit Fronto), gefolgt von "NOTES" und
-//     "GLOSSARY". Der Appendix-Text enthält selbst römisch nummerierte
-//     Zeilen (Briefnummern, Fußnotenverweise), die ohne explizites
-//     Abschneiden fälschlich als Fortsetzung von Buch XII geparst würden.
-//     Reale Stichprobe: ungefiltert würden nach Buch XII, Abschnitt XXVII
-//     (dem letzten echten Abschnitt) noch etliche zusätzliche
-//     "Abschnitte" mit unsortierten Nummern (X, XI, XVI, XXIII, ...) aus
-//     dem Appendix angehängt. Der Parser schneidet daher explizit an der
-//     "APPENDIX"-Zeile nach "THE TWELFTH BOOK" ab.
-//   - Am Ende von Buch II (nach dem letzten Abschnitt XV, vor "THE THIRD
-//     BOOK") steht eine alleinstehende, komplett kursivierte Kolophon-Zeile
-//     "_Whilst I was at Carnuntum._" (Orts-/Datumsangabe im Gutenberg-
-//     Rohtext per Unterstrich-Kursivierung markiert). Das ist kein
-//     Abschnittstext und darf nicht an den vorherigen Abschnitt angehängt
-//     werden. Erkennungsregel: eine Zeile, die komplett in "_..._"
-//     eingeschlossen ist, wird verworfen.
-//   - Einzelne Wörter/Phrasen MITTEN im Fließtext sind ebenfalls per
-//     Unterstrich kursiviert (z. B. "_Hypomnemata_", "_in infinitum_").
-//     Diese Unterstriche sind reine Kursiv-Markup-Artefakte des
-//     Gutenberg-Texts (keine echte Interpunktion) und werden aus dem
-//     Ergebnistext entfernt.
-//   - Fußnoten in eckigen Klammern (z. B. "[1]", "[Footnote ...]") wie im
-//     DE-Parser (dort: fortlaufende Fußnotenziffern im "N   Text"-Format)
-//     kommen im Fließtext der 12 Bücher NICHT vor: eine Durchsuchung des
-//     gesamten Bereichs zwischen der ersten Buchüberschrift und "APPENDIX"
-//     auf das Zeichen "[" ergab keinen einzigen Treffer. Eckige Klammern
-//     tauchen nur im APPENDIX/NOTES-Beiwerk auf (z. B. "FRONTO[1]" in der
-//     Appendix-Überschrift), das ohnehin abgeschnitten wird. Es gibt daher
-//     keine Fußnoten-Erkennung/-Entfernung im Fließtext zu implementieren.
-//   - Manche Bücher haben in dieser Ausgabe (laut eingebettetem NOTES-
-//     Abschnitt eine auf Casaubons Übersetzung basierende Zählung, nicht
-//     Longs, obwohl der Task-Titel "Long" nennt — siehe Task-Report)
-//     Lücken in der fortlaufenden Nummerierung, z. B. Buch II springt von
-//     "IV." direkt zu "VI." (kein Abschnitt V). Das ist eine echte
-//     Eigenheit der Quelle, keine Fußnote — der Parser übernimmt die
-//     römischen Zahlen wörtlich, ohne eine "erwartete nächste Nummer"
-//     durchzusetzen (anders als der DE-Parser, der das zur
-//     Fußnoten-Disambiguierung braucht).
+// Longs Format weicht von der ursprünglichen Brief-Annahme deutlich ab:
+//   - Buchüberschriften sind eine ALLEINSTEHENDE römische Zahl, sonst
+//     nichts auf der Zeile: "I." … "XII." (nicht "THE FIRST BOOK").
+//   - Der ERSTE Abschnitt eines Buches hat KEINE Nummer, beginnt direkt
+//     nach der Buchüberschrift. Alle weiteren Abschnitte sind mit
+//     ARABISCHEN Zahlen nummeriert ("2. Text", "3. Text", ... nicht
+//     römisch).
+//   - Nach Buch XII folgt vor dem Gutenberg-Ende-Marker "INDEXES." (Index
+//     of Terms, General Index) — wird abgeschnitten, sonst würde der
+//     Glossar-Text (selbst voller "[Wort]"-Klammern) als Fortsetzung von
+//     Buch XII geparst.
+//   - Fußnoten sind mit genau 4 Leerzeichen eingerückt und beginnen mit
+//     einer Referenz "[A]".."[E]". Solange eine Zeile eingerückt ist,
+//     bleibt der Parser "in der Fußnote" (auch bei abweichender
+//     Einrückungstiefe verschachtelter Zitate) und verwirft, bis wieder
+//     eine NICHT eingerückte Zeile erscheint.
+//   - Marcus/Long zitiert gelegentlich Verse (Homer, Hesiod, Empedokles)
+//     mitten im Fließtext, ebenfalls eingerückt, aber OHNE "[X]"-Referenz
+//     am Anfang — diese Verszeilen gehören zum Abschnittstext und bleiben
+//     erhalten (nur die Einrückung wird beim Trimmen entfernt).
+//   - Eckige Klammern haben drei Bedeutungen: (1) Fußnoten-Referenzen
+//     "[A]" -> vollständig entfernen; (2) griechische Transliterationen
+//     "[Greek: ...]" (auch doppelt geklammert) -> vollständig entfernen;
+//     (3) echte redaktionelle Ergänzungen Longs wie "[I learned]" -> nur
+//     die Klammern entfernen, Wortinhalt bleibt.
+//   - Vereinzelte alleinstehende "+"-Zeichen im Fließtext (vermutlich ein
+//     bei der ASCII-Transkription verlorenes Konjektur-/Kritikzeichen,
+//     keiner Fußnotendefinition zuordenbar) werden als Artefakt entfernt.
+//   - "[Illustration: ...]" markiert eine Bildunterschrift zwischen zwei
+//     Abschnitten — wird komplett verworfen.
+//   - Kursiv-Unterstriche ("_word_") werden wie bei PG #2680 entfernt.
 
-const FIXTURE = `*** START OF THE PROJECT GUTENBERG EBOOK MEDITATIONS ***
-Introduction text to be discarded.
+const FIXTURE = `*** START OF THE PROJECT GUTENBERG EBOOK THOUGHTS OF MARCUS AURELIUS ANTONINUS ***
+Biographical sketch to be discarded.
 
-THE FIRST BOOK
+I.
 
-I. Of my grandfather Verus I have learned to be
-gentle and meek.
+From my grandfather Verus I learned good morals and the government
+of my temper.
 
-II. Of him that brought me up, not to be fondly
-addicted to either of the two great factions.
+2. From the reputation and remembrance of my father, modesty and a
+manly character.
 
-THE SECOND BOOK
+II.
 
-I. Remember how long thou hast already put off these things.
+Begin the morning by saying to thyself, I shall meet with the busybody.
 
-*** END OF THE PROJECT GUTENBERG EBOOK MEDITATIONS ***
+*** END OF THE PROJECT GUTENBERG EBOOK THOUGHTS OF MARCUS AURELIUS ANTONINUS ***
 `;
 
 describe('parseEn', () => {
-  it('erkennt Bücher, römische Abschnittsnummern und schneidet Gutenberg-Rahmen ab', () => {
+  it('erkennt Bücher (alleinstehende römische Zahl), einen unnummerierten ersten Abschnitt und arabisch nummerierte Folgeabschnitte, schneidet Gutenberg-Rahmen ab', () => {
     const result = parseEn(FIXTURE);
     expect(result).toEqual([
-      { book: 1, section: 1, text: 'Of my grandfather Verus I have learned to be gentle and meek.' },
-      { book: 1, section: 2, text: 'Of him that brought me up, not to be fondly addicted to either of the two great factions.' },
-      { book: 2, section: 1, text: 'Remember how long thou hast already put off these things.' },
+      { book: 1, section: 1, text: 'From my grandfather Verus I learned good morals and the government of my temper.' },
+      { book: 1, section: 2, text: 'From the reputation and remembrance of my father, modesty and a manly character.' },
+      { book: 2, section: 1, text: 'Begin the morning by saying to thyself, I shall meet with the busybody.' },
     ]);
   });
 
   it('funktioniert mit CRLF-Zeilenenden (reales Gutenberg-Format)', () => {
     const fixture = FIXTURE.replace(/\n/g, '\r\n');
     expect(parseEn(fixture)).toEqual([
-      { book: 1, section: 1, text: 'Of my grandfather Verus I have learned to be gentle and meek.' },
-      { book: 1, section: 2, text: 'Of him that brought me up, not to be fondly addicted to either of the two great factions.' },
-      { book: 2, section: 1, text: 'Remember how long thou hast already put off these things.' },
+      { book: 1, section: 1, text: 'From my grandfather Verus I learned good morals and the government of my temper.' },
+      { book: 1, section: 2, text: 'From the reputation and remembrance of my father, modesty and a manly character.' },
+      { book: 2, section: 1, text: 'Begin the morning by saying to thyself, I shall meet with the busybody.' },
     ]);
   });
 
-  it('verwirft Inhaltsverzeichnis- und Widmungs-Beiwerk vor der ersten echten Buchüberschrift', () => {
-    // Reale Struktur: TOC listet "     FIRST BOOK" (ohne "THE", eingerückt),
-    // danach folgt eine Widmung mit Überschrift "HIS FIRST BOOK" (mit "HIS"
-    // statt "THE") und einem eigenen Zitat "ANTONINUS Book vi. Num. xlviii.
-    // ...". Keine dieser Zeilen darf als Buchanfang erkannt werden.
+  it('verwirft eine eingerückte Fußnote (Referenz "[A]"), auch mehrzeilig, bis zur nächsten nicht eingerückten Zeile', () => {
     const fixture = `*** START OF THE PROJECT GUTENBERG EBOOK MEDITATIONS ***
 
-CONTENTS
+I.
 
-     FIRST BOOK
+From my grandfather Verus[A] I learned good morals.
 
-     SECOND BOOK
+    [A] Annius Verus was his grandfather's name. There is no verb
+    in this section connected with the word "from."
 
-INTRODUCTION
-
-Some biographical text that must be discarded, mentioning I. things
-and II. more things without being inside a book.
-
-HIS FIRST BOOK
-
-concerning HIMSELF:
-
-ANTONINUS Book vi. Num. xlviii. Whensoever thou wilt rejoice thyself,
-think and meditate.
-
-THE FIRST BOOK
-
-I. Real first section.
+2. Second real section, after the footnote block.
 
 *** END OF THE PROJECT GUTENBERG EBOOK MEDITATIONS ***
 `;
-    expect(parseEn(fixture)).toEqual([{ book: 1, section: 1, text: 'Real first section.' }]);
+    expect(parseEn(fixture)).toEqual([
+      { book: 1, section: 1, text: 'From my grandfather Verus I learned good morals.' },
+      { book: 1, section: 2, text: 'Second real section, after the footnote block.' },
+    ]);
   });
 
-  it('schneidet den Appendix nach Buch XII ab, statt ihn als Fortsetzung von Buch XII zu parsen', () => {
+  it('behält eine eingerückte Verszeile im Fließtext, die NICHT durch eine Fußnoten-Referenz eingeleitet wird', () => {
+    // Realer Fall Buch II §10 (Long-Übersetzung): eine zitierte Verszeile
+    // ist eingerückt, aber keine Fußnote — sie gehört zum Abschnittstext.
     const fixture = `*** START OF THE PROJECT GUTENBERG EBOOK MEDITATIONS ***
 
-THE TWELFTH BOOK
+I.
 
-I. Last book, first section.
+Consider if thou hast hitherto behaved to all in such a way that
+this may be said of thee,--
 
-XXVII. Last real section of the last book.
+      "Never has wronged a man in deed or word."
 
-APPENDIX
+And call to recollection both how many things thou hast passed through.
 
-CORRESPONDENCE OF M. AURELIUS ANTONINUS AND M. CORNELIUS FRONTO
+*** END OF THE PROJECT GUTENBERG EBOOK MEDITATIONS ***
+`;
+    expect(parseEn(fixture)).toEqual([
+      {
+        book: 1,
+        section: 1,
+        text:
+          'Consider if thou hast hitherto behaved to all in such a way that this may be said of thee,-- ' +
+          '"Never has wronged a man in deed or word." And call to recollection both how many things thou hast passed through.',
+      },
+    ]);
+  });
 
-I. This looks like a section but is Appendix letter numbering.
+  it('schneidet "INDEXES." (Index of Terms / General Index) nach Buch XII ab, statt es als Fortsetzung von Buch XII zu parsen', () => {
+    const fixture = `*** START OF THE PROJECT GUTENBERG EBOOK MEDITATIONS ***
 
-II. So does this.
+XII.
+
+Last book, first section.
+
+2. Last real section of the last book.
+
+INDEXES.
+
+INDEX OF TERMS.
+
+[Greek: adiaphora] (indifferentia, Cicero, Seneca); things
+  indifferent, neither good nor bad.
 
 *** END OF THE PROJECT GUTENBERG EBOOK MEDITATIONS ***
 `;
     expect(parseEn(fixture)).toEqual([
       { book: 12, section: 1, text: 'Last book, first section.' },
-      { book: 12, section: 27, text: 'Last real section of the last book.' },
+      { book: 12, section: 2, text: 'Last real section of the last book.' },
     ]);
   });
 
-  it('verwirft eine alleinstehende kursivierte Kolophon-Zeile ("_Whilst I was at Carnuntum._"), statt sie an den vorigen Abschnitt anzuhängen', () => {
-    // Realer Fall am Ende von Buch II: nach dem letzten Abschnitt (vor "THE
-    // THIRD BOOK") steht diese Orts-/Datumsangabe als eigene Zeile.
+  it('entfernt eine Bildunterschrift ("[Illustration: ...]") zwischen zwei Abschnitten', () => {
     const fixture = `*** START OF THE PROJECT GUTENBERG EBOOK MEDITATIONS ***
 
-THE SECOND BOOK
+I.
 
-I. Last section of book two.
+First section text.
 
-_Whilst I was at Carnuntum._
+[Illustration: THE FORUM]
 
-THE THIRD BOOK
-
-I. First section of book three.
+2. Second section text.
 
 *** END OF THE PROJECT GUTENBERG EBOOK MEDITATIONS ***
 `;
     expect(parseEn(fixture)).toEqual([
-      { book: 2, section: 1, text: 'Last section of book two.' },
-      { book: 3, section: 1, text: 'First section of book three.' },
+      { book: 1, section: 1, text: 'First section text.' },
+      { book: 1, section: 2, text: 'Second section text.' },
+    ]);
+  });
+
+  it('entfernt griechische Transliterationen ("[Greek: ...]", auch doppelt geklammert) vollständig, behält aber redaktionelle Ergänzungen wie "[I learned]" als reinen Text', () => {
+    const fixture = `*** START OF THE PROJECT GUTENBERG EBOOK MEDITATIONS ***
+
+I.
+
+A member [Greek: melos] of the system, [I learned], and Extensions [[Greek: aktines]] too.
+
+*** END OF THE PROJECT GUTENBERG EBOOK MEDITATIONS ***
+`;
+    expect(parseEn(fixture)).toEqual([
+      { book: 1, section: 1, text: 'A member of the system, I learned, and Extensions too.' },
+    ]);
+  });
+
+  it('entfernt vereinzelte alleinstehende "+"-Zeichen (Transkriptionsartefakt) aus dem Fließtext', () => {
+    const fixture = `*** START OF THE PROJECT GUTENBERG EBOOK MEDITATIONS ***
+
+I.
+
+If then thou art irritable, + cure this man's disposition.
+
+*** END OF THE PROJECT GUTENBERG EBOOK MEDITATIONS ***
+`;
+    expect(parseEn(fixture)).toEqual([
+      { book: 1, section: 1, text: "If then thou art irritable, cure this man's disposition." },
     ]);
   });
 
   it('entfernt Kursiv-Unterstriche mitten im Fließtext, behält aber den Wortinhalt', () => {
     const fixture = `*** START OF THE PROJECT GUTENBERG EBOOK MEDITATIONS ***
 
-THE FIRST BOOK
+I.
 
-I. Whom also I must thank for the _Hypomnemata_, and so upwards _in infinitum_.
-
-*** END OF THE PROJECT GUTENBERG EBOOK MEDITATIONS ***
-`;
-    expect(parseEn(fixture)).toEqual([
-      { book: 1, section: 1, text: 'Whom also I must thank for the Hypomnemata, and so upwards in infinitum.' },
-    ]);
-  });
-
-  it('übernimmt Lücken in der Original-Nummerierung wörtlich (kein erzwungenes +1)', () => {
-    // Reale Eigenheit von Buch II in dieser Ausgabe: kein Abschnitt V.
-    const fixture = `*** START OF THE PROJECT GUTENBERG EBOOK MEDITATIONS ***
-
-THE SECOND BOOK
-
-IV. Section four.
-
-VI. Section six, there is no section five in this edition.
+We know, from Tacitus, the _Life of Antoninus_ in full.
 
 *** END OF THE PROJECT GUTENBERG EBOOK MEDITATIONS ***
 `;
     expect(parseEn(fixture)).toEqual([
-      { book: 2, section: 4, text: 'Section four.' },
-      { book: 2, section: 6, text: 'Section six, there is no section five in this edition.' },
+      { book: 1, section: 1, text: 'We know, from Tacitus, the Life of Antoninus in full.' },
     ]);
   });
 });
