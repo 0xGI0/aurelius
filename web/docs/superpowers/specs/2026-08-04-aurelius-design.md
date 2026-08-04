@@ -8,7 +8,8 @@ Eine ruhige, mehrsprachige Zitate-App zu Marc Aurels *Selbstbetrachtungen*. Ein 
 
 ## 2. Funktionale Anforderungen
 
-- **Zitat per Tap:** Tap auf die Zitat-Karte zeigt ein zufälliges Zitat ohne baldige Wiederholung (Shuffle-Bag: alle Zitate einmal durchmischen, erst dann neu mischen).
+- **Zitat per Tap:** Tap auf die Zitat-Karte zeigt einen zufälligen Abschnitt ohne baldige Wiederholung (Shuffle-Bag: alle Abschnitte einmal durchmischen, erst dann neu mischen).
+- **Vollständiges Werk:** Die App enthält *alle* Abschnitte der Selbstbetrachtungen (12 Bücher, ca. 490 Abschnitte) — keine kuratierte Auswahl. Längere Abschnitte werden in der Karte scrollbar dargestellt.
 - **Mehrsprachige Zitate:** Jede Passage liegt in drei Sprachen vor, umschaltbar per Sprachwähler:
   - **Deutsch:** Albert Wittstock (1879, historische Reclam-Universal-Bibliothek) — gemeinfrei.
   - **Englisch:** George Long (1862) — gemeinfrei.
@@ -88,7 +89,8 @@ aurelius/
 
 ## 7. Datenbeschaffung & Lizenz
 
-- Kuratierung von **~100–150 Passagen**, ausgerichtet über die Stellenangabe (Buch/Abschnitt), aus gemeinfreien Quellen: Wittstock (zeno.org/Wikisource), Long (Project Gutenberg), griechischer Originaltext (Perseus/Gutenberg).
+- Übernahme des **vollständigen Werks** (12 Bücher, ca. 490 Abschnitte), skriptgestützt ausgerichtet über die Stellenangabe (Buch/Abschnitt), aus gemeinfreien Quellen: Wittstock (zeno.org/Wikisource), Long (Project Gutenberg), griechischer Originaltext (Perseus/Gutenberg). Erwarteter Umfang: ca. 1–1,5 MB JSON — unproblematisch für das App-Bundle, weiterhin komplett offline.
+- **Alignment-Prüfung:** Die Abschnittszählung weicht zwischen Editionen stellenweise ab; das Import-Skript prüft die Abschnittszahl pro Buch gegen alle drei Quellen und meldet Abweichungen zur manuellen Klärung.
 - **Arbeitsschritt Lizenzverifikation:** Vor Übernahme wird für jede Quelle Gemeinfreiheit und exakte Edition verifiziert und in `data/SOURCES.md` dokumentiert. Moderne Übersetzungen (z. B. aktuelle Reclam-Ausgaben) werden nicht verwendet.
 
 ## 8. Build & Deploy
@@ -103,7 +105,7 @@ aurelius/
 **Unit-Tests (Jest):** Shuffle-Bag (keine Wiederholung bis Bag leer), Provider-Auswahl (Key → Anthropic, sonst Fallback), Fehlerpfade der KI-Schicht.
 
 **Erfolgskriterien (MVP fertig, wenn):**
-1. App startet in Expo Go und im Browser; Zitatwechsel und Sprachumschaltung funktionieren offline.
+1. App startet in Expo Go und im Browser; Zitatwechsel und Sprachumschaltung funktionieren offline; alle 12 Bücher sind vollständig enthalten (Stichproben-Abgleich des Alignments über mehrere Bücher).
 2. Mit hinterlegtem Anthropic-Key streamt die Erklärung live.
 3. Ohne Key greift der Gemini-Fallback über die Vercel-Function (sofern Free-Tier verfügbar).
 4. Android-APK lässt sich bauen und installieren.
