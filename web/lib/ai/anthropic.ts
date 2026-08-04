@@ -3,10 +3,15 @@ import { fetch as expoFetch } from 'expo/fetch';
 import { Platform } from 'react-native';
 import type { Quote, QuoteLang } from '../quotes';
 import { formatReference } from '../quotes';
-import { buildExplainPrompt, EXPLAIN_SYSTEM } from './prompt';
+import { buildExplainPrompt, explainSystem, type ExplainLang } from './prompt';
 import { ExplainError } from './errors';
 
-export async function* explainWithClaude(apiKey: string, quote: Quote, lang: QuoteLang): AsyncIterable<string> {
+export async function* explainWithClaude(
+  apiKey: string,
+  quote: Quote,
+  lang: QuoteLang,
+  uiLang: ExplainLang = 'de',
+): AsyncIterable<string> {
   const client = new Anthropic({
     apiKey,
     dangerouslyAllowBrowser: true,
@@ -17,8 +22,17 @@ export async function* explainWithClaude(apiKey: string, quote: Quote, lang: Quo
     const stream = client.messages.stream({
       model: 'claude-opus-5',
       max_tokens: 1024,
-      system: EXPLAIN_SYSTEM,
-      messages: [{ role: 'user', content: buildExplainPrompt(quote.texts[lang], formatReference(quote)) }],
+      system: explainSystem(uiLang),
+      messages: [
+        {
+          role: 'user',
+          content: buildExplainPrompt(
+            quote.texts[lang],
+            formatReference(quote, uiLang === 'en' ? 'Book' : 'Buch'),
+            uiLang,
+          ),
+        },
+      ],
     });
     for await (const event of stream) {
       if (event.type === 'content_block_delta' && event.delta.type === 'text_delta') {

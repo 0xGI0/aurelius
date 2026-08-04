@@ -9,9 +9,12 @@ import {
 } from '../lib/settings';
 import { useTheme } from '../theme/ThemeContext';
 import { Segmented } from '../components/Segmented';
+import { useT, useUiLang, setUiLang, type UiLang } from '../lib/i18n';
 
 export default function Settings() {
   const { colors, pref, setPref } = useTheme();
+  const t = useT();
+  const uiLang = useUiLang();
   const [lang, setLang] = useState<QuoteLang>('de');
   const [keyInput, setKeyInput] = useState('');
   const [hasKey, setHasKey] = useState(false);
@@ -47,47 +50,57 @@ export default function Settings() {
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }}>
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.header}>
-          <Text style={[styles.title, { color: colors.text }]}>Einstellungen</Text>
-          <Link href="/" accessibilityLabel="Zurück">
-            <Text style={{ color: colors.accent, fontSize: 16 }}>Fertig</Text>
+          <Text style={[styles.title, { color: colors.text }]}>{t('setTitle')}</Text>
+          <Link href="/" accessibilityLabel={t('setDone')}>
+            <Text style={{ color: colors.accent, fontSize: 16 }}>{t('setDone')}</Text>
           </Link>
         </View>
 
-        {section('Zitat-Sprache', (
-          <Segmented<QuoteLang>
+        {section(t('setUiLang'), (
+          <Segmented<UiLang>
             options={[
               { value: 'de', label: 'Deutsch' },
               { value: 'en', label: 'English' },
-              { value: 'grc', label: 'Ἑλληνικά' },
+            ]}
+            value={uiLang}
+            onChange={setUiLang}
+          />
+        ))}
+
+        {section(t('setQuoteLang'), (
+          <Segmented<QuoteLang>
+            options={[
+              { value: 'de', label: t('langDe') },
+              { value: 'en', label: t('langEn') },
+              { value: 'grc', label: t('langGrc') },
             ]}
             value={lang}
             onChange={(l) => { setLang(l); void setQuoteLang(l); }}
           />
         ))}
 
-        {section('Erscheinungsbild', (
+        {section(t('setAppearance'), (
           <Segmented<ThemePref>
             options={[
-              { value: 'light', label: 'Hell' },
-              { value: 'dark', label: 'Dunkel' },
-              { value: 'system', label: 'System' },
+              { value: 'light', label: t('setLight') },
+              { value: 'dark', label: t('setDark') },
+              { value: 'system', label: t('setSystem') },
             ]}
             value={pref}
             onChange={setPref}
           />
         ))}
 
-        {section('KI-Erklärung', (
+        {section(t('setAI'), (
           <View style={{ gap: 10 }}>
             <Text style={{ color: colors.textSoft, fontSize: 14, lineHeight: 21 }}>
-              Mit eigenem Anthropic-API-Key nutzt die App Claude direkt von deinem Gerät.
-              Ohne Key springt der eingebaute Gratis-Modus ein (sofern verfügbar).
+              {t('setAIHint')}
             </Text>
             {hasKey ? (
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
-                <Text style={{ color: colors.text }}>Key hinterlegt ✓</Text>
+                <Text style={{ color: colors.text }}>{t('setKeyStored')}</Text>
                 <Pressable onPress={removeKey} accessibilityRole="button">
-                  <Text style={{ color: colors.accent }}>Löschen</Text>
+                  <Text style={{ color: colors.accent }}>{t('setKeyDelete')}</Text>
                 </Pressable>
               </View>
             ) : (
@@ -107,22 +120,20 @@ export default function Settings() {
                   style={[styles.saveBtn, { backgroundColor: colors.accent }]}
                   accessibilityRole="button"
                 >
-                  <Text style={{ color: colors.bg, fontWeight: '700' }}>Key speichern</Text>
+                  <Text style={{ color: colors.bg, fontWeight: '700' }}>{t('setKeySave')}</Text>
                 </Pressable>
               </View>
             )}
-            {saved && <Text style={{ color: colors.accent }}>Gespeichert.</Text>}
+            {saved && <Text style={{ color: colors.accent }}>{t('setKeySaved')}</Text>}
             {Platform.OS === 'web' && (
-              <Text style={{ color: colors.textSoft, fontSize: 12 }}>
-                Hinweis: Im Browser wird der Key unverschlüsselt im localStorage abgelegt.
-              </Text>
+              <Text style={{ color: colors.textSoft, fontSize: 12 }}>{t('setWebNote')}</Text>
             )}
           </View>
         ))}
 
-        {section('Quellen', (
+        {section(t('setSources'), (
           <Text style={{ color: colors.textSoft, fontSize: 12, lineHeight: 18 }}>
-            Deutsch: Albert Wittstock (1879, gemeinfrei) · Englisch: George Long (1862, gemeinfrei) · Altgriechisch: Perseus Digital Library / PerseusDL canonical-greekLit, Lizenz CC BY-SA 4.0. Details: data/SOURCES.md im Repository.
+            {t('setSourcesText')}
           </Text>
         ))}
       </ScrollView>

@@ -9,8 +9,12 @@ export interface Quote {
 
 const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
 
-export function formatReference(q: Pick<Quote, 'book' | 'section'>): string {
-  return `Buch ${ROMAN[q.book]}, ${q.section}`;
+export function formatReference(q: Pick<Quote, 'book' | 'section'>, bookWord = 'Buch'): string {
+  return `${bookWord} ${ROMAN[q.book]}, ${q.section}`;
+}
+
+export function bookRoman(book: number): string {
+  return ROMAN[book] ?? String(book);
 }
 
 export class ShuffleBag {
