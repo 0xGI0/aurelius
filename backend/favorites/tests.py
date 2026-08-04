@@ -61,3 +61,37 @@ class FavoritesApiTests(TestCase):
         self.assertEqual(client_b.get("/api/favorites/").json(), [])
         client_b.delete("/api/favorites/5-23/")
         self.assertEqual(len(self.client.get("/api/favorites/").json()), 1)
+
+
+from django.core.cache import cache
+from django.test import override_settings
+
+
+class CorsTests(TestCase):
+    def test_erlaubte_origin_bekommt_cors_header(self):
+        resp = APIClient().get(
+            "/api/favorites/", HTTP_ORIGIN="https://aurelius-rust.vercel.app"
+        )
+        self.assertEqual(
+            resp["Access-Control-Allow-Origin"], "https://aurelius-rust.vercel.app"
+        )
+
+    def test_fremde_origin_bekommt_keinen_cors_header(self):
+        resp = APIClient().get("/api/favorites/", HTTP_ORIGIN="https://boese-seite.example")
+        self.assertNotIn("Access-Control-Allow-Origin", resp)
+
+
+# DRF brennt Throttle-Raten beim Import ein — override_settings(REST_FRAMEWORK=…)
+# greift nicht. Wir testen deshalb gegen die echte Rate (60/min) und beschleunigen
+# das Passwort-Hashing, damit 61 Login-Versuche nicht Minuten dauern.
+@override_settings(PASSWORD_HASHERS=["django.contrib.auth.hashers.MD5PasswordHasher"])
+class ThrottleTests(TestCase):
+    def setUp(self):
+        cache.clear()
+
+    def test_anonyme_anfragen_werden_gedrosselt(self):
+        client = APIClient()
+        daten = {"email": "x@example.com", "password": "falsches-passwort"}
+        stati = [client.post("/api/auth/login/", daten).status_code for _ in range(61)]
+        self.assertNotIn(429, stati[:5])  # die ersten Versuche laufen durch
+        self.assertEqual(stati[-1], 429)  # ab der 61. Anfrage/min ist Schluss

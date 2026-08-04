@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',  # von dj_rest_auth.registration importiert, auch ohne Social-Login
     'dj_rest_auth',
     'dj_rest_auth.registration',
+    'corsheaders',
     'accounts',
     'favorites',
 ]
@@ -54,6 +55,7 @@ AUTH_USER_MODEL = 'accounts.User'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -159,3 +161,9 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Aurelius] "
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 DEFAULT_FROM_EMAIL = "aurelius@localhost"
+
+CORS_ALLOWED_ORIGINS = [
+    "https://aurelius-rust.vercel.app",  # Expo-Web (Produktion)
+    "http://localhost:8081",             # Expo-Dev-Server
+    "http://localhost:19006",            # Expo-Web-Dev (Legacy-Port)
+]
