@@ -23,3 +23,76 @@ class UserModelTests(TestCase):
         )
         self.assertTrue(admin.is_staff)
         self.assertTrue(admin.is_superuser)
+
+
+import re
+
+from django.core import mail
+from django.core.cache import cache
+from rest_framework.test import APIClient
+
+
+class AuthApiTests(TestCase):
+    def setUp(self):
+        # allauths Mail-Rate-Limit (1 Bestätigungsmail/Adresse/3min) lebt im
+        # Cache und überlebt Test-Rollbacks — für deterministische Tests leeren:
+        cache.clear()
+        self.client = APIClient()
+
+    def _register(self, email="marc@example.com"):
+        return self.client.post("/api/auth/registration/", {
+            "email": email,
+            "password1": "stoa-am-limes-121",
+            "password2": "stoa-am-limes-121",
+        })
+
+    def _verify_key_aus_mail(self):
+        body = mail.outbox[-1].body
+        return re.search(r"account-confirm-email/([-:\w]+)", body).group(1)
+
+    def test_registrierung_sendet_verifizierungsmail(self):
+        resp = self._register()
+        self.assertEqual(resp.status_code, 201)
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, ["marc@example.com"])
+
+    def test_login_vor_verifizierung_abgelehnt(self):
+        self._register()
+        resp = self.client.post("/api/auth/login/", {
+            "email": "marc@example.com", "password": "stoa-am-limes-121",
+        })
+        self.assertEqual(resp.status_code, 400)
+
+    def test_verifizieren_dann_login_liefert_token(self):
+        self._register()
+        resp = self.client.post("/api/auth/registration/verify-email/",
+                                {"key": self._verify_key_aus_mail()})
+        self.assertEqual(resp.status_code, 200)
+        resp = self.client.post("/api/auth/login/", {
+            "email": "marc@example.com", "password": "stoa-am-limes-121",
+        })
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn("key", resp.json())
+
+    def test_user_endpoint_mit_token(self):
+        self._register()
+        self.client.post("/api/auth/registration/verify-email/",
+                         {"key": self._verify_key_aus_mail()})
+        token = self.client.post("/api/auth/login/", {
+            "email": "marc@example.com", "password": "stoa-am-limes-121",
+        }).json()["key"]
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {token}")
+        resp = self.client.get("/api/auth/user/")
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.json()["email"], "marc@example.com")
+
+    def test_logout_widerruft_token(self):
+        self._register()
+        self.client.post("/api/auth/registration/verify-email/",
+                         {"key": self._verify_key_aus_mail()})
+        token = self.client.post("/api/auth/login/", {
+            "email": "marc@example.com", "password": "stoa-am-limes-121",
+        }).json()["key"]
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {token}")
+        self.assertEqual(self.client.post("/api/auth/logout/").status_code, 200)
+        self.assertEqual(self.client.get("/api/auth/user/").status_code, 401)
