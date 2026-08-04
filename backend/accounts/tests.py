@@ -96,3 +96,35 @@ class AuthApiTests(TestCase):
         self.client.credentials(HTTP_AUTHORIZATION=f"Token {token}")
         self.assertEqual(self.client.post("/api/auth/logout/").status_code, 200)
         self.assertEqual(self.client.get("/api/auth/user/").status_code, 401)
+
+
+from allauth.account.models import EmailAddress
+
+
+class PasswordResetTests(TestCase):
+    def setUp(self):
+        cache.clear()
+        self.client = APIClient()
+        user = get_user_model().objects.create_user(
+            email="marc@example.com", password="alt-passwort-123"
+        )
+        EmailAddress.objects.create(user=user, email=user.email, primary=True, verified=True)
+
+    def test_reset_flow_setzt_neues_passwort(self):
+        resp = self.client.post("/api/auth/password/reset/", {"email": "marc@example.com"})
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(len(mail.outbox), 1)
+        m = re.search(r"reset/confirm/([^/]+)/([^/\s]+)/", mail.outbox[0].body)
+        self.assertIsNotNone(m)
+        resp = self.client.post("/api/auth/password/reset/confirm/", {
+            "uid": m.group(1),
+            "token": m.group(2),
+            "new_password1": "neu-und-lang-genug-9",
+            "new_password2": "neu-und-lang-genug-9",
+        })
+        self.assertEqual(resp.status_code, 200)
+        resp = self.client.post("/api/auth/login/", {
+            "email": "marc@example.com", "password": "neu-und-lang-genug-9",
+        })
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn("key", resp.json())
