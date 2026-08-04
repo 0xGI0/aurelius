@@ -3,6 +3,8 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "dependencies": {
+    "@expo-google-fonts/cormorant-garamond": "^0.4.1",
+    "@expo-google-fonts/gfs-didot": "^0.4.1",
     "@expo/ui": "~57.0.9",
     "expo": "~57.0.10",
     "expo-constants": "~57.0.9",
