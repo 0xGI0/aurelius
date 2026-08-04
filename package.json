@@ -42,7 +42,7 @@
     "@types/react": "~19.2.2",
     "@vercel/node": "^5.9.5",
     "tsx": "^4.23.5",
-    "typescript": "~6.0.3"
+    "typescript": "~7.0.2"
   },
   "scripts": {
     "start": "expo start",
