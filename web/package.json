@@ -7,6 +7,7 @@
     "@expo-google-fonts/cormorant-garamond": "^0.4.1",
     "@expo-google-fonts/gfs-didot": "^0.4.1",
     "@expo/ui": "~57.0.9",
+    "@google/genai": "^2.15.0",
     "expo": "~57.0.10",
     "expo-constants": "~57.0.9",
     "expo-device": "~57.0.1",
@@ -37,6 +38,7 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^26.1.2",
     "@types/react": "~19.2.2",
+    "@vercel/node": "^5.9.5",
     "tsx": "^4.23.5",
     "typescript": "~6.0.3"
   },
