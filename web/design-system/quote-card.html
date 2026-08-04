@@ -1,0 +1,88 @@
+<!-- @dsCard group="Components" -->
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Georgia, serif;
+    background: #EDE6D6;
+    padding: 48px;
+  }
+  .kicker {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #5A6575;
+    font-weight: 600;
+    margin: 0 0 24px;
+  }
+  .stage { display: flex; gap: 28px; flex-wrap: wrap; }
+  .panel {
+    flex: 1;
+    min-width: 300px;
+    border-radius: 28px;
+    padding: 40px 32px;
+  }
+  .panel.light { background: #F4EEE1; }
+  .panel.dark { background: #0F151D; }
+  .panel h2 {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 0 0 20px;
+    font-family: Georgia, serif;
+    font-weight: 700;
+  }
+  .panel.light h2 { color: #5A6575; }
+  .panel.dark h2 { color: #9AA3B0; }
+
+  .card {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 20px;
+    padding: 24px;
+    max-width: 360px;
+  }
+  .card.light { background: #FBF7ED; border-color: #E2D9C6; }
+  .card.dark { background: #161F2A; border-color: #26303D; }
+
+  .quote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+  }
+  .card.light .quote { color: #1B2531; }
+  .card.dark .quote { color: #EAE2D2; }
+
+  .ref {
+    margin-top: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+  .card.light .ref { color: #A6763C; }
+  .card.dark .ref { color: #C9A264; }
+</style></head><body>
+  <div class="kicker">Aurelius &middot; Zitat-Karte</div>
+  <div class="stage">
+    <div class="panel light">
+      <h2>Light</h2>
+      <div class="card light">
+        <div class="quote">&bdquo;La&szlig; die Einbildung schwinden, und es schwindet die Klage, da&szlig; man dir B&ouml;ses getan.&ldquo;</div>
+        <div class="ref">BUCH IV, 7</div>
+      </div>
+    </div>
+    <div class="panel dark">
+      <h2>Dark</h2>
+      <div class="card dark">
+        <div class="quote">&bdquo;La&szlig; die Einbildung schwinden, und es schwindet die Klage, da&szlig; man dir B&ouml;ses getan.&ldquo;</div>
+        <div class="ref">BUCH IV, 7</div>
+      </div>
+    </div>
+  </div>
+</body></html>
