@@ -6,6 +6,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/auth/", include("dj_rest_auth.urls")),
     path("api/auth/registration/", include("dj_rest_auth.registration.urls")),
+    path("api/favorites/", include("favorites.urls")),
     # Nur für reverse() in den von allauth/Django erzeugten E-Mails —
     # die Links werden später von den Frontends bedient (Spec §4):
     re_path(

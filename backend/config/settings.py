@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     'dj_rest_auth.registration',
     'accounts',
+    'favorites',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
