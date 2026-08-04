@@ -1,0 +1,119 @@
+<!-- @dsCard group="Type" -->
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=GFS+Didot&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Georgia, serif;
+    background: #F4EEE1;
+    color: #1B2531;
+    padding: 48px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  .kicker {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #5A6575;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+  h1 {
+    font-size: 20px;
+    font-weight: 400;
+    font-style: italic;
+    color: #1B2531;
+    margin: 0 0 36px;
+  }
+  .row {
+    display: flex;
+    align-items: baseline;
+    gap: 36px;
+    padding: 28px 0;
+    border-top: 1px solid #E2D9C6;
+  }
+  .row:last-child { border-bottom: 1px solid #E2D9C6; }
+  .meta { width: 176px; flex-shrink: 0; }
+  .meta .name {
+    font-family: Georgia, serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1B2531;
+    margin-bottom: 6px;
+  }
+  .meta .spec {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 11px;
+    color: #5A6575;
+    line-height: 1.7;
+  }
+  .specimen { flex: 1; min-width: 0; }
+  .quote-de {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    color: #1B2531;
+  }
+  .quote-grc {
+    font-family: 'GFS Didot', Georgia, serif;
+    font-size: 22px;
+    line-height: 34px;
+    color: #1B2531;
+  }
+  .ui-sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+  .ui-brand { font-size: 13px; letter-spacing: 4px; font-weight: 600; color: #5A6575; }
+  .ui-label { font-size: 13px; font-weight: 600; color: #1B2531; margin-top: 10px; }
+  .ui-body { font-size: 15px; line-height: 22px; color: #1B2531; margin-top: 10px; }
+  .ref {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: #A6763C;
+  }
+</style></head><body>
+  <div class="wrap">
+    <div class="kicker">Aurelius</div>
+    <h1>Typografie</h1>
+
+    <div class="row">
+      <div class="meta">
+        <div class="name">Zitat &middot; Deutsch</div>
+        <div class="spec">Cormorant Garamond 500<br>24px / 36px</div>
+      </div>
+      <div class="specimen quote-de">&bdquo;Des Morgens sage dir selbst: Heute werde ich Zudringlichen begegnen.&ldquo;</div>
+    </div>
+
+    <div class="row">
+      <div class="meta">
+        <div class="name">Zitat &middot; Griechisch</div>
+        <div class="spec">GFS Didot 400<br>22px / 34px</div>
+      </div>
+      <div class="specimen quote-grc">Ἕωθεν προλέγειν ἑαυτῷ&middot; συντεύξομαι περιέργῳ</div>
+    </div>
+
+    <div class="row">
+      <div class="meta">
+        <div class="name">UI &middot; Sans</div>
+        <div class="spec">System-Sans<br>Marke, Steuerelemente, Fließtext</div>
+      </div>
+      <div class="specimen ui-sans">
+        <div class="ui-brand">AURELIUS</div>
+        <div class="ui-label">Deutsch &middot; English &middot; Ἑλληνικά</div>
+        <div class="ui-body">Ein ruhiger Sans f&uuml;r Navigation, Buttons und Systemtexte &mdash; zur&uuml;ckhaltend neben der Serifenschrift der Zitate.</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="meta">
+        <div class="name">Stellenangabe</div>
+        <div class="spec">System-Sans 600<br>12px, +2px Tracking, Bronze</div>
+      </div>
+      <div class="specimen ref">BUCH II, 1</div>
+    </div>
+  </div>
+</body></html>

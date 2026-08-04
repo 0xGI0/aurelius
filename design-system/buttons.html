@@ -1,0 +1,117 @@
+<!-- @dsCard group="Components" -->
+<!doctype html><html><head><meta charset="utf-8"><style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #EDE6D6;
+    padding: 48px;
+  }
+  .kicker {
+    font-family: Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #5A6575;
+    font-weight: 600;
+    margin: 0 0 24px;
+  }
+  .stage { display: flex; gap: 28px; flex-wrap: wrap; }
+  .panel {
+    flex: 1;
+    min-width: 300px;
+    border-radius: 28px;
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .panel.light { background: #F4EEE1; }
+  .panel.dark { background: #0F151D; }
+  .panel h2 {
+    font-family: Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 0;
+    font-weight: 700;
+  }
+  .panel.light h2 { color: #5A6575; }
+  .panel.dark h2 { color: #9AA3B0; }
+
+  .segmented {
+    display: inline-flex;
+    width: fit-content;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .panel.light .segmented { border-color: #E2D9C6; background: #FBF7ED; }
+  .panel.dark .segmented { border-color: #26303D; background: #161F2A; }
+
+  .seg {
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .panel.light .seg { color: #5A6575; }
+  .panel.dark .seg { color: #9AA3B0; }
+  .panel.light .seg.active { background: #A6763C; color: #FBF7ED; }
+  .panel.dark .seg.active { background: #C9A264; color: #161F2A; }
+
+  .btn {
+    display: inline-block;
+    width: fit-content;
+    padding: 12px 28px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .panel.light .btn { background: #A6763C; color: #F4EEE1; }
+  .panel.dark .btn { background: #C9A264; color: #0F151D; }
+
+  .caption {
+    font-family: Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .panel.light .caption { color: #5A6575; }
+  .panel.dark .caption { color: #9AA3B0; }
+</style></head><body>
+  <div class="kicker">Aurelius &middot; Erkl&auml;ren-Button &amp; Segmented Control</div>
+  <div class="stage">
+    <div class="panel light">
+      <h2>Light</h2>
+      <div>
+        <div class="segmented">
+          <div class="seg active">Deutsch</div>
+          <div class="seg">English</div>
+          <div class="seg">Ἑλληνικά</div>
+        </div>
+        <div class="caption" style="margin-top:8px">Segmented &middot; radius 999, aktiv Bronze</div>
+      </div>
+      <div>
+        <div class="btn">Erkl&auml;ren</div>
+        <div class="caption" style="margin-top:8px">Pill-Button &middot; radius 999, Bronze</div>
+      </div>
+    </div>
+    <div class="panel dark">
+      <h2>Dark</h2>
+      <div>
+        <div class="segmented">
+          <div class="seg active">Deutsch</div>
+          <div class="seg">English</div>
+          <div class="seg">Ἑλληνικά</div>
+        </div>
+        <div class="caption" style="margin-top:8px">Segmented &middot; radius 999, aktiv Bronze hell</div>
+      </div>
+      <div>
+        <div class="btn">Erkl&auml;ren</div>
+        <div class="caption" style="margin-top:8px">Pill-Button &middot; radius 999, Bronze hell</div>
+      </div>
+    </div>
+  </div>
+</body></html>
