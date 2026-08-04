@@ -23,9 +23,13 @@ export async function* explainWithGemini(quote: Quote, lang: QuoteLang): AsyncIt
   if (!resp.body) throw new ExplainError('server', 'kein Stream');
   const reader = resp.body.getReader();
   const decoder = new TextDecoder();
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    yield decoder.decode(value, { stream: true });
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      yield decoder.decode(value, { stream: true });
+    }
+  } catch {
+    throw new ExplainError('offline');
   }
 }
