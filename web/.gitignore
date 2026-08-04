@@ -48,3 +48,6 @@ example
 
 # sandbox artifacts from create-expo-app's bundled Claude plugin (not real files)
 .mcp.json
+
+# Vercel CLI project link (per-machine, not shared)
+.vercel
