@@ -89,7 +89,7 @@ aurelius/
 
 ## 7. Datenbeschaffung & Lizenz
 
-- Übernahme des **vollständigen Werks** (12 Bücher, ca. 490 Abschnitte), skriptgestützt ausgerichtet über die Stellenangabe (Buch/Abschnitt), aus gemeinfreien Quellen: Wittstock (zeno.org/Wikisource), Long (Project Gutenberg), griechischer Originaltext (Perseus/Gutenberg). Erwarteter Umfang: ca. 1–1,5 MB JSON — unproblematisch für das App-Bundle, weiterhin komplett offline.
+- Übernahme des **vollständigen Werks** (12 Bücher, ca. 490 Abschnitte), skriptgestützt ausgerichtet über die Stellenangabe (Buch/Abschnitt), aus gemeinfreien Quellen: Wittstock als vom Nutzer geliefertes PDF (Reclam UB 1241, Nachdruck 1986; Übersetzung Albert Wittstock † 1903 → gemeinfrei; Abgleich mit zeno.org bei Extraktionsproblemen), Long (Project Gutenberg), griechischer Originaltext (Perseus/Gutenberg). Erwarteter Umfang: ca. 1–1,5 MB JSON — unproblematisch für das App-Bundle, weiterhin komplett offline.
 - **Alignment-Prüfung:** Die Abschnittszählung weicht zwischen Editionen stellenweise ab; das Import-Skript prüft die Abschnittszahl pro Buch gegen alle drei Quellen und meldet Abweichungen zur manuellen Klärung.
 - **Arbeitsschritt Lizenzverifikation:** Vor Übernahme wird für jede Quelle Gemeinfreiheit und exakte Edition verifiziert und in `data/SOURCES.md` dokumentiert. Moderne Übersetzungen (z. B. aktuelle Reclam-Ausgaben) werden nicht verwendet.
 
