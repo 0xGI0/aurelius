@@ -30,4 +30,18 @@ describe('explainWithGemini Fehlerpfade', () => {
     mockFetch.mockResolvedValueOnce({ ok: false, status: 500 });
     expect(((await caught()) as ExplainError).kind).toBe('server');
   });
+  it('Verbindungsabbruch während des Streamens → offline', async () => {
+    const read = jest
+      .fn()
+      .mockResolvedValueOnce({ done: false, value: new TextEncoder().encode('teil') })
+      .mockRejectedValueOnce(new Error('connection reset'));
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      body: { getReader: () => ({ read }) },
+    });
+    const e = await caught();
+    expect(e).toBeInstanceOf(ExplainError);
+    expect((e as ExplainError).kind).toBe('offline');
+  });
 });
