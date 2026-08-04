@@ -31,14 +31,17 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const fade = useRef(new Animated.Value(1)).current;
+  const requestId = useRef(0);
 
   useEffect(() => {
     getQuoteLang().then(setLang);
   }, []);
 
   const nextQuote = () => {
+    requestId.current += 1;
     setStream(null);
     setError(null);
+    setBusy(false);
     Animated.timing(fade, { toValue: 0, duration: 150, useNativeDriver: true }).start(() => {
       setQuote(byId.get(bag.next())!);
       Animated.timing(fade, { toValue: 1, duration: 250, useNativeDriver: true }).start();
@@ -53,9 +56,13 @@ export default function Home() {
   const explain = async () => {
     setError(null);
     setBusy(true);
+    const id = requestId.current;
     try {
-      setStream(await getExplainStream(quote, lang));
+      const s = await getExplainStream(quote, lang);
+      if (id !== requestId.current) return;
+      setStream(s);
     } catch (e) {
+      if (id !== requestId.current) return;
       setError(e instanceof ExplainError ? ERROR_COPY[e.kind] : ERROR_COPY.server);
       setBusy(false);
     }
