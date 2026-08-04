@@ -48,9 +48,23 @@ const LIGATURE_RE = /[]/g;
 const HEADER_RE = /^Marc Aurel\s*[–-]\s*Selbstbetrachtungen/;
 const PAGENUM_RE = /^\|\s*\d+\s*\|$/;
 const ORNAMENT_RE = /^\*+$/;
-const NUM_RE = /^(\d{1,3})(?:\s+(\S.*))?$/;
+// Gruppe 2 (optional) fängt Fußnoten-Nummernbereiche wie "86-89" ab (eine
+// Fußnote kann mehrere Verweisziffern auf einmal erklären) — solche Zeilen
+// sind NIE ein echter Abschnittsanfang, egal was sonst zutrifft. Gruppe 3
+// fängt die Lücke zwischen Nummer und Text separat ein: Fußnoten stehen
+// enger gesetzt (Lücke <=3 Zeichen) als Abschnitte (Lücke >=4 Zeichen) —
+// über den gesamten Text hinweg empirisch ohne Überschneidung verifiziert
+// (nach Behebung der Fußnoten-Bereichs-/Verweisziffer-Fälle oben). Dient
+// als zusätzliche Absicherung, falls die ERSTE Fußnote eines neuen Blocks
+// zufällig dieselbe Nummer wie der erwartete nächste Abschnitt trägt.
+const NUM_RE = /^(\d{1,3})(-\d{1,3})?(?:(\s+)(\S.*))?$/;
 const HYPHEN_END_RE = /[A-Za-zÀ-ÿ]-$/;
 const FOOTNOTE_MARKER_RE = /([^\s\d])\d{1,3}(?!\d)/g;
+// Eine Abschnittszeile, deren gesamter "Rest" nur aus Ziffern besteht (z. B.
+// "21     100"), ist kein echter Satzanfang — pdftotext hat hier eine
+// Fußnoten-Verweisziffer, die eigentlich mitten im Fließtext an ein Wort
+// angehängt gehört, auf die Abschnittszeile selbst verschoben.
+const BARE_FOOTNOTE_DIGIT_RE = /^\d{1,3}$/;
 
 export interface ParsedSection {
   book: number;
@@ -135,13 +149,25 @@ export function parseDe(raw: string): ParsedSection[] {
     const m = line.match(NUM_RE);
     if (m && book > 0) {
       const num = Number(m[1]);
-      const rest = m[2] ?? '';
-      const isReal = num === expected && blankRun >= 1;
+      const isRange = m[2] !== undefined;
+      const gap = m[3] !== undefined ? m[3].length : undefined;
+      const rest = m[4] ?? '';
+      // "21     100": die komplette erste Zeile ist nur eine verirrte
+      // Fußnotenziffer, kein echter Satzanfang -> nicht in den Puffer
+      // übernehmen (siehe BARE_FOOTNOTE_DIGIT_RE oben).
+      const restIsBareFootnoteDigit = BARE_FOOTNOTE_DIGIT_RE.test(rest);
+      // Lücke fehlt nur bei "nackten" Nummernzeilen ohne Text auf derselben
+      // Zeile (der dokumentierte Layout-Fehler bei sehr wenigen Abschnitten,
+      // z. B. Buch XII §10) — die kommen im Textkorpus nie als Fußnote vor,
+      // daher hier zulassen; ist Text vorhanden, muss die Lücke breit genug
+      // für einen Abschnitt (nicht nur eine Fußnote) sein.
+      const gapLooksLikeSection = gap === undefined || gap >= 4;
+      const isReal = !isRange && num === expected && blankRun >= 1 && gapLooksLikeSection;
       if (isReal) {
         flush();
         curBook = book;
         curSection = num;
-        buf = rest ? [rest] : [];
+        buf = rest && !restIsBareFootnoteDigit ? [rest] : [];
         expected = num + 1;
         inFootnoteBlock = false;
       } else {

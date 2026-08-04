@@ -133,4 +133,60 @@ unterbrochen wird und danach weitergeht.
       { book: 1, section: 1, text: 'Der Stoff und die Hoffnung fließen ineinander.' },
     ]);
   });
+
+  it('verwirft Fußnoten mit Nummernbereich ("86-89   Text"), statt sie an den vorigen Abschnitt anzuhängen', () => {
+    // Realer Fall aus Buch IV, §51: Eine Fußnote kann mehrere Verweisziffern
+    // auf einmal erklären ("86-89"). Die Zeile matcht die einfache
+    // Nummer-Regex nicht (Bindestrich statt Leerzeichen nach der Zahl) und
+    // würde sonst als normale Fließtextzeile an den offenen Abschnitt
+    // angehängt werden.
+    const fixture = `Erstes Buch
+
+1      Erster Abschnitt, der von einer Bereichs-Fußnote gefolgt wird.
+
+86-89   Männer, die ein hohes Alter erreichten.
+90   Wie Homer von Nestor erzählt.
+`;
+    expect(parseDe(fixture)).toEqual([
+      { book: 1, section: 1, text: 'Erster Abschnitt, der von einer Bereichs-Fußnote gefolgt wird.' },
+    ]);
+  });
+
+  it('entfernt eine verirrte Fußnotenziffer, die allein auf der Abschnittszeile steht ("2      100")', () => {
+    // Realer Fall aus Buch V, §21: pdftotext platziert die Fußnoten-Verweisziffer
+    // manchmal komplett allein auf der Abschnittsnummernzeile, statt an das
+    // Wort im folgenden Fließtext angehängt (wo sie ohnehin entfernt würde).
+    const fixture = `Erstes Buch
+
+1      Erster Abschnitt.
+
+2      100
+       Zweiter Abschnitt beginnt hier richtig, nicht mit einer Zahl.
+`;
+    expect(parseDe(fixture)).toEqual([
+      { book: 1, section: 1, text: 'Erster Abschnitt.' },
+      { book: 1, section: 2, text: 'Zweiter Abschnitt beginnt hier richtig, nicht mit einer Zahl.' },
+    ]);
+  });
+
+  it('erkennt einen echten Abschnitt auch dann korrekt, wenn die erste Fußnote eines neuen Blocks zufällig dieselbe Nummer trägt', () => {
+    // Härtungsfall: "num === erwartet" und "Leerzeile davor" reichen allein
+    // nicht aus, um eine Fußnote von einem Abschnitt zu unterscheiden, wenn
+    // die erste Fußnote eines Blocks zufällig dieselbe Nummer wie der
+    // erwartete nächste Abschnitt trägt. Fußnoten stehen aber immer enger
+    // gesetzt (schmalere Lücke zwischen Nummer und Text) als Abschnitte —
+    // dieses zusätzliche Signal muss die Kollision auflösen.
+    const fixture = `Erstes Buch
+
+1      Erster Abschnitt.
+
+2   Fußnote, die zufällig auch "2" heißt und wie ein Abschnitt aussehen könnte.
+
+2      Zweiter Abschnitt, der wirklich zu Buch eins gehört.
+`;
+    expect(parseDe(fixture)).toEqual([
+      { book: 1, section: 1, text: 'Erster Abschnitt.' },
+      { book: 1, section: 2, text: 'Zweiter Abschnitt, der wirklich zu Buch eins gehört.' },
+    ]);
+  });
 });
