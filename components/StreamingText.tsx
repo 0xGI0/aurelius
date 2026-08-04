@@ -15,7 +15,11 @@ export function StreamingText({ stream, onDone, onError }: Props) {
   const cursor = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
-    if (!stream) return;
+    if (!stream) {
+      setText('');
+      setRunning(false);
+      return;
+    }
     let cancelled = false;
     setText('');
     setRunning(true);
