@@ -6,9 +6,11 @@
   <a href="#deutsch">Deutsch</a> · <a href="#english">English</a>
 </p>
 <p align="center">
-  <img src="assets/images/marcus-portrait.jpg" width="220" alt="Büste des Marc Aurel (Glyptothek München)">
-  &nbsp;&nbsp;
-  <img src="assets/images/epictetus.jpg" width="186" alt="Epiktet (Kupferstich, Oxford 1715)">
+  <img src="assets/images/marcus-portrait.jpg" width="180" alt="Büste des Marc Aurel (Glyptothek München)">
+  &nbsp;
+  <img src="assets/images/epictetus.jpg" width="152" alt="Epiktet (Kupferstich, Oxford 1715)">
+  &nbsp;
+  <img src="assets/images/seneca.jpg" width="168" alt="Pseudo-Seneca-Büste (Foto: Marie-Lan Nguyen, CC BY 2.5)">
 </p>
 
 ---
@@ -16,10 +18,11 @@
 ## Deutsch
 
 Eine ruhige, zweisprachige App für die **großen Stoiker**: Marc Aurels
-*Selbstbetrachtungen* (12 Bücher, **486 Abschnitte**) und Epiktets
-*Handbüchlein der Moral* (**53 Kapitel**) — jeweils auf Deutsch, Englisch
-und Altgriechisch, mit Themen-Filtern, Favoriten und optionaler
-KI-Erklärung als Live-Stream.
+*Selbstbetrachtungen* (**486 Abschnitte**), Epiktets *Handbüchlein der
+Moral* (**53 Kapitel**) und Senecas *Von der Kürze des Lebens*
+(**20 Kapitel**) — jeweils auf Deutsch, Englisch und im Original
+(Altgriechisch bzw. Latein), mit Themen-Filtern, Favoriten und
+optionaler KI-Erklärung als Live-Stream.
 
 **Live:** https://aurelius-rust.vercel.app
 
@@ -35,7 +38,7 @@ KI-Erklärung als Live-Stream.
 - **Themen-Filter** — Tod, Wut, Trauer, Angst, Familie, Besitz, Gelassenheit, Pflicht, Natur
 - **Drei Zitat-Sprachen** — Wittstock 1879 (de), George Long 1862 (en), griechischer Originaltext (grc), umschaltbar
 - **Zweisprachige Oberfläche** — Deutsch/Englisch
-- **Bücher-Browser** — alle 12 Bücher bis zum einzelnen Abschnitt, plus kuratierte „Stoische Bibliothek"
+- **Bücher-Browser** — alle 12 Bücher bzw. Kapitel bis zum einzelnen Abschnitt
 - **Ausgewählt** — eigene Zitat-Sammlung per Stern; lokal, mit Konto geräteübergreifend synchronisiert (Aktivierung mit dem Server-Go-Live)
 - **Über Marc Aurel & Die Stoa** — Kurzbiografie und Einführung
 - **KI-Erklärung** — eigener Anthropic-Key (direkt vom Gerät, Streaming) oder Gemini-Fallback über eine Vercel-Function
@@ -84,8 +87,9 @@ gibt es dort unter [Releases](https://github.com/0xGI0/aurelius-android/releases
 ## English
 
 A calm, bilingual app for the **great Stoics**: Marcus Aurelius' *Meditations*
-(12 books, **486 sections**) and Epictetus' *Enchiridion* (**53 chapters**) —
-each in German, English and Ancient Greek, with topic filters, favorites and
+(**486 sections**), Epictetus' *Enchiridion* (**53 chapters**) and Seneca's
+*On the Shortness of Life* (**20 chapters**) — each in German, English and
+the original (Ancient Greek or Latin), with topic filters, favorites and
 optional AI explanations streamed live.
 
 **Live:** https://aurelius-rust.vercel.app
@@ -102,7 +106,7 @@ optional AI explanations streamed live.
 - **Topic filters** — death, anger, grief, fear, family, possessions, equanimity, duty, nature
 - **Three quote languages** — Wittstock 1879 (de), George Long 1862 (en), the Greek original (grc), switchable
 - **Bilingual interface** — German/English
-- **Book browser** — all 12 books down to the individual section, plus a curated "Stoic Library"
+- **Book browser** — all 12 books and chapters down to the individual section
 - **Selected** — your own collection via the star; local, or synced across devices with an account (activated with the server go-live)
 - **About Marcus Aurelius & The Stoa** — short biography and introduction
 - **AI explanation** — your own Anthropic key (straight from the device, streaming) or a Gemini fallback via a Vercel function

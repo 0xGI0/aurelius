@@ -7,12 +7,11 @@ import type { Author, Quote, QuoteLang } from '../../lib/quotes';
 import { bookRoman } from '../../lib/quotes';
 import { EPIKTET_QUOTES, SENECA_QUOTES } from '../../lib/corpus';
 import { getAuthor, getQuoteLang, setAuthor as persistAuthor, setQuoteLang } from '../../lib/settings';
-import { READING_LIST } from '../../data/readingList';
 import { useTheme } from '../../theme/ThemeContext';
 import { Screen } from '../../components/Screen';
 import { Segmented } from '../../components/Segmented';
 import { fonts } from '../../theme/tokens';
-import { useT, useUiLang } from '../../lib/i18n';
+import { useT } from '../../lib/i18n';
 
 const QUOTES = quotesData as Quote[];
 
@@ -20,7 +19,6 @@ export default function Books() {
   const { colors } = useTheme();
   const router = useRouter();
   const t = useT();
-  const uiLang = useUiLang();
   const [author, setAuthor] = useState<Author>('aurel');
   const [lang, setLang] = useState<QuoteLang>('de');
 
@@ -127,28 +125,6 @@ export default function Books() {
         </>
       )}
 
-      <Text style={[styles.h1, styles.h1Second, { color: colors.text }]}>{t('libTitle')}</Text>
-      <Text style={[styles.sub, { color: colors.textSoft }]}>{t('libSub')}</Text>
-
-      <View style={styles.list}>
-        {READING_LIST.map((item) => (
-          <View
-            key={item.title}
-            style={[styles.bookCard, { backgroundColor: colors.card, borderColor: colors.border }]}
-          >
-            <Text style={[styles.era, { color: colors.accent }]}>
-              {item.author.toUpperCase()} ·{' '}
-              {t(item.era === 'Antike' ? 'eraAncient' : 'eraModern').toUpperCase()}
-            </Text>
-            <Text style={[styles.bookTitle, { color: colors.text }]}>
-              {uiLang === 'en' ? item.titleEn : item.title}
-            </Text>
-            <Text style={{ color: colors.textSoft, fontSize: 14, lineHeight: 21 }}>
-              {uiLang === 'en' ? item.noteEn : item.note}
-            </Text>
-          </View>
-        ))}
-      </View>
     </Screen>
   );
 }
