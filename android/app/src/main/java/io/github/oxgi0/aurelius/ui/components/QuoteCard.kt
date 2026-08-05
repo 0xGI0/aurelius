@@ -15,6 +15,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -55,10 +58,34 @@ fun QuoteCard(
             .padding(start = 28.dp, end = 28.dp, bottom = 28.dp, top = topInset),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        // Scroll-Hinweis: Verlauf am unteren/oberen Rand, solange dort Text wartet
+        val scroll = rememberScrollState()
         Column(
             modifier = Modifier
                 .heightIn(min = 164.dp, max = 460.dp)
-                .verticalScroll(rememberScrollState()),
+                .drawWithContent {
+                    drawContent()
+                    val fade = 36.dp.toPx()
+                    if (scroll.canScrollForward) {
+                        drawRect(
+                            brush = Brush.verticalGradient(
+                                colors = listOf(Color.Transparent, colors.card),
+                                startY = size.height - fade,
+                                endY = size.height,
+                            ),
+                        )
+                    }
+                    if (scroll.canScrollBackward) {
+                        drawRect(
+                            brush = Brush.verticalGradient(
+                                colors = listOf(colors.card, Color.Transparent),
+                                startY = 0f,
+                                endY = fade,
+                            ),
+                        )
+                    }
+                }
+                .verticalScroll(scroll),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             androidx.compose.foundation.text.selection.SelectionContainer {
