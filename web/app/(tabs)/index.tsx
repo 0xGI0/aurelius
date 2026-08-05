@@ -81,10 +81,31 @@ export default function Home() {
     void setQuoteLang(l);
   };
 
+  // Die Wortmarke ist der Autoren-Umschalter: aktiver Autor in Akzentfarbe
   const header = (
     <View style={styles.header}>
       <View style={styles.headerSide} />
-      <Text style={[styles.brand, { color: colors.textSoft }]}>AURELIUS</Text>
+      <View style={styles.brandRow}>
+        <Pressable
+          onPress={() => changeAuthor('aurel')}
+          accessibilityRole="button"
+          accessibilityState={{ selected: author === 'aurel' }}
+        >
+          <Text style={[styles.brand, { color: author === 'aurel' ? colors.accent : colors.textSoft }]}>
+            AURELIUS
+          </Text>
+        </Pressable>
+        <Text style={[styles.brand, { color: colors.textSoft }]}>·</Text>
+        <Pressable
+          onPress={() => changeAuthor('epiktet')}
+          accessibilityRole="button"
+          accessibilityState={{ selected: author === 'epiktet' }}
+        >
+          <Text style={[styles.brand, { color: author === 'epiktet' ? colors.accent : colors.textSoft }]}>
+            EPIKTET
+          </Text>
+        </Pressable>
+      </View>
       <View style={styles.headerSide}>
         <Link href="/settings" accessibilityLabel="Einstellungen">
           <Ionicons name="settings-outline" size={20} color={colors.accent} />
@@ -112,14 +133,6 @@ export default function Home() {
       </Animated.View>
 
       <View style={styles.controls}>
-        <Segmented<Author>
-          options={[
-            { value: 'aurel', label: t('authorAurel') },
-            { value: 'epiktet', label: t('authorEpiktet') },
-          ]}
-          value={author}
-          onChange={changeAuthor}
-        />
         <TopicChips topics={topicOptions} value={topic} onChange={changeTopic} />
         <View style={styles.langRow}>
           <Segmented<QuoteLang>
@@ -158,6 +171,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   headerSide: { width: 24, alignItems: 'flex-end' },
+  brandRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   brand: { fontSize: 13, letterSpacing: 5, fontWeight: '600' },
   medallionWrap: { alignItems: 'center', marginBottom: -44, zIndex: 2 },
   medallion: { width: 88, height: 88, borderRadius: 44, borderWidth: 2 },
