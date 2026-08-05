@@ -1,4 +1,4 @@
-Django>=5.2,<6.0
+Django>=6.0.7,<7.0
 djangorestframework>=3.16
 dj-rest-auth>=7.0
 django-allauth>=65.4
