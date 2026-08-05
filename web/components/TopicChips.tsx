@@ -1,6 +1,6 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  NativeScrollEvent, NativeSyntheticEvent, Pressable, ScrollView, StyleSheet, Text, View,
+  NativeScrollEvent, NativeSyntheticEvent, Platform, Pressable, ScrollView, StyleSheet, Text, View,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from '../theme/ThemeContext';
@@ -25,6 +25,54 @@ export function TopicChips({ topics, value, onChange }: Props) {
   const layoutW = useRef(0);
   const contentW = useRef(0);
   const lastX = useRef(0);
+  const scrollRef = useRef<ScrollView>(null);
+
+  // RN-Web scrollt horizontale Listen nicht per Maus — Drag + Mausrad nachrüsten.
+  useEffect(() => {
+    if (Platform.OS !== 'web') return;
+    const node = (scrollRef.current as unknown as {
+      getScrollableNode?: () => HTMLElement;
+    })?.getScrollableNode?.();
+    if (!node) return;
+    let down = false;
+    let moved = false;
+    let startX = 0;
+    let startLeft = 0;
+    const onDown = (e: MouseEvent) => {
+      down = true; moved = false; startX = e.clientX; startLeft = node.scrollLeft;
+    };
+    const onMove = (e: MouseEvent) => {
+      if (!down) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 4) moved = true;
+      node.scrollLeft = startLeft - dx;
+      if (moved) e.preventDefault();
+    };
+    const onUp = () => { down = false; };
+    // Nach einem Drag keinen Chip-Klick auslösen
+    const onClickCapture = (e: MouseEvent) => {
+      if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; }
+    };
+    const onWheel = (e: WheelEvent) => {
+      if (e.deltaY !== 0 && node.scrollWidth > node.clientWidth) {
+        node.scrollLeft += e.deltaY;
+        e.preventDefault();
+      }
+    };
+    node.style.cursor = 'grab';
+    node.addEventListener('mousedown', onDown);
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+    node.addEventListener('click', onClickCapture, true);
+    node.addEventListener('wheel', onWheel, { passive: false });
+    return () => {
+      node.removeEventListener('mousedown', onDown);
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+      node.removeEventListener('click', onClickCapture, true);
+      node.removeEventListener('wheel', onWheel);
+    };
+  }, []);
 
   const update = useCallback(() => {
     setFadeLeft(lastX.current > 1);
@@ -41,6 +89,7 @@ export function TopicChips({ topics, value, onChange }: Props) {
   return (
     <View style={styles.wrap}>
       <ScrollView
+        ref={scrollRef}
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.row}
