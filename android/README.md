@@ -6,17 +6,21 @@
   <a href="#deutsch">Deutsch</a> · <a href="#english">English</a>
 </p>
 <p align="center">
-  <img src="app/src/main/res/drawable/marcus_portrait.jpg" width="240" alt="Büste des Marc Aurel (Glyptothek München)">
+  <img src="app/src/main/res/drawable/marcus_portrait.jpg" width="220" alt="Büste des Marc Aurel (Glyptothek München)">
+  &nbsp;&nbsp;
+  <img src="app/src/main/res/drawable/epictetus.jpg" width="186" alt="Epiktet (Kupferstich, Oxford 1715)">
 </p>
 
 ---
 
 ## Deutsch
 
-Native Android-App für Marc Aurels *Selbstbetrachtungen* — alle **486 Abschnitte**
-auf Deutsch, Englisch und Altgriechisch, mit Themen-Filtern, Favoriten
-(lokal oder per Konto geräteübergreifend synchronisiert) und optionalen
-KI-Erklärungen. Vollständig offline nutzbar, keine Werbung, kein Tracking.
+Native Android-App für die großen Stoiker: Marc Aurels *Selbstbetrachtungen*
+(**486 Abschnitte**) und Epiktets *Handbüchlein der Moral* (**53 Kapitel**) —
+jeweils auf Deutsch, Englisch und Altgriechisch, mit Autoren-Umschalter,
+Themen-Filtern, Favoriten (lokal oder per Konto geräteübergreifend
+synchronisiert) und optionalen KI-Erklärungen. Vollständig offline nutzbar,
+keine Werbung, kein Tracking.
 
 Kotlin + Jetpack Compose · minSdk 26 (Android 8.0) · Lizenz **GPL-3.0-or-later**
 
@@ -51,19 +55,20 @@ unsigniertes APK (so baut auch F-Droid).
 
 ### Quellen & Lizenzen der Inhalte
 
-- Deutsch: Albert Wittstock (1879, gemeinfrei) · Englisch: George Long (1862, gemeinfrei)
-- Altgriechisch: Perseus Digital Library, PerseusDL canonical-greekLit, **CC BY-SA 4.0**
-- Büste/Porträt: Glyptothek München, Foto Bibi Saint-Pol (gemeinfrei)
+- Selbstbetrachtungen: Albert Wittstock (1879) · George Long (1862) · Perseus (grc, **CC BY-SA 4.0**)
+- Handbüchlein: Carl Conz (1864) · George Long (1877) · Perseus (grc, **CC BY-SA 4.0**)
+- Büste Marc Aurels: Glyptothek München, Foto Bibi Saint-Pol (gemeinfrei) · Epiktet-Stich: Oxford 1715 (gemeinfrei)
 - Schriften: Fraunces & GFS Didot (SIL Open Font License, siehe `licenses/`)
 
 ---
 
 ## English
 
-Native Android app for Marcus Aurelius' *Meditations* — all **486 sections**
-in German, English and Ancient Greek, with topic filters, favorites (local,
-or synced across devices with a free account) and optional AI explanations.
-Fully usable offline, no ads, no tracking.
+Native Android app for the great Stoics: Marcus Aurelius' *Meditations*
+(**486 sections**) and Epictetus' *Enchiridion* (**53 chapters**) — each in
+German, English and Ancient Greek, with an author switch, topic filters,
+favorites (local, or synced across devices with a free account) and optional
+AI explanations. Fully usable offline, no ads, no tracking.
 
 Kotlin + Jetpack Compose · minSdk 26 (Android 8.0) · License **GPL-3.0-or-later**
 
@@ -98,7 +103,7 @@ F-Droid builds it).
 
 ### Content sources & licenses
 
-- German: Albert Wittstock (1879, public domain) · English: George Long (1862, public domain)
-- Ancient Greek: Perseus Digital Library, PerseusDL canonical-greekLit, **CC BY-SA 4.0**
-- Bust/portrait: Glyptothek Munich, photo Bibi Saint-Pol (public domain)
+- Meditations: Albert Wittstock (1879) · George Long (1862) · Perseus (grc, **CC BY-SA 4.0**)
+- Enchiridion: Carl Conz (1864) · George Long (1877) · Perseus (grc, **CC BY-SA 4.0**)
+- Bust of Marcus: Glyptothek Munich, photo Bibi Saint-Pol (public domain) · Epictetus engraving: Oxford 1715 (public domain)
 - Fonts: Fraunces & GFS Didot (SIL Open Font License, see `licenses/`)

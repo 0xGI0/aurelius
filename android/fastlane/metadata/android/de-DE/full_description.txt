@@ -1,8 +1,9 @@
-Alle 486 Abschnitte aus Marc Aurels „Selbstbetrachtungen" — Deutsch (Wittstock 1879), Englisch (Long 1862) und im altgriechischen Original (Perseus Digital Library, CC BY-SA 4.0).
+Zwei stoische Klassiker in einer App: alle 486 Abschnitte aus Marc Aurels „Selbstbetrachtungen" und Epiktets „Handbüchlein der Moral" (53 Kapitel) — jeweils Deutsch, Englisch und im altgriechischen Original (Perseus Digital Library, CC BY-SA 4.0).
 
 Funktionen:
 
-• Zufälliger Gedanke auf Tipp — ohne Wiederholungen, dank Shuffle-Verfahren
+• Autoren-Umschalter: Marc Aurel oder Epiktet, mit Porträts und einem Vergleich der beiden
+• Zufälliger Gedanke auf Knopfdruck — ohne Wiederholungen, dank Shuffle-Verfahren
 • Neun Themen-Filter: Tod, Wut, Trauer, Angst, Familie, Besitz, Gelassenheit, Pflicht, Natur
 • Alle zwölf Bücher zum Durchblättern und Lesen
 • Favoriten — lokal, oder mit kostenlosem Konto geräteübergreifend synchronisiert
