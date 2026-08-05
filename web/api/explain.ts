@@ -2,12 +2,10 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { GoogleGenAI } from '@google/genai';
 import { buildExplainPrompt, explainSystem, type ExplainLang } from '../lib/ai/prompt';
 
-// Websuche (2026-08-04, Task 10 Step 1): `gemini-2.5-flash` ist weiterhin der
-// korrekte Modellname und im Gemini-API-Free-Tier verfügbar (bestätigt über
-// ai.google.dev/gemini-api/docs/pricing: Flash-Modelle inkl. 2.5 Flash sind
-// kostenlos nutzbar, Limits gelten). ACHTUNG: 2.5 Flash ist laut Suchergebnissen
-// für 2026-10-16 zur Deprecation vorgesehen — vor diesem Datum ggf. auf ein
-// dann aktuelles Flash-Modell (z. B. 2.5/3.x Flash-Nachfolger) umstellen.
+// 2026-08-05: `gemini-2.5-flash` ist für NEUE API-Keys bereits gesperrt
+// (404 „no longer available to new users" — live verifiziert). Stattdessen
+// der Alias `gemini-flash-latest`, der immer aufs aktuelle Flash-Modell
+// zeigt und Deprecations überlebt.
 // SDK-Abgleich (@google/genai@2.15.0, node_modules/@google/genai/dist/genai.d.ts):
 // generateContentStream(params: GenerateContentParameters) mit
 // { model, contents, config? } ist unverändert; `systemInstruction` und
@@ -36,7 +34,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const ai = new GoogleGenAI({ apiKey });
   try {
     const stream = await ai.models.generateContentStream({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-flash-latest',
       contents: buildExplainPrompt(text, reference, lang),
       config: { systemInstruction: explainSystem(lang), maxOutputTokens: 1024 },
     });
