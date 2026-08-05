@@ -8,6 +8,7 @@ import io.github.oxgi0.aurelius.data.QuoteRepository
 import io.github.oxgi0.aurelius.db.AppDatabase
 import io.github.oxgi0.aurelius.net.BackendApi
 import io.github.oxgi0.aurelius.net.BackendApiFactory
+import io.github.oxgi0.aurelius.net.ExplainClient
 import io.github.oxgi0.aurelius.prefs.EncryptedSecretsStore
 import io.github.oxgi0.aurelius.prefs.SecretsStore
 import io.github.oxgi0.aurelius.prefs.SettingsStore
@@ -35,6 +36,7 @@ class AppContainer(private val app: Application) {
     val api: BackendApi by lazy {
         BackendApiFactory.create(BuildConfig.BACKEND_URL.ifBlank { "http://unkonfiguriert.invalid" }, secrets)
     }
+    val explain: ExplainClient by lazy { ExplainClient(BuildConfig.EXPLAIN_URL) }
 
     private fun readAsset(name: String): String =
         app.assets.open(name).bufferedReader().use { it.readText() }

@@ -149,7 +149,7 @@ fun QuoteScreen(nav: NavHostController) {
                     .padding(horizontal = 24.dp, vertical = 11.dp),
             )
 
-            // ExplainSection folgt in Task 10
+            io.github.oxgi0.aurelius.ui.components.ExplainSection(displayed, state.quoteLang)
         }
     }
 }

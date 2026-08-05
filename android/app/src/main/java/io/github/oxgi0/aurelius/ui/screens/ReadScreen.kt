@@ -59,6 +59,6 @@ fun ReadScreen(nav: NavHostController, quoteId: String) {
             io.github.oxgi0.aurelius.ui.components.FavoriteStar(quote.id)
         }
 
-        // ExplainSection folgt in Task 10
+        io.github.oxgi0.aurelius.ui.components.ExplainSection(quote, quoteLang)
     }
 }
