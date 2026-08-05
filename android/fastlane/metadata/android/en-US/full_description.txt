@@ -9,6 +9,5 @@ Features:
 • Favorites — local, or synced across devices with a free account
 • AI explanation of individual passages (optional, needs internet)
 • Bilingual interface (German/English), light and dark theme
-• Stoic library: an annotated reading list from Epictetus to today
 
 The app works fully offline — only account sync and AI explanations need a connection. No ads, no tracking.

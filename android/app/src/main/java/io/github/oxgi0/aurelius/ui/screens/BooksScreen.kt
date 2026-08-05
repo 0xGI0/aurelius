@@ -30,10 +30,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import io.github.oxgi0.aurelius.AureliusApp
 import io.github.oxgi0.aurelius.R
-import io.github.oxgi0.aurelius.data.READING_LIST
 import io.github.oxgi0.aurelius.data.roman
 import io.github.oxgi0.aurelius.ui.components.H1
-import io.github.oxgi0.aurelius.ui.components.Kicker
 import io.github.oxgi0.aurelius.ui.components.Screen
 import io.github.oxgi0.aurelius.ui.components.Segmented
 import io.github.oxgi0.aurelius.ui.components.SubLine
@@ -45,7 +43,6 @@ import io.github.oxgi0.aurelius.ui.theme.LocalColors
 fun BooksScreen(nav: NavHostController) {
     val colors = LocalColors.current
     val container = (LocalContext.current.applicationContext as AureliusApp).container
-    val uiLang by container.settings.uiLang.collectAsState(initial = "de")
     val quoteLang by container.settings.quoteLang.collectAsState(initial = "de")
     val author by container.settings.author.collectAsState(initial = "aurel")
     val scope = androidx.compose.runtime.rememberCoroutineScope()
@@ -114,7 +111,6 @@ fun BooksScreen(nav: NavHostController) {
                 }
             }
 
-            LibrarySection(uiLang)
         }
         return
     }
@@ -158,53 +154,6 @@ fun BooksScreen(nav: NavHostController) {
             }
         }
 
-        LibrarySection(uiLang)
     }
 }
 
-/** Stoische Bibliothek — für beide Autoren-Ansichten identisch. */
-@Composable
-private fun LibrarySection(uiLang: String) {
-    val colors = LocalColors.current
-    val cardShape = RoundedCornerShape(14.dp)
-    H1(stringResource(R.string.lib_title))
-    SubLine(stringResource(R.string.lib_sub))
-
-    Column(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
-        READING_LIST.forEach { item ->
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(cardShape)
-                    .background(colors.card)
-                    .border(1.dp, colors.border, cardShape)
-                    .padding(horizontal = 18.dp, vertical = 14.dp),
-            ) {
-                val eraLabel = stringResource(
-                    if (item.era == "Antike") R.string.era_ancient else R.string.era_modern
-                )
-                Text(
-                    text = "${item.author} · $eraLabel".uppercase(),
-                    color = colors.accent,
-                    fontSize = 11.sp,
-                    letterSpacing = 2.sp,
-                    fontWeight = FontWeight.SemiBold,
-                )
-                Text(
-                    text = if (uiLang == "en") item.titleEn else item.title,
-                    fontFamily = FrauncesMedium,
-                    fontSize = 18.sp,
-                    color = colors.text,
-                    modifier = Modifier.padding(top = 4.dp),
-                )
-                Text(
-                    text = if (uiLang == "en") item.noteEn else item.note,
-                    fontSize = 14.sp,
-                    lineHeight = 21.sp,
-                    color = colors.textSoft,
-                    modifier = Modifier.padding(top = 4.dp),
-                )
-            }
-        }
-    }
-}

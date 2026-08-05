@@ -6,9 +6,11 @@
   <a href="#deutsch">Deutsch</a> · <a href="#english">English</a>
 </p>
 <p align="center">
-  <img src="app/src/main/res/drawable/marcus_portrait.jpg" width="220" alt="Büste des Marc Aurel (Glyptothek München)">
-  &nbsp;&nbsp;
-  <img src="app/src/main/res/drawable/epictetus.jpg" width="186" alt="Epiktet (Kupferstich, Oxford 1715)">
+  <img src="app/src/main/res/drawable/marcus_portrait.jpg" width="180" alt="Büste des Marc Aurel (Glyptothek München)">
+  &nbsp;
+  <img src="app/src/main/res/drawable/epictetus.jpg" width="152" alt="Epiktet (Kupferstich, Oxford 1715)">
+  &nbsp;
+  <img src="app/src/main/res/drawable/seneca.jpg" width="168" alt="Pseudo-Seneca-Büste (Foto: Marie-Lan Nguyen, CC BY 2.5)">
 </p>
 
 ---
@@ -16,8 +18,9 @@
 ## Deutsch
 
 Native Android-App für die großen Stoiker: Marc Aurels *Selbstbetrachtungen*
-(**486 Abschnitte**) und Epiktets *Handbüchlein der Moral* (**53 Kapitel**) —
-jeweils auf Deutsch, Englisch und Altgriechisch, mit Autoren-Umschalter,
+(**486 Abschnitte**), Epiktets *Handbüchlein der Moral* (**53 Kapitel**) und
+Senecas *Von der Kürze des Lebens* (**20 Kapitel**) — jeweils auf Deutsch,
+Englisch und im Original (Altgriechisch bzw. Latein), mit Autoren-Umschalter,
 Themen-Filtern, Favoriten (lokal oder per Konto geräteübergreifend
 synchronisiert) und optionalen KI-Erklärungen. Vollständig offline nutzbar,
 keine Werbung, kein Tracking.
@@ -57,7 +60,8 @@ unsigniertes APK (so baut auch F-Droid).
 
 - Selbstbetrachtungen: Albert Wittstock (1879) · George Long (1862) · Perseus (grc, **CC BY-SA 4.0**)
 - Handbüchlein: Carl Conz (1864) · George Long (1877) · Perseus (grc, **CC BY-SA 4.0**)
-- Büste Marc Aurels: Glyptothek München, Foto Bibi Saint-Pol (gemeinfrei) · Epiktet-Stich: Oxford 1715 (gemeinfrei)
+- Von der Kürze des Lebens: Otto Apelt (1923) · John W. Basore (1932, PD) · lateinisches Original
+- Büste Marc Aurels: Glyptothek München, Foto Bibi Saint-Pol (gemeinfrei) · Epiktet-Stich: Oxford 1715 (gemeinfrei) · Pseudo-Seneca: Foto Marie-Lan Nguyen (**CC BY 2.5**)
 - Schriften: Fraunces & GFS Didot (SIL Open Font License, siehe `licenses/`)
 
 ---
@@ -65,8 +69,9 @@ unsigniertes APK (so baut auch F-Droid).
 ## English
 
 Native Android app for the great Stoics: Marcus Aurelius' *Meditations*
-(**486 sections**) and Epictetus' *Enchiridion* (**53 chapters**) — each in
-German, English and Ancient Greek, with an author switch, topic filters,
+(**486 sections**), Epictetus' *Enchiridion* (**53 chapters**) and Seneca's
+*On the Shortness of Life* (**20 chapters**) — each in German, English and
+the original (Ancient Greek or Latin), with an author switch, topic filters,
 favorites (local, or synced across devices with a free account) and optional
 AI explanations. Fully usable offline, no ads, no tracking.
 
@@ -105,5 +110,6 @@ F-Droid builds it).
 
 - Meditations: Albert Wittstock (1879) · George Long (1862) · Perseus (grc, **CC BY-SA 4.0**)
 - Enchiridion: Carl Conz (1864) · George Long (1877) · Perseus (grc, **CC BY-SA 4.0**)
-- Bust of Marcus: Glyptothek Munich, photo Bibi Saint-Pol (public domain) · Epictetus engraving: Oxford 1715 (public domain)
+- On the Shortness of Life: Otto Apelt (1923) · John W. Basore (1932, PD) · Latin original
+- Bust of Marcus: Glyptothek Munich, photo Bibi Saint-Pol (public domain) · Epictetus engraving: Oxford 1715 (public domain) · Pseudo-Seneca: photo Marie-Lan Nguyen (**CC BY 2.5**)
 - Fonts: Fraunces & GFS Didot (SIL Open Font License, see `licenses/`)
