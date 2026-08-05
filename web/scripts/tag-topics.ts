@@ -75,18 +75,22 @@ const TOPICS: TopicDef[] = [
 ];
 
 const quotes = JSON.parse(readFileSync('data/quotes.json', 'utf8')) as Quote[];
+// Epiktets Encheiridion läuft durch dieselbe Heuristik (IDs e-1..e-53)
+const enchiridion = JSON.parse(readFileSync('data/enchiridion.json', 'utf8')) as Quote[];
+const all = [...quotes, ...enchiridion];
 
 const result = TOPICS.map((t) => {
-  const quoteIds = quotes
+  const quoteIds = all
     .filter((q) => t.de.test(q.texts.de) || t.en.test(q.texts.en))
     .map((q) => q.id);
   return { id: t.id, label: t.label, quoteIds };
 });
 
 for (const t of result) {
-  console.log(`${t.label.padEnd(28)} ${t.quoteIds.length} Abschnitte`);
+  const ench = t.quoteIds.filter((id) => id.startsWith('e-')).length;
+  console.log(`${t.label.padEnd(28)} ${t.quoteIds.length} Abschnitte (davon Epiktet: ${ench})`);
 }
-const untagged = quotes.filter((q) => !result.some((t) => t.quoteIds.includes(q.id)));
+const untagged = all.filter((q) => !result.some((t) => t.quoteIds.includes(q.id)));
 console.log(`Ohne Thema: ${untagged.length}`);
 
 writeFileSync('data/topics.json', JSON.stringify(result));

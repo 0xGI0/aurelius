@@ -23,3 +23,22 @@ Nicht alignierbare Abschnitte insgesamt: siehe `data-sources/alignment-report.tx
 | Bild | Quelle | Lizenz |
 |---|---|---|
 | Büste des Marc Aurel (Medaillon + Porträt in der App) | Glyptothek München; Foto: Bibi Saint-Pol, Wikimedia Commons („Marcus Aurelius Glyptothek Munich.jpg") | Gemeinfrei (Public Domain, vom Fotografen freigegeben) |
+
+## Epiktet — Handbüchlein der Moral (Encheiridion)
+
+Ergänzt am 2026-08-05 (Teilprojekt 5). IDs `e-1` … `e-53` in `data/enchiridion.json`, Zählung kanonisch nach der griechischen Edition (53 Kapitel).
+
+| Sprache | Quelle | Nachweis |
+|---|---|---|
+| Deutsch | Carl Conz (Übers.), *Handbüchlein der stoischen Moral* (1864). Übersetzer 19. Jh. → gemeinfrei; derselbe Text ist bei Zeno.org gelistet und von LibriVox (ausschließlich gemeinfreie Werke) vertont. | PDF: `data-sources/Epiktet-Handbuechlein-Conz.pdf` (von susannealbers.de) |
+| Englisch | George Long (Übers.), *The Enchiridion*, in: *A Selection from the Discourses of Epictetus with the Encheiridion* (1877). Long (1800–1879) → gemeinfrei. | Project Gutenberg **#10661**, `data-sources/pg-long-enchiridion.txt` |
+| Altgriechisch | Epiktet, *Ἐγχειρίδιον*; Edition aus PerseusDL canonical-greekLit (tlg0557.tlg002, `perseus-grc2`). | Committet als `data-sources/tlg0557.tlg002.xml`. Lizenz: **CC BY-SA 4.0**, Namensnennung wie oben. |
+
+Editions-Eigenheiten (beim Alignment verifiziert):
+
+1. **Longs Edition verschmilzt Kapitel 50+51** zu einem Kapitel (sein LI/LII entspricht griechisch 52/53). Der Parser trennt am dokumentierten Satzanfang „How long will you then still defer …" und stellt die kanonische 53er-Zählung her.
+2. **Conz unterteilt Kapitel in Verse** („I, 1." … „I, 5.") mit redaktionellen Zwischenüberschriften; Verse werden pro Kapitel zusammengeführt, Überschriften verworfen.
+
+| Bild | Quelle | Lizenz |
+|---|---|---|
+| Epiktet-Porträt (Kupferstich-Frontispiz, 18. Jh.) | Wikimedia Commons | Gemeinfrei (ein antikes Porträt Epiktets existiert nicht) |
