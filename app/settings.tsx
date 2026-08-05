@@ -8,6 +8,7 @@ import {
   getQuoteLang, setQuoteLang, getAnthropicKey, setAnthropicKey, deleteAnthropicKey,
 } from '../lib/settings';
 import { useTheme } from '../theme/ThemeContext';
+import { AccountSection } from '../components/AccountSection';
 import { Segmented } from '../components/Segmented';
 import { useT, useUiLang, setUiLang, type UiLang } from '../lib/i18n';
 
@@ -55,6 +56,8 @@ export default function Settings() {
             <Text style={{ color: colors.accent, fontSize: 16 }}>{t('setDone')}</Text>
           </Link>
         </View>
+
+        {section(t('accTitle'), <AccountSection />)}
 
         {section(t('setUiLang'), (
           <Segmented<UiLang>

@@ -4,6 +4,7 @@ import { useFonts } from 'expo-font';
 import { Fraunces_500Medium, Fraunces_600SemiBold } from '@expo-google-fonts/fraunces';
 import { GFSDidot_400Regular } from '@expo-google-fonts/gfs-didot';
 import { ThemeProvider } from '../theme/ThemeContext';
+import { flushQueue } from '../lib/favorites';
 import { initUiLang } from '../lib/i18n';
 
 export default function RootLayout() {
@@ -15,6 +16,8 @@ export default function RootLayout() {
 
   useEffect(() => {
     void initUiLang();
+    // Offline-Queue der Favoriten nachholen (Spec §6)
+    void flushQueue().catch(() => undefined);
   }, []);
   if (!loaded) return null;
   return (
