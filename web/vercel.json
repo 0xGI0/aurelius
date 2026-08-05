@@ -1,4 +1,8 @@
 {
   "buildCommand": "npx expo export -p web",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/read/:id", "destination": "/read/[id].html" },
+    { "source": "/book/:book", "destination": "/book/[book].html" }
+  ]
 }
