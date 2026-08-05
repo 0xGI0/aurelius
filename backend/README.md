@@ -6,9 +6,11 @@
   <a href="#deutsch">Deutsch</a> · <a href="#english">English</a>
 </p>
 <p align="center">
-  <img src="docs/marcus-portrait.jpg" width="200" alt="Büste des Marc Aurel (Glyptothek München)">
-  &nbsp;&nbsp;
-  <img src="docs/epictetus.jpg" width="170" alt="Epiktet (Kupferstich, Oxford 1715)">
+  <img src="docs/marcus-portrait.jpg" width="170" alt="Büste des Marc Aurel (Glyptothek München)">
+  &nbsp;
+  <img src="docs/epictetus.jpg" width="144" alt="Epiktet (Kupferstich, Oxford 1715)">
+  &nbsp;
+  <img src="docs/seneca.jpg" width="158" alt="Pseudo-Seneca-Büste (Foto: Marie-Lan Nguyen, CC BY 2.5)">
 </p>
 
 ---
