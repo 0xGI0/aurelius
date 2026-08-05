@@ -61,15 +61,17 @@ fun QuoteCard(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(
-                text = quote.texts[lang] ?: quote.texts.getValue("de"),
-                color = colors.text,
-                textAlign = TextAlign.Center,
-                fontFamily = if (greek) GfsDidot else FrauncesMedium,
-                fontWeight = if (greek) FontWeight.Normal else FontWeight.Medium,
-                fontSize = if (greek) 22.sp else 23.sp,
-                lineHeight = if (greek) 34.sp else 36.sp,
-            )
+            androidx.compose.foundation.text.selection.SelectionContainer {
+                Text(
+                    text = quote.texts[lang] ?: quote.texts.getValue("de"),
+                    color = colors.text,
+                    textAlign = TextAlign.Center,
+                    fontFamily = if (greek) GfsDidot else FrauncesMedium,
+                    fontWeight = if (greek) FontWeight.Normal else FontWeight.Medium,
+                    fontSize = if (greek) 22.sp else 23.sp,
+                    lineHeight = if (greek) 34.sp else 36.sp,
+                )
+            }
         }
         Text(
             text = formatReference(quote, stringResource(R.string.ref_book)).uppercase(),

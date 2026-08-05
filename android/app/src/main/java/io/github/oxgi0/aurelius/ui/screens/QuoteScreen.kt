@@ -107,11 +107,11 @@ fun QuoteScreen(nav: NavHostController) {
                     .clip(CircleShape)
                     .border(2.dp, colors.accent, CircleShape),
             )
+            // Kein Tap-to-Next mehr: Text soll markier-/kopierbar sein (User-Wunsch)
             QuoteCard(
                 quote = displayed,
                 lang = state.quoteLang,
                 topInset = 64.dp,
-                onTap = { vm.drawNext() },
             )
         }
 
