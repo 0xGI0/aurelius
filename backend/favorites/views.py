@@ -1,13 +1,11 @@
-import re
-
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Favorite
+from .models import Favorite, QUOTE_ID_VALIDATOR
 
-# Marc Aurel: "buch-abschnitt" (5-23) · Epiktet: "e-kapitel" (e-53)
-QUOTE_ID_RE = re.compile(r"^(\d{1,2}-\d{1,3}|e-\d{1,2}|s-\d{1,2})$")
+# EINE Quelle fürs ID-Muster: der Feld-Validator aus models.py
+QUOTE_ID_RE = QUOTE_ID_VALIDATOR.regex
 
 
 def _serialisiere(favorit):

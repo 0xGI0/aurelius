@@ -59,9 +59,20 @@ class FavoritesApiTests(TestCase):
         self.assertIn("e-53", ids)
 
     def test_seneca_ids_werden_akzeptiert(self):
+        # Übergangsweise beide Formen: alte Kapitel-IDs (Android ≤0.4.0)
+        # und neue Paragraphen-IDs (seit dem Umbau vom 2026-08-05)
         resp = self.client.put("/api/favorites/s-20/")
         self.assertEqual(resp.status_code, 201)
         self.assertEqual(self.client.put("/api/favorites/s-123/").status_code, 400)
+
+    def test_seneca_paragraphen_ids_werden_akzeptiert(self):
+        resp = self.client.put("/api/favorites/s-4-2/")
+        self.assertEqual(resp.status_code, 201)
+        self.assertEqual(resp.json()["quote_id"], "s-4-2")
+        # längste reale Form (7 Zeichen) passt ins Feld
+        self.assertEqual(self.client.put("/api/favorites/s-20-13/").status_code, 201)
+        for kaputt in ["s-4-", "s-4-123", "s-123-1", "s-4-2-1"]:
+            self.assertEqual(self.client.put(f"/api/favorites/{kaputt}/").status_code, 400, kaputt)
 
     def test_userdaten_sind_getrennt(self):
         self.client.put("/api/favorites/5-23/")
