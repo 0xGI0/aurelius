@@ -15,10 +15,15 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        val settings = (application as AureliusApp).container.settings
+        val container = (application as AureliusApp).container
+        val settings = container.settings
         setContent {
             val uiLang by settings.uiLang.collectAsState(initial = "de")
             val theme by settings.themePref.collectAsState(initial = "system")
+            // Offline-Queue beim Start nachholen (Spec §6)
+            androidx.compose.runtime.LaunchedEffect(Unit) {
+                runCatching { container.favorites.flushQueue() }
+            }
             LocalizedApp(uiLang) {
                 AureliusTheme(
                     pref = when (theme) {

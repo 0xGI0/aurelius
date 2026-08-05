@@ -25,7 +25,13 @@ class AppContainer(private val app: Application) {
     val db: AppDatabase by lazy {
         Room.databaseBuilder(app, AppDatabase::class.java, "aurelius.db").build()
     }
-    val favorites: FavoritesRepository by lazy { FavoritesRepository(db.favoriteDao()) }
+    val favorites: FavoritesRepository by lazy {
+        FavoritesRepository(
+            dao = db.favoriteDao(),
+            session = { if (secrets.token != null) api else null },
+            onUnauthorized = { secrets.token = null; secrets.email = null },
+        )
+    }
     val api: BackendApi by lazy {
         BackendApiFactory.create(BuildConfig.BACKEND_URL.ifBlank { "http://unkonfiguriert.invalid" }, secrets)
     }
