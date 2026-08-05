@@ -15,8 +15,8 @@ android {
         applicationId = "io.github.oxgi0.aurelius"
         minSdk = 26
         targetSdk = 36
-        versionCode = 1
-        versionName = "0.1.0"
+        versionCode = 2
+        versionName = "0.1.1"
         buildConfigField("String", "EXPLAIN_URL", "\"https://aurelius-rust.vercel.app/api/explain\"")
     }
 
