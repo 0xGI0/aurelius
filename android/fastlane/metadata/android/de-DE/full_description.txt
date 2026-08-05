@@ -1,0 +1,13 @@
+Alle 486 Abschnitte aus Marc Aurels „Selbstbetrachtungen" — Deutsch (Wittstock 1879), Englisch (Long 1862) und im altgriechischen Original (Perseus Digital Library, CC BY-SA 4.0).
+
+Funktionen:
+
+• Zufälliger Gedanke auf Tipp — ohne Wiederholungen, dank Shuffle-Verfahren
+• Neun Themen-Filter: Tod, Wut, Trauer, Angst, Familie, Besitz, Gelassenheit, Pflicht, Natur
+• Alle zwölf Bücher zum Durchblättern und Lesen
+• Favoriten — lokal, oder mit kostenlosem Konto geräteübergreifend synchronisiert
+• KI-Erklärung einzelner Passagen (optional, braucht Internet)
+• Zweisprachige Oberfläche (Deutsch/Englisch), helles und dunkles Design
+• Stoische Bibliothek: kommentierte Leseliste von Epiktet bis heute
+
+Die App funktioniert vollständig offline — nur Konto-Sync und KI-Erklärungen brauchen eine Verbindung. Keine Werbung, kein Tracking.

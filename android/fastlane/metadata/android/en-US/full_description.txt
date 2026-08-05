@@ -1,0 +1,13 @@
+All 486 sections of Marcus Aurelius' "Meditations" — in German (Wittstock 1879), English (Long 1862) and the Ancient Greek original (Perseus Digital Library, CC BY-SA 4.0).
+
+Features:
+
+• A random thought at a tap — repetition-free shuffle
+• Nine topic filters: death, anger, grief, fear, family, possessions, equanimity, duty, nature
+• All twelve books to browse and read
+• Favorites — local, or synced across devices with a free account
+• AI explanation of individual passages (optional, needs internet)
+• Bilingual interface (German/English), light and dark theme
+• Stoic library: an annotated reading list from Epictetus to today
+
+The app works fully offline — only account sync and AI explanations need a connection. No ads, no tracking.
