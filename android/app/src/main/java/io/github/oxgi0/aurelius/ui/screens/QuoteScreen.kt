@@ -135,7 +135,7 @@ fun QuoteScreen(nav: NavHostController) {
                     ),
                     langs.indexOf(state.quoteLang),
                 ) { i -> vm.setQuoteLang(langs[i]) }
-                // FavoriteStar folgt in Task 7
+                io.github.oxgi0.aurelius.ui.components.FavoriteStar(displayed.id)
             }
 
             Text(

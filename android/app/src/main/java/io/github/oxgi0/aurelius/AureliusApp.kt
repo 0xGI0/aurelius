@@ -3,10 +3,13 @@ package io.github.oxgi0.aurelius
 import android.app.Application
 import android.content.Context
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.room.Room
 import io.github.oxgi0.aurelius.data.QuoteRepository
+import io.github.oxgi0.aurelius.db.AppDatabase
 import io.github.oxgi0.aurelius.prefs.EncryptedSecretsStore
 import io.github.oxgi0.aurelius.prefs.SecretsStore
 import io.github.oxgi0.aurelius.prefs.SettingsStore
+import io.github.oxgi0.aurelius.sync.FavoritesRepository
 
 private val Context.settingsDataStore by preferencesDataStore(name = "aurelius_settings")
 
@@ -17,6 +20,10 @@ class AppContainer(private val app: Application) {
     val quotes: QuoteRepository by lazy {
         QuoteRepository(readAsset("quotes.json"), readAsset("topics.json"))
     }
+    val db: AppDatabase by lazy {
+        Room.databaseBuilder(app, AppDatabase::class.java, "aurelius.db").build()
+    }
+    val favorites: FavoritesRepository by lazy { FavoritesRepository(db.favoriteDao()) }
 
     private fun readAsset(name: String): String =
         app.assets.open(name).bufferedReader().use { it.readText() }

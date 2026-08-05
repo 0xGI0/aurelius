@@ -56,7 +56,7 @@ fun ReadScreen(nav: NavHostController, quoteId: String) {
                 ),
                 langs.indexOf(quoteLang),
             ) { i -> scope.launch { container.settings.setQuoteLang(langs[i]) } }
-            // FavoriteStar folgt in Task 7
+            io.github.oxgi0.aurelius.ui.components.FavoriteStar(quote.id)
         }
 
         // ExplainSection folgt in Task 10
