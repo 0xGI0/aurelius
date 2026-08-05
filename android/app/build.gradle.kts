@@ -16,15 +16,15 @@ tasks.cyclonedxBom {
 }
 
 android {
-    namespace = "io.github.oxgi0.aurelius"
+    namespace = "io.github.oxgi0.stoa"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "io.github.oxgi0.aurelius"
+        applicationId = "io.github.oxgi0.stoa"
         minSdk = 26
         targetSdk = 36
-        versionCode = 4
-        versionName = "0.3.0"
+        versionCode = 5
+        versionName = "0.4.0"
         buildConfigField("String", "EXPLAIN_URL", "\"https://aurelius-rust.vercel.app/api/explain\"")
     }
 

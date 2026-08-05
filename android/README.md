@@ -1,7 +1,7 @@
 <p align="center">
-  <img src="docs/logo.png" width="140" alt="Aurelius-Logo: Lorbeerkranz mit A">
+  <img src="docs/logo.png" width="140" alt="Stoa-Logo: Lorbeerkranz">
 </p>
-<h1 align="center">Aurelius</h1>
+<h1 align="center">Stoa</h1>
 <p align="center">
   <a href="#deutsch">Deutsch</a> · <a href="#english">English</a>
 </p>
@@ -27,22 +27,22 @@ keine Werbung, kein Tracking.
 
 Kotlin + Jetpack Compose · minSdk 26 (Android 8.0) · Lizenz **GPL-3.0-or-later**
 
-**Schwester-Projekte:** [aurelius](https://github.com/0xGI0/aurelius) (Web-App) ·
-[aurelius-backend](https://github.com/0xGI0/aurelius-backend) (Konto- & Sync-Server)
+**Schwester-Projekte:** [`web/`](../web/) (Web-App) ·
+[`backend/`](../backend/) (Konto- & Sync-Server)
 
 ### Installation
 
-Aktuelle APK von den [Releases](https://github.com/0xGI0/aurelius-android/releases)
+Aktuelle APK von den [Releases](https://github.com/0xGI0/stoa/releases)
 laden und öffnen („Unbekannte Quellen" einmalig erlauben). F-Droid-Aufnahme ist
 in Vorbereitung.
 
 **Download prüfen (optional, empfohlen):**
 
     sha256sum -c SHA256SUMS.txt                      # Prüfsumme
-    gh attestation verify aurelius-*.apk \
-      --repo 0xGI0/aurelius-android                  # Sigstore-Build-Nachweis
+    gh attestation verify stoa-*.apk \
+      --repo 0xGI0/stoa                  # Sigstore-Build-Nachweis
     curl -s https://tertlidis.com/pgp.asc | gpg --import
-    gpg --verify aurelius-*.apk.asc aurelius-*.apk   # PGP-Signatur des Maintainers
+    gpg --verify stoa-*.apk.asc stoa-*.apk   # PGP-Signatur des Maintainers
 
 Die Attestierung beweist, dass die APK von der öffentlichen GitHub-Actions-
 Pipeline aus genau diesem Quellcode gebaut wurde; die PGP-Signatur
@@ -81,22 +81,22 @@ AI explanations. Fully usable offline, no ads, no tracking.
 
 Kotlin + Jetpack Compose · minSdk 26 (Android 8.0) · License **GPL-3.0-or-later**
 
-**Sister projects:** [aurelius](https://github.com/0xGI0/aurelius) (web app) ·
-[aurelius-backend](https://github.com/0xGI0/aurelius-backend) (account & sync server)
+**Sister projects:** [`web/`](../web/) (web app) ·
+[`backend/`](../backend/) (account & sync server)
 
 ### Install
 
-Grab the latest APK from the [Releases](https://github.com/0xGI0/aurelius-android/releases)
+Grab the latest APK from the [Releases](https://github.com/0xGI0/stoa/releases)
 page and open it (allow "unknown sources" once). F-Droid inclusion is in
 preparation.
 
 **Verify your download (optional, recommended):**
 
     sha256sum -c SHA256SUMS.txt                      # checksum
-    gh attestation verify aurelius-*.apk \
-      --repo 0xGI0/aurelius-android                  # Sigstore build provenance
+    gh attestation verify stoa-*.apk \
+      --repo 0xGI0/stoa                  # Sigstore build provenance
     curl -s https://tertlidis.com/pgp.asc | gpg --import
-    gpg --verify aurelius-*.apk.asc aurelius-*.apk   # maintainer PGP signature
+    gpg --verify stoa-*.apk.asc stoa-*.apk   # maintainer PGP signature
 
 The attestation proves the APK was built by the public GitHub Actions
 pipeline from exactly this source code; the PGP signature (fingerprint

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Aurelius</string>
+    <string name="app_name">Stoa</string>
 
     <!-- Tabs -->
     <string name="tab_quote">Quote</string>

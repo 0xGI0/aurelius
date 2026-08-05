@@ -1,0 +1,159 @@
+package io.github.oxgi0.stoa.ui.screens
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import io.github.oxgi0.stoa.AureliusApp
+import io.github.oxgi0.stoa.R
+import io.github.oxgi0.stoa.data.roman
+import io.github.oxgi0.stoa.ui.components.H1
+import io.github.oxgi0.stoa.ui.components.Screen
+import io.github.oxgi0.stoa.ui.components.Segmented
+import io.github.oxgi0.stoa.ui.components.SubLine
+import kotlinx.coroutines.launch
+import io.github.oxgi0.stoa.ui.theme.FrauncesMedium
+import io.github.oxgi0.stoa.ui.theme.LocalColors
+
+@Composable
+fun BooksScreen(nav: NavHostController) {
+    val colors = LocalColors.current
+    val container = (LocalContext.current.applicationContext as AureliusApp).container
+    val quoteLang by container.settings.quoteLang.collectAsState(initial = "de")
+    val author by container.settings.author.collectAsState(initial = "aurel")
+    val scope = androidx.compose.runtime.rememberCoroutineScope()
+    val cardShape = RoundedCornerShape(14.dp)
+
+    val switchers: @Composable () -> Unit = {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp),
+        ) {
+            val authorKeys = listOf("aurel", "epiktet", "seneca")
+            Segmented(
+                listOf(
+                    stringResource(R.string.author_aurel),
+                    stringResource(R.string.author_epiktet),
+                    stringResource(R.string.author_seneca),
+                ),
+                authorKeys.indexOf(author).coerceAtLeast(0),
+            ) { i ->
+                scope.launch { container.settings.setAuthor(authorKeys[i]) }
+            }
+            val langs = listOf("de", "en", "grc")
+            Segmented(
+                listOf(
+                    stringResource(R.string.lang_de),
+                    stringResource(R.string.lang_en),
+                    stringResource(if (author == "seneca") R.string.lang_la else R.string.lang_grc),
+                ),
+                langs.indexOf(quoteLang),
+            ) { i ->
+                scope.launch { container.settings.setQuoteLang(langs[i]) }
+            }
+        }
+    }
+
+    if (author != "aurel") {
+        Screen {
+            switchers()
+            H1(stringResource(if (author == "seneca") R.string.brev_title else R.string.ench_title))
+            SubLine(stringResource(if (author == "seneca") R.string.brev_sub else R.string.ench_sub))
+
+            Column(verticalArrangement = Arrangement.spacedBy(14.dp), modifier = Modifier.fillMaxWidth()) {
+                (if (author == "seneca") container.quotes.debrevitate else container.quotes.enchiridion).forEach { q ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth().clickable { nav.navigate("read/${q.id}") },
+                    ) {
+                        Text(
+                            text = q.section.toString(),
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = colors.accent,
+                            textAlign = androidx.compose.ui.text.style.TextAlign.End,
+                            modifier = Modifier.widthIn(min = 24.dp).padding(end = 10.dp),
+                        )
+                        Text(
+                            text = q.texts[quoteLang] ?: q.texts.getValue("de"),
+                            fontFamily = FrauncesMedium,
+                            fontSize = 15.sp,
+                            lineHeight = 22.sp,
+                            color = colors.text,
+                            maxLines = 2,
+                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+                        )
+                    }
+                }
+            }
+
+        }
+        return
+    }
+
+    Screen {
+        switchers()
+        H1(stringResource(R.string.books_title))
+        SubLine(stringResource(R.string.books_sub))
+
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
+            container.quotes.books().forEach { (book, count) ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(cardShape)
+                        .background(colors.card)
+                        .border(1.dp, colors.border, cardShape)
+                        .clickable { nav.navigate("book/$book") }
+                        .padding(horizontal = 18.dp, vertical = 14.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = "${stringResource(R.string.ref_book)} ${roman(book)}",
+                        fontFamily = FrauncesMedium,
+                        fontSize = 17.sp,
+                        color = colors.text,
+                    )
+                    Spacer(Modifier.weight(1f))
+                    Text(
+                        text = "$count ${stringResource(R.string.sections)}",
+                        fontSize = 13.sp,
+                        color = colors.textSoft,
+                    )
+                    Icon(
+                        Icons.Filled.ChevronRight,
+                        contentDescription = null,
+                        tint = colors.accent,
+                        modifier = Modifier.size(16.dp).padding(start = 2.dp),
+                    )
+                }
+            }
+        }
+
+    }
+}
+

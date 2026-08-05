@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "aurelius-android"
+rootProject.name = "stoa-android"
 include(":app")

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # PGP-Signaturen für ein bestehendes GitHub-Release erzeugen und hochladen.
-# Nutzung: ./scripts/sign-release.sh vX.Y.Z
+# Nutzung: ./scripts/sign-release.sh android-vX.Y.Z
 set -euo pipefail
 
-TAG="${1:?Nutzung: sign-release.sh vX.Y.Z}"
-REPO="0xGI0/aurelius-android"
+TAG="${1:?Nutzung: sign-release.sh android-vX.Y.Z}"
+REPO="0xGI0/stoa"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
