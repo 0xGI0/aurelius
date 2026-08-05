@@ -2,5 +2,5 @@ Django>=5.2,<6.0
 djangorestframework>=3.16
 dj-rest-auth>=7.0
 django-allauth>=65.4
-django-cors-headers>=4.7
+django-cors-headers>=4.9.0
 requests>=2.31
