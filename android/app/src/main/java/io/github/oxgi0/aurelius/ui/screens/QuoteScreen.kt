@@ -68,21 +68,45 @@ fun QuoteScreen(nav: NavHostController) {
     }
 
     Screen {
-        // Header: Platzhalter · Wortmarke · Einstellungen
+        // Header: die Wortmarke ist der Autoren-Umschalter (aktiv = Akzent)
+        val isEpiktet = state.author == io.github.oxgi0.aurelius.data.Author.Epiktet
         Row(
             modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Spacer(Modifier.width(24.dp))
-            Text(
-                text = "AURELIUS",
-                fontSize = 13.sp,
-                letterSpacing = 5.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = colors.textSoft,
+            Row(
                 modifier = Modifier.weight(1f),
-                textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-            )
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    text = "AURELIUS",
+                    fontSize = 13.sp,
+                    letterSpacing = 5.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = if (!isEpiktet) colors.accent else colors.textSoft,
+                    modifier = Modifier.clickable {
+                        vm.selectAuthor(io.github.oxgi0.aurelius.data.Author.Aurel)
+                    },
+                )
+                Text(
+                    text = "·",
+                    fontSize = 13.sp,
+                    color = colors.textSoft,
+                    modifier = Modifier.padding(horizontal = 10.dp),
+                )
+                Text(
+                    text = "EPIKTET",
+                    fontSize = 13.sp,
+                    letterSpacing = 5.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = if (isEpiktet) colors.accent else colors.textSoft,
+                    modifier = Modifier.clickable {
+                        vm.selectAuthor(io.github.oxgi0.aurelius.data.Author.Epiktet)
+                    },
+                )
+            }
             Icon(
                 Icons.Outlined.Settings,
                 contentDescription = stringResource(R.string.acc_settings),
@@ -125,18 +149,6 @@ fun QuoteScreen(nav: NavHostController) {
             verticalArrangement = Arrangement.spacedBy(14.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Segmented(
-                listOf(
-                    stringResource(R.string.author_aurel),
-                    stringResource(R.string.author_epiktet),
-                ),
-                if (state.author == io.github.oxgi0.aurelius.data.Author.Epiktet) 1 else 0,
-            ) { i ->
-                vm.selectAuthor(
-                    if (i == 1) io.github.oxgi0.aurelius.data.Author.Epiktet
-                    else io.github.oxgi0.aurelius.data.Author.Aurel
-                )
-            }
             TopicChips(container.quotes.topics, state.topicId) { vm.selectTopic(it) }
 
             Row(

@@ -35,7 +35,9 @@ import io.github.oxgi0.aurelius.data.roman
 import io.github.oxgi0.aurelius.ui.components.H1
 import io.github.oxgi0.aurelius.ui.components.Kicker
 import io.github.oxgi0.aurelius.ui.components.Screen
+import io.github.oxgi0.aurelius.ui.components.Segmented
 import io.github.oxgi0.aurelius.ui.components.SubLine
+import kotlinx.coroutines.launch
 import io.github.oxgi0.aurelius.ui.theme.FrauncesMedium
 import io.github.oxgi0.aurelius.ui.theme.LocalColors
 
@@ -46,10 +48,38 @@ fun BooksScreen(nav: NavHostController) {
     val uiLang by container.settings.uiLang.collectAsState(initial = "de")
     val quoteLang by container.settings.quoteLang.collectAsState(initial = "de")
     val author by container.settings.author.collectAsState(initial = "aurel")
+    val scope = androidx.compose.runtime.rememberCoroutineScope()
     val cardShape = RoundedCornerShape(14.dp)
+
+    val switchers: @Composable () -> Unit = {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp),
+        ) {
+            Segmented(
+                listOf(stringResource(R.string.author_aurel), stringResource(R.string.author_epiktet)),
+                if (author == "epiktet") 1 else 0,
+            ) { i ->
+                scope.launch { container.settings.setAuthor(if (i == 1) "epiktet" else "aurel") }
+            }
+            val langs = listOf("de", "en", "grc")
+            Segmented(
+                listOf(
+                    stringResource(R.string.lang_de),
+                    stringResource(R.string.lang_en),
+                    stringResource(R.string.lang_grc),
+                ),
+                langs.indexOf(quoteLang),
+            ) { i ->
+                scope.launch { container.settings.setQuoteLang(langs[i]) }
+            }
+        }
+    }
 
     if (author == "epiktet") {
         Screen {
+            switchers()
             H1(stringResource(R.string.ench_title))
             SubLine(stringResource(R.string.ench_sub))
 
@@ -85,6 +115,7 @@ fun BooksScreen(nav: NavHostController) {
     }
 
     Screen {
+        switchers()
         H1(stringResource(R.string.books_title))
         SubLine(stringResource(R.string.books_sub))
 
