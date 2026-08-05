@@ -6,7 +6,9 @@
   <a href="#deutsch">Deutsch</a> · <a href="#english">English</a>
 </p>
 <p align="center">
-  <img src="docs/marcus-portrait.jpg" width="220" alt="Büste des Marc Aurel (Glyptothek München)">
+  <img src="docs/marcus-portrait.jpg" width="200" alt="Büste des Marc Aurel (Glyptothek München)">
+  &nbsp;&nbsp;
+  <img src="docs/epictetus.jpg" width="170" alt="Epiktet (Kupferstich, Oxford 1715)">
 </p>
 
 ---
