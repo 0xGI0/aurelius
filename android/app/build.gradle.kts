@@ -20,6 +20,21 @@ android {
         buildConfigField("String", "EXPLAIN_URL", "\"https://aurelius-rust.vercel.app/api/explain\"")
     }
 
+    // Signatur nur, wenn der lokale Schlüssel vorhanden ist (Env-Vars) —
+    // F-Droid baut ohne und signiert selbst.
+    val ksPath: String? = System.getenv("AURELIUS_KEYSTORE")
+    val ksPass: String? = System.getenv("AURELIUS_KEYSTORE_PASS")
+    if (ksPath != null && ksPass != null) {
+        signingConfigs {
+            create("release") {
+                storeFile = file(ksPath)
+                storePassword = ksPass
+                keyAlias = "aurelius"
+                keyPassword = ksPass
+            }
+        }
+    }
+
     buildTypes {
         debug {
             buildConfigField("String", "BACKEND_URL", "\"http://10.0.2.2:8000\"")
@@ -27,6 +42,9 @@ android {
         release {
             isMinifyEnabled = false
             buildConfigField("String", "BACKEND_URL", "\"\"")
+            if (ksPath != null && ksPass != null) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
 
