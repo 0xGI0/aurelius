@@ -6,10 +6,11 @@ import quotesData from '../../data/quotes.json';
 import type { Author, Quote, QuoteLang } from '../../lib/quotes';
 import { bookRoman } from '../../lib/quotes';
 import { EPIKTET_QUOTES } from '../../lib/corpus';
-import { getAuthor, getQuoteLang } from '../../lib/settings';
+import { getAuthor, getQuoteLang, setAuthor as persistAuthor, setQuoteLang } from '../../lib/settings';
 import { READING_LIST } from '../../data/readingList';
 import { useTheme } from '../../theme/ThemeContext';
 import { Screen } from '../../components/Screen';
+import { Segmented } from '../../components/Segmented';
 import { fonts } from '../../theme/tokens';
 import { useT, useUiLang } from '../../lib/i18n';
 
@@ -40,8 +41,35 @@ export default function Books() {
     return [...counts.entries()].sort((a, b) => a[0] - b[0]);
   }, []);
 
+  const changeAuthor = (a: Author) => {
+    setAuthor(a);
+    void persistAuthor(a);
+  };
+
   return (
     <Screen>
+      <View style={styles.switcher}>
+        <Segmented<Author>
+          options={[
+            { value: 'aurel', label: t('authorAurel') },
+            { value: 'epiktet', label: t('authorEpiktet') },
+          ]}
+          value={author}
+          onChange={changeAuthor}
+        />
+        <Segmented<QuoteLang>
+          options={[
+            { value: 'de', label: t('langDe') },
+            { value: 'en', label: t('langEn') },
+            { value: 'grc', label: t('langGrc') },
+          ]}
+          value={lang}
+          onChange={(l) => {
+            setLang(l);
+            void setQuoteLang(l);
+          }}
+        />
+      </View>
       {author === 'epiktet' ? (
         <>
           <Text style={[styles.h1, { color: colors.text }]}>{t('enchTitle')}</Text>
@@ -121,6 +149,7 @@ export default function Books() {
 }
 
 const styles = StyleSheet.create({
+  switcher: { alignItems: 'center', marginTop: 8, marginBottom: 4, gap: 10 },
   h1: { fontFamily: fonts.display, fontSize: 28, marginTop: 8 },
   h1Second: { marginTop: 36 },
   sub: { fontSize: 13, letterSpacing: 1, marginTop: 4, marginBottom: 16 },
