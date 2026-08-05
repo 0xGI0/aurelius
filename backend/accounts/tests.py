@@ -128,3 +128,52 @@ class PasswordResetTests(TestCase):
         })
         self.assertEqual(resp.status_code, 200)
         self.assertIn("key", resp.json())
+
+
+class EmailLinkTests(TestCase):
+    """Die Links in den Mails müssen direkt im Browser funktionieren
+    (Teilprojekt 3): Bestätigen per Klick, Passwort-Reset mit Formular."""
+
+    def setUp(self):
+        cache.clear()
+        self.client = APIClient()
+
+    def test_confirm_link_verifiziert_direkt(self):
+        self.client.post("/api/auth/registration/", {
+            "email": "marc@example.com",
+            "password1": "stoa-am-limes-121",
+            "password2": "stoa-am-limes-121",
+        })
+        link = re.search(r"(/api/auth/registration/account-confirm-email/[-:\w]+/)", mail.outbox[-1].body)
+        self.assertIsNotNone(link)
+        resp = self.client.get(link.group(1))
+        self.assertEqual(resp.status_code, 200)
+        # Login funktioniert jetzt ohne separaten API-Verify-Aufruf
+        resp = self.client.post("/api/auth/login/", {
+            "email": "marc@example.com", "password": "stoa-am-limes-121",
+        })
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn("key", resp.json())
+
+    def test_reset_link_zeigt_formular_und_setzt_passwort(self):
+        user = get_user_model().objects.create_user(
+            email="marc@example.com", password="alt-passwort-123"
+        )
+        EmailAddress.objects.create(user=user, email=user.email, primary=True, verified=True)
+        self.client.post("/api/auth/password/reset/", {"email": "marc@example.com"})
+        link = re.search(r"(/api/auth/password/reset/confirm/[^/\s]+/[^/\s]+/)", mail.outbox[-1].body)
+        self.assertIsNotNone(link)
+        resp = self.client.get(link.group(1), follow=True)
+        self.assertEqual(resp.status_code, 200)
+        self.assertContains(resp, "form")
+        # POST auf die Formular-URL (nach Redirect auf …/set-password/)
+        form_url = resp.redirect_chain[-1][0]
+        resp = self.client.post(form_url, {
+            "new_password1": "neu-und-lang-genug-9",
+            "new_password2": "neu-und-lang-genug-9",
+        }, follow=True)
+        self.assertEqual(resp.status_code, 200)
+        resp = self.client.post("/api/auth/login/", {
+            "email": "marc@example.com", "password": "neu-und-lang-genug-9",
+        })
+        self.assertEqual(resp.status_code, 200)

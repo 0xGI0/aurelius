@@ -1,0 +1,11 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+  {% if ok %}
+    <h1>E-Mail bestätigt ✓</h1>
+    <p>Dein Konto ist aktiv. Du kannst dich jetzt in der App oder im Browser anmelden.</p>
+  {% else %}
+    <h1>Link ungültig</h1>
+    <p class="err">Dieser Bestätigungslink ist abgelaufen oder wurde schon verwendet.
+    Fordere in der App eine neue Mail an.</p>
+  {% endif %}
+{% endblock %}

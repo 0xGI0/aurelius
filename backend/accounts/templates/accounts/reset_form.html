@@ -1,0 +1,18 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+  {% if validlink %}
+    <h1>Neues Passwort setzen</h1>
+    <form method="post">
+      {% csrf_token %}
+      <input type="password" name="new_password1" placeholder="Neues Passwort" required>
+      <input type="password" name="new_password2" placeholder="Neues Passwort wiederholen" required>
+      {% if form.errors %}<p class="err">Das hat nicht geklappt — prüfe beide Felder
+      (mindestens 8 Zeichen, nicht zu einfach).</p>{% endif %}
+      <button type="submit">Passwort speichern</button>
+    </form>
+  {% else %}
+    <h1>Link ungültig</h1>
+    <p class="err">Dieser Link ist abgelaufen oder wurde schon verwendet.
+    Fordere in der App einen neuen an.</p>
+  {% endif %}
+{% endblock %}
