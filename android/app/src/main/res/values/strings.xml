@@ -1,4 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Default = Deutsch (Parität zur Expo-App: kein Geräte-Locale-Fallback auf Englisch). -->
 <resources>
     <string name="app_name">Aurelius</string>
+
+    <!-- Tabs -->
+    <string name="tab_quote">Zitat</string>
+    <string name="tab_books">Bücher</string>
+    <string name="tab_favorites">Ausgewählt</string>
+    <string name="tab_aurel">Marc Aurel</string>
+    <string name="tab_stoa">Stoa</string>
+
+    <!-- Home -->
+    <string name="hint_tap">Tippe auf die Karte für den nächsten Gedanken</string>
+    <string name="btn_next">Neuer Gedanke</string>
+    <string name="btn_explain">Erklären</string>
+    <string name="topic_all">Alle</string>
+    <string name="ref_book">Buch</string>
+
+    <!-- Zitat-Sprachen -->
+    <string name="lang_de">Deutsch</string>
+    <string name="lang_en">English</string>
+    <string name="lang_grc">Altgriechisch</string>
+
+    <!-- Themen -->
+    <string name="topic_tod">Tod &amp; Vergänglichkeit</string>
+    <string name="topic_wut">Wut &amp; Vergebung</string>
+    <string name="topic_trauer">Trauer &amp; Trost</string>
+    <string name="topic_angst">Angst &amp; Mut</string>
+    <string name="topic_familie">Familie &amp; Mitmenschen</string>
+    <string name="topic_besitz">Besitz &amp; Ruhm</string>
+    <string name="topic_gelassenheit">Gelassenheit &amp; Widrigkeit</string>
+    <string name="topic_pflicht">Pflicht &amp; Handeln</string>
+    <string name="topic_natur">Natur &amp; Schicksal</string>
+
+    <!-- Fehler -->
+    <string name="err_offline">Keine Verbindung — die Erklärung braucht Internet.</string>
+    <string name="err_auth">Der API-Key wurde abgelehnt. Prüfe ihn in den Einstellungen.</string>
+    <string name="err_rate">Gerade ausgelastet. Versuch es gleich nochmal — oder hinterlege einen eigenen Key.</string>
+    <string name="err_not_configured">Der Gratis-Modus ist noch nicht eingerichtet. Hinterlege deinen eigenen Claude-API-Key in den Einstellungen.</string>
+    <string name="err_server">Da ging etwas schief. Versuch es nochmal.</string>
+
+    <!-- Einstellungen -->
+    <string name="set_title">Einstellungen</string>
+    <string name="set_done">Fertig</string>
+    <string name="set_ui_lang">App-Sprache</string>
+    <string name="set_quote_lang">Zitat-Sprache</string>
+    <string name="set_appearance">Erscheinungsbild</string>
+    <string name="set_light">Hell</string>
+    <string name="set_dark">Dunkel</string>
+    <string name="set_system">System</string>
+    <string name="set_ai">KI-Erklärung</string>
+    <string name="set_ai_hint">Mit eigenem Anthropic-API-Key nutzt die App Claude direkt von deinem Gerät. Ohne Key springt der eingebaute Gratis-Modus ein (sofern verfügbar).</string>
+    <string name="set_key_stored">Key hinterlegt ✓</string>
+    <string name="set_key_delete">Löschen</string>
+    <string name="set_key_save">Key speichern</string>
+    <string name="set_key_saved">Gespeichert.</string>
+    <string name="set_sources">Quellen</string>
+    <string name="set_sources_text">Deutsch: Albert Wittstock (1879, gemeinfrei) · Englisch: George Long (1862, gemeinfrei) · Altgriechisch: Perseus Digital Library / PerseusDL canonical-greekLit, Lizenz CC BY-SA 4.0. Details: data/SOURCES.md im Repository.</string>
+
+    <!-- Ausgewählt -->
+    <string name="fav_title">Ausgewählte Gedanken</string>
+    <string name="fav_one">Abschnitt</string>
+    <string name="fav_many">Abschnitte</string>
+    <string name="fav_empty_title">Noch nichts ausgewählt</string>
+    <string name="fav_empty_text">Tippe beim Lesen auf den Stern, um einen Gedanken hier abzulegen.</string>
+    <string name="fav_add">Zur Auswahl hinzufügen</string>
+    <string name="fav_remove">Aus Auswahl entfernen</string>
+
+    <!-- Bücher -->
+    <string name="books_title">Die zwölf Bücher</string>
+    <string name="books_sub">Selbstbetrachtungen · Τὰ εἰς ἑαυτόν</string>
+    <string name="sections">Abschnitte</string>
+    <string name="lib_title">Stoische Bibliothek</string>
+    <string name="lib_sub">Zum Weiterlesen — von der Antike bis heute</string>
+    <string name="era_ancient">Antike</string>
+    <string name="era_modern">Modern</string>
+    <string name="back">Zurück</string>
+    <string name="book_not_found">Buch nicht gefunden.</string>
+    <string name="section_not_found">Abschnitt nicht gefunden.</string>
+
+    <!-- Marc Aurel -->
+    <string name="aurel_sub">121–180 n. Chr. · Römischer Kaiser und Stoiker</string>
+    <string name="aurel_s1_title">Der Kaiser</string>
+    <string name="aurel_s1">Marcus Aurelius Antoninus wurde 121 in Rom geboren, früh von Kaiser Hadrian gefördert und von Antoninus Pius adoptiert. Ab 161 regierte er das Römische Reich — in einer Zeit, die ihm wenig Ruhe ließ: die Markomannenkriege an der Donau, eine verheerende Seuche, Missernten und Aufstände. Er starb 180 im Feldlager bei Vindobona, dem heutigen Wien.</string>
+    <string name="aurel_s2_title">Der Philosoph</string>
+    <string name="aurel_s2">Schon als Junge fühlte er sich der Stoa verbunden — er schlief zeitweise auf bloßen Brettern, sehr zum Ärger seiner Mutter. Sein Lehrer Junius Rusticus gab ihm die Lehrgespräche Epiktets in die Hand, die ihn nie wieder losließen. Die Nachwelt nannte ihn den „Philosophen auf dem Kaiserthron": ein Mann mit größter Macht, der täglich übte, sie nicht zu missbrauchen.</string>
+    <string name="aurel_s3_title">Die Selbstbetrachtungen</string>
+    <string name="aurel_s3">Sein Werk „Τὰ εἰς ἑαυτόν" — wörtlich „An sich selbst" — schrieb er auf Griechisch, abends im Feldlager, unter anderem in Carnuntum an der Donau. Es war nie zur Veröffentlichung gedacht: keine Lehre, sondern ein Selbstgespräch. Zwölf Bücher lang erinnert sich ein müder Mann daran, was er sein will — geduldig, gerecht, unbestechlich gegenüber Ruhm und Angst. Gerade weil er nur für sich schrieb, liest es sich bis heute, als spräche er mit uns.</string>
+    <string name="aurel_credit">Büste: Glyptothek München · Foto: Bibi Saint-Pol, Wikimedia Commons (gemeinfrei)</string>
+    <string name="acc_bust">Büste des Marc Aurel</string>
+    <string name="acc_settings">Einstellungen</string>
+
+    <!-- Stoa -->
+    <string name="stoa_title">Die Stoa</string>
+    <string name="stoa_sub">Eine Schule der Gelassenheit · seit ca. 300 v. Chr.</string>
+    <string name="stoa_intro">Um 300 v. Chr. begann Zenon von Kition in Athen zu lehren — in der Stoa Poikile, der „bemalten Säulenhalle", die der Schule ihren Namen gab. Aus dem Kreis seiner Schüler wurde eine der einflussreichsten Philosophien der Antike: eine Anleitung, in einer Welt voller Zufälle ein aufrechtes, ruhiges Leben zu führen.</string>
+    <string name="stoa_i1_title">Unterscheide</string>
+    <string name="stoa_i1">Manches liegt in deiner Macht: dein Urteil, dein Wille, dein Handeln. Das meiste nicht: dein Ruf, Krankheit, das Verhalten anderer. Gelassenheit beginnt dort, wo man beides sauber auseinanderhält — und seine Kraft nur auf das Erste richtet.</string>
+    <string name="stoa_i2_title">Tugend genügt</string>
+    <string name="stoa_i2">Das einzige wirklich Gute ist der eigene Charakter: Weisheit, Gerechtigkeit, Mut und Maß. Reichtum, Gesundheit, Ansehen sind angenehm — aber weder gut noch schlecht. Wer das ernst nimmt, kann viel verlieren, ohne verloren zu sein.</string>
+    <string name="stoa_i3_title">Im Einklang mit der Natur</string>
+    <string name="stoa_i3">Die Stoiker sahen die Welt von Vernunft durchzogen — dem Logos. Gut leben heißt: der eigenen Vernunft folgen und sich als Teil eines Ganzen begreifen. Der Mensch ist für den Menschen da, „wie die Zähne der oberen und unteren Reihe füreinander".</string>
+    <string name="stoa_i4_title">Übung, nicht Theorie</string>
+    <string name="stoa_i4">Stoa ist tägliche Praxis: morgens sich vornehmen, wem man begegnen wird; abends den Tag prüfen; die Dinge betrachten, wie sie sind. Genau dafür schrieb Marc Aurel seine Notizen — nicht als Buch, sondern als Training.</string>
+    <string name="stoa_heads_title">Die Köpfe</string>
+    <string name="stoa_heads">Zenon begründete die Schule, Chrysipp gab ihr das System. In Rom wurde sie praktisch: Seneca, der Berater und Essayist. Epiktet, der freigelassene Sklave, dessen Lehrgespräche Marc Aurel prägten. Und Marc Aurel selbst — der Kaiser, der sie nachts im Feldlager übte.</string>
+    <string name="stoa_today_title">Und heute</string>
+    <string name="stoa_today">Die stoische Grundidee — nicht die Dinge beunruhigen uns, sondern unsere Urteile über sie — lebt in der modernen kognitiven Verhaltenstherapie weiter. Wer die Stoa liest, liest keine Ruinen: Sie ist eine Werkbank, und sie steht jedem offen.</string>
 </resources>
