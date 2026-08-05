@@ -23,8 +23,8 @@ android {
         applicationId = "io.github.oxgi0.stoa"
         minSdk = 26
         targetSdk = 36
-        versionCode = 5
-        versionName = "0.4.0"
+        versionCode = 6
+        versionName = "0.4.1"
         buildConfigField("String", "EXPLAIN_URL", "\"https://die-stoa.vercel.app/api/explain\"")
     }
 

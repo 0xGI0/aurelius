@@ -75,17 +75,20 @@ class QuoteRepositoryTest {
     fun `referenceLabel unterscheidet die werke`() {
         assertEquals("Handbuch, 5", referenceLabel(repo.byId("e-5")!!, "Buch", "Handbuch"))
         assertEquals("Buch IV, 7", referenceLabel(repo.byId("4-7")!!, "Buch", "Handbuch"))
-        assertEquals("De brevitate, 5", referenceLabel(repo.byId("s-5")!!, "Buch", "Handbuch"))
+        assertEquals("De brevitate 4,2", referenceLabel(repo.byId("s-4-2")!!, "Buch", "Handbuch"))
     }
 
     @Test
-    fun `debrevitate hat 20 kapitel mit latein im original-slot`() {
-        assertEquals(20, repo.debrevitate.size)
+    fun `debrevitate hat 104 paragraphen mit latein im original-slot`() {
+        assertEquals(104, repo.debrevitate.size)
+        assertEquals(20, repo.senecaChapters().size)
+        assertEquals(5, repo.senecaChapter(4).size)
         repo.debrevitate.forEach { q ->
             assertTrue(q.id.startsWith("s-"))
             listOf("de", "en", "grc").forEach { assertTrue(q.texts.getValue(it).isNotBlank()) }
         }
-        assertTrue(repo.byId("s-1")!!.texts.getValue("grc").contains("Maior pars mortalium"))
-        assertEquals(20, repo.poolFor(Author.Seneca, null).size)
+        assertTrue(repo.byId("s-1-1")!!.texts.getValue("grc").contains("Maior pars mortalium"))
+        assertTrue(repo.byId("s-4-2")!!.texts.getValue("de").contains("Der selige Augustus"))
+        assertEquals(104, repo.poolFor(Author.Seneca, null).size)
     }
 }

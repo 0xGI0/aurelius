@@ -29,7 +29,9 @@ class AppContainer(private val app: Application) {
         )
     }
     val db: AppDatabase by lazy {
-        Room.databaseBuilder(app, AppDatabase::class.java, "aurelius.db").build()
+        Room.databaseBuilder(app, AppDatabase::class.java, "aurelius.db")
+            .addMigrations(AppDatabase.MIGRATION_1_2)
+            .build()
     }
     val favorites: FavoritesRepository by lazy {
         FavoritesRepository(

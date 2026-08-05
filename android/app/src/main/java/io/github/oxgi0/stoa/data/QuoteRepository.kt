@@ -20,8 +20,13 @@ class QuoteRepository(
     /** Epiktets Encheiridion in Quote-Form: book 0, section = Kapitel. */
     val enchiridion: List<Quote> = chapters(enchiridionJson)
 
-    /** Senecas De brevitate vitae — der 'grc'-Slot trägt hier das LATEINISCHE Original. */
-    val debrevitate: List<Quote> = chapters(debrevitateJson)
+    /**
+     * Senecas De brevitate vitae in Paragraphen-Einheiten (klassische
+     * Zählung): book = Kapitel, section = Paragraph. Der 'grc'-Slot trägt
+     * hier das LATEINISCHE Original.
+     */
+    val debrevitate: List<Quote> = json.decodeFromString<List<BrevEntry>>(debrevitateJson)
+        .map { Quote(id = it.id, book = it.chapter, section = it.paragraph, texts = it.texts) }
 
     private val index: Map<String, Quote> =
         (quotes + enchiridion + debrevitate).associateBy { it.id }
@@ -34,6 +39,13 @@ class QuoteRepository(
     /** Buchnummer → Abschnittszahl, nach Buchnummer sortiert. */
     fun books(): List<Pair<Int, Int>> =
         quotes.groupBy { it.book }.map { (book, list) -> book to list.size }.sortedBy { it.first }
+
+    /** Seneca: Kapitelnummer → Paragraphenzahl, sortiert. */
+    fun senecaChapters(): List<Pair<Int, Int>> =
+        debrevitate.groupBy { it.book }.map { (c, list) -> c to list.size }.sortedBy { it.first }
+
+    fun senecaChapter(chapter: Int): List<Quote> =
+        debrevitate.filter { it.book == chapter }.sortedBy { it.section }
 
     fun quotesFor(author: Author): List<Quote> = when (author) {
         Author.Epiktet -> enchiridion

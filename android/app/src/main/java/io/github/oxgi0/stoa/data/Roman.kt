@@ -9,11 +9,11 @@ fun formatReference(q: Quote, bookWord: String): String =
     "$bookWord ${roman(q.book)}, ${q.section}"
 
 /**
- * "Buch IV, 7" (Marc Aurel), "Handbuch, 5" (Epiktet), "De brevitate, 5"
- * (Seneca — lateinischer Titel, in beiden UI-Sprachen gleich).
+ * "Buch IV, 7" (Marc Aurel), "Handbuch, 5" (Epiktet), "De brevitate 4,2"
+ * (Seneca — lateinischer Titel + Kapitel,Paragraph, in beiden UI-Sprachen gleich).
  */
 fun referenceLabel(q: Quote, bookWord: String, manualWord: String): String = when (authorOf(q.id)) {
     Author.Epiktet -> "$manualWord, ${q.section}"
-    Author.Seneca -> "De brevitate, ${q.section}"
+    Author.Seneca -> "De brevitate ${q.book},${q.section}"
     Author.Aurel -> formatReference(q, bookWord)
 }

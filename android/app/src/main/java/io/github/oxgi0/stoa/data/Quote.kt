@@ -25,6 +25,15 @@ data class EnchEntry(
     val texts: Map<String, String>,
 )
 
+/** Rohform der De-brevitate-Einträge — Paragraphen-Zählung seit 2026-08-05. */
+@Serializable
+data class BrevEntry(
+    val id: String,
+    val chapter: Int,
+    val paragraph: Int,
+    val texts: Map<String, String>,
+)
+
 enum class Author { Aurel, Epiktet, Seneca }
 
 fun authorOf(id: String): Author = when {

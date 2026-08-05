@@ -31,11 +31,11 @@ import io.github.oxgi0.stoa.ui.theme.FrauncesMedium
 import io.github.oxgi0.stoa.ui.theme.LocalColors
 
 @Composable
-fun BookScreen(nav: NavHostController, bookNumber: Int) {
+fun BookScreen(nav: NavHostController, bookNumber: Int, isSeneca: Boolean = false) {
     val colors = LocalColors.current
     val container = (LocalContext.current.applicationContext as AureliusApp).container
     val quoteLang by container.settings.quoteLang.collectAsState(initial = "de")
-    val sections = container.quotes.byBook(bookNumber)
+    val sections = if (isSeneca) container.quotes.senecaChapter(bookNumber) else container.quotes.byBook(bookNumber)
 
     if (sections.isEmpty()) {
         Screen(header = { BackHeader { nav.popBackStack() } }, center = true) {
@@ -45,7 +45,7 @@ fun BookScreen(nav: NavHostController, bookNumber: Int) {
     }
 
     Screen(header = { BackHeader { nav.popBackStack() } }) {
-        H1("${stringResource(R.string.ref_book)} ${roman(bookNumber)}")
+        H1(if (isSeneca) "De brevitate $bookNumber" else "${stringResource(R.string.ref_book)} ${roman(bookNumber)}")
         SubLine("${sections.size} ${stringResource(R.string.sections)}")
 
         Column(verticalArrangement = Arrangement.spacedBy(14.dp), modifier = Modifier.fillMaxWidth()) {

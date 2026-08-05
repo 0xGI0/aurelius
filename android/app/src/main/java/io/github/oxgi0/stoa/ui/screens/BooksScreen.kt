@@ -85,8 +85,45 @@ fun BooksScreen(nav: NavHostController) {
             H1(stringResource(if (author == "seneca") R.string.brev_title else R.string.ench_title))
             SubLine(stringResource(if (author == "seneca") R.string.brev_sub else R.string.ench_sub))
 
+            if (author == "seneca") {
+                // Kapitel → Paragraphen, Bauart der Aurel-Bücher (klassische Zählung)
+                Column(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
+                    container.quotes.senecaChapters().forEach { (chapter, count) ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(cardShape)
+                                .background(colors.card)
+                                .border(1.dp, colors.border, cardShape)
+                                .clickable { nav.navigate("book/s-$chapter") }
+                                .padding(horizontal = 18.dp, vertical = 14.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Text(
+                                text = "De brevitate $chapter",
+                                fontFamily = FrauncesMedium,
+                                fontSize = 17.sp,
+                                color = colors.text,
+                            )
+                            Spacer(Modifier.weight(1f))
+                            Text(
+                                text = "$count ${stringResource(R.string.sections)}",
+                                fontSize = 13.sp,
+                                color = colors.textSoft,
+                            )
+                            Icon(
+                                Icons.Filled.ChevronRight,
+                                contentDescription = null,
+                                tint = colors.accent,
+                                modifier = Modifier.size(16.dp).padding(start = 2.dp),
+                            )
+                        }
+                    }
+                }
+                return@Screen
+            }
             Column(verticalArrangement = Arrangement.spacedBy(14.dp), modifier = Modifier.fillMaxWidth()) {
-                (if (author == "seneca") container.quotes.debrevitate else container.quotes.enchiridion).forEach { q ->
+                container.quotes.enchiridion.forEach { q ->
                     Row(
                         modifier = Modifier.fillMaxWidth().clickable { nav.navigate("read/${q.id}") },
                     ) {

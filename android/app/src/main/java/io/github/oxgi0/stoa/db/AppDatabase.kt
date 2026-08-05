@@ -9,6 +9,8 @@ import androidx.room.PrimaryKey
 import androidx.room.Query
 import androidx.room.RoomDatabase
 import androidx.room.Transaction
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.flow.Flow
 
 @Entity(tableName = "favorites")
@@ -59,7 +61,31 @@ interface FavoriteDao {
     suspend fun dequeue(id: Long)
 }
 
-@Database(entities = [FavoriteEntity::class, PendingOpEntity::class], version = 1, exportSchema = true)
+@Database(entities = [FavoriteEntity::class, PendingOpEntity::class], version = 2, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun favoriteDao(): FavoriteDao
+
+    companion object {
+        /**
+         * Seneca-Paragraphen-Umbau (2026-08-05): Kapitel-Favoriten s-N heben
+         * wir auf den ersten Paragraphen (s-N-1); Kollisionen mit schon
+         * vorhandenen neuen IDs werden vorher verworfen. pending_ops analog.
+         */
+        val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    "DELETE FROM favorites WHERE quoteId GLOB 's-[0-9]*' AND quoteId NOT GLOB 's-*-*' " +
+                        "AND (quoteId || '-1') IN (SELECT quoteId FROM favorites)"
+                )
+                db.execSQL(
+                    "UPDATE favorites SET quoteId = quoteId || '-1' " +
+                        "WHERE quoteId GLOB 's-[0-9]*' AND quoteId NOT GLOB 's-*-*'"
+                )
+                db.execSQL(
+                    "UPDATE pending_ops SET quoteId = quoteId || '-1' " +
+                        "WHERE quoteId GLOB 's-[0-9]*' AND quoteId NOT GLOB 's-*-*'"
+                )
+            }
+        }
+    }
 }

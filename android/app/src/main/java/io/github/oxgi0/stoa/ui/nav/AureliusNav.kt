@@ -66,8 +66,11 @@ fun AureliusNav(navController: NavHostController = rememberNavController()) {
             composable("settings") { io.github.oxgi0.stoa.ui.screens.SettingsScreen(navController) }
             composable("account") { io.github.oxgi0.stoa.ui.screens.AccountScreen(navController) }
             composable("book/{book}") { entry ->
-                val book = entry.arguments?.getString("book")?.toIntOrNull() ?: -1
-                io.github.oxgi0.stoa.ui.screens.BookScreen(navController, book)
+                // "7" = Aurel Buch 7 · "s-7" = Seneca De brevitate Kapitel 7
+                val raw = entry.arguments?.getString("book") ?: ""
+                val isSeneca = raw.startsWith("s-")
+                val book = (if (isSeneca) raw.removePrefix("s-") else raw).toIntOrNull() ?: -1
+                io.github.oxgi0.stoa.ui.screens.BookScreen(navController, book, isSeneca)
             }
             composable("read/{id}") { entry ->
                 val id = entry.arguments?.getString("id") ?: ""
