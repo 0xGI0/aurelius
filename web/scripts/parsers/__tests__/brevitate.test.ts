@@ -27,7 +27,7 @@ describe('parseBrevLaNumbered', () => {
 
   it('Texte sind bereinigt (kein Markup, keine Marker)', () => {
     for (const p of paras) {
-      expect(p.text).not.toMatch(/<|\[\d+\]/);
+      expect(p.text).not.toMatch(/<|\[\s*\d+\s*\]/);
       expect(p.text.length).toBeGreaterThan(40);
     }
   });

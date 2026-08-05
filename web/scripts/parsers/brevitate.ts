@@ -73,7 +73,7 @@ export function parseBrevLaNumbered(html: string): BrevParagraph[] {
     for (let i = 1; i < pieces.length; i += 2) {
       const text = pieces[i + 1]
         .replace(/<[^>]+>/g, ' ')
-        .replace(/&#91;\d+&#93;|\[\d+\]/g, '')
+        .replace(/&#91;\s*\d+\s*&#93;|\[\s*\d+\s*\]/g, '')
         .replace(/&#160;|&nbsp;/g, ' ')
         .replace(/&amp;/g, '&')
         .replace(/\s+/g, ' ')
@@ -91,7 +91,7 @@ export function parseBrevLa(html: string): BrevChapter[] {
     .map((p) =>
       p[1]
         .replace(/<[^>]+>/g, ' ')
-        .replace(/&#91;\d+&#93;|\[\d+\]/g, '')
+        .replace(/&#91;\s*\d+\s*&#93;|\[\s*\d+\s*\]/g, '')
         .replace(/&#160;|&nbsp;/g, ' ')
         .replace(/&amp;/g, '&')
         .replace(/\s+/g, ' ')
