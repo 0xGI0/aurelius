@@ -45,6 +45,45 @@ export function parseBrevEn(rawJson: string): BrevChapter[] {
  * 20 nicht-leere <p>-Absätze — einer pro Kapitel; "[N]"-Ankermarken werden
  * entfernt.
  */
+export interface BrevParagraph {
+  chapter: number;
+  paragraph: number;
+  text: string;
+}
+
+const ROMAN_TO_NUM = new Map(
+  ['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX']
+    .map((r, i) => [r, i + 1] as const),
+);
+
+/**
+ * la.wikisource-Volltext mit klassischer Zählung: Kapitel als
+ * <h2 id="IV.">IV.</h2>, Paragraphen als HighlightedAnchor-Spans "[1]".
+ * Wikisource-Chrome (Edit-Links „recensere") liegt in eigenen Tags und
+ * fällt beim Zerlegen weg.
+ */
+export function parseBrevLaNumbered(html: string): BrevParagraph[] {
+  const out: BrevParagraph[] = [];
+  const chapterBlocks = [...html.matchAll(/<h2 id="([IVX]+)\.">[\s\S]*?<\/div>([\s\S]*?)(?=<div class="mw-heading|<div class="printfooter")/g)];
+  for (const [, roman, block] of chapterBlocks) {
+    const chapter = ROMAN_TO_NUM.get(roman);
+    if (chapter === undefined) continue;
+    const pieces = block.split(/<span id="&#91;\d+&#93;"[^>]*>\[(\d+)\]<\/span>/);
+    // split liefert [vor, num1, text1, num2, text2, …]
+    for (let i = 1; i < pieces.length; i += 2) {
+      const text = pieces[i + 1]
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/&#91;\d+&#93;|\[\d+\]/g, '')
+        .replace(/&#160;|&nbsp;/g, ' ')
+        .replace(/&amp;/g, '&')
+        .replace(/\s+/g, ' ')
+        .trim();
+      if (text) out.push({ chapter, paragraph: Number(pieces[i]), text });
+    }
+  }
+  return out;
+}
+
 export function parseBrevLa(html: string): BrevChapter[] {
   const m = html.match(/<div class="mw-parser-output">([\s\S]*?)<div class="printfooter"/);
   const body = m ? m[1] : html;
