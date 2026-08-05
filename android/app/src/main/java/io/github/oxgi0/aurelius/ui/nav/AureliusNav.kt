@@ -63,7 +63,7 @@ fun AureliusNav(navController: NavHostController = rememberNavController()) {
             composable("favorites") { PlaceholderScreen(R.string.tab_favorites) }
             composable("aurel") { PlaceholderScreen(R.string.tab_aurel) }
             composable("stoa") { PlaceholderScreen(R.string.tab_stoa) }
-            composable("settings") { PlaceholderScreen(R.string.set_title) }
+            composable("settings") { io.github.oxgi0.aurelius.ui.screens.SettingsScreen(navController) }
             composable("book/{book}") { PlaceholderScreen(R.string.tab_books) }
             composable("read/{id}") { PlaceholderScreen(R.string.tab_quote) }
         }
