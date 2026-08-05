@@ -31,6 +31,7 @@ export function QuoteCard({ quote, lang, onPress, topInset = 0 }: Props) {
     >
       <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
         <Text
+          selectable
           style={{
             fontFamily: isGreek ? fonts.greek : fonts.quote,
             fontSize: isGreek ? 22 : 23,

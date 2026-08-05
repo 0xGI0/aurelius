@@ -86,7 +86,8 @@ export default function Home() {
             accessibilityLabel="Büste des Marc Aurel"
           />
         </View>
-        <QuoteCard quote={quote} lang={lang} onPress={drawNext} topInset={64} />
+        {/* Kein Tap-to-Next mehr: Text soll markier-/kopierbar sein (User-Wunsch) */}
+        <QuoteCard quote={quote} lang={lang} topInset={64} />
       </Animated.View>
 
       <View style={styles.controls}>
