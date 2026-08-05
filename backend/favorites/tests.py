@@ -47,9 +47,16 @@ class FavoritesApiTests(TestCase):
         self.assertEqual(self.client.get("/api/favorites/").json(), [])
 
     def test_ungueltige_quote_id_400(self):
-        for kaputt in ["abc", "1-", "-3", "123-1", "1-1234", "1-1x"]:
+        for kaputt in ["abc", "1-", "-3", "123-1", "1-1234", "1-1x", "e-", "e-123", "x-5", "e-5x"]:
             resp = self.client.put(f"/api/favorites/{kaputt}/")
             self.assertEqual(resp.status_code, 400, kaputt)
+
+    def test_epiktet_ids_werden_akzeptiert(self):
+        resp = self.client.put("/api/favorites/e-53/")
+        self.assertEqual(resp.status_code, 201)
+        self.assertEqual(resp.json()["quote_id"], "e-53")
+        ids = [e["quote_id"] for e in self.client.get("/api/favorites/").json()]
+        self.assertIn("e-53", ids)
 
     def test_userdaten_sind_getrennt(self):
         self.client.put("/api/favorites/5-23/")
