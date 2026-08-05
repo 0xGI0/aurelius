@@ -1,0 +1,13 @@
+Drei stoische Klassiker in einer App: Marc Aurels „Selbstbetrachtungen" (486 Abschnitte), Epiktets „Handbüchlein der Moral" (53 Kapitel) und Senecas „Von der Kürze des Lebens" (20 Kapitel) — jeweils Deutsch, Englisch und im Original (Altgriechisch bzw. Latein).
+
+Funktionen:
+
+• Autoren-Umschalter mit Porträts und einem Vergleich der drei Stoiker
+• Zufälliger Gedanke auf Knopfdruck — ohne Wiederholungen, dank Shuffle-Verfahren
+• Neun Themen-Filter: Tod, Wut, Trauer, Angst, Familie, Besitz, Gelassenheit, Pflicht, Natur
+• Alle zwölf Bücher zum Durchblättern und Lesen
+• Favoriten — lokal, oder mit kostenlosem Konto geräteübergreifend synchronisiert
+• KI-Erklärung einzelner Passagen (optional, braucht Internet)
+• Zweisprachige Oberfläche (Deutsch/Englisch), helles und dunkles Design
+
+Die App funktioniert vollständig offline — nur Konto-Sync und KI-Erklärungen brauchen eine Verbindung. Keine Werbung, kein Tracking.

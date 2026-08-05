@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Default = Deutsch (Parität zur Expo-App: kein Geräte-Locale-Fallback auf Englisch). -->
+<resources>
+    <string name="app_name">Aurelius</string>
+
+    <!-- Tabs -->
+    <string name="tab_quote">Zitat</string>
+    <string name="tab_books">Bücher</string>
+    <string name="tab_favorites">Ausgewählt</string>
+    <string name="tab_aurel">Die Stoiker</string>
+    <string name="tab_stoa">Stoa</string>
+
+    <!-- Home -->
+    <string name="hint_tap">Tippe auf die Karte für den nächsten Gedanken</string>
+    <string name="btn_next">Neuer Gedanke</string>
+    <string name="btn_explain">Erklären</string>
+    <string name="topic_all">Alle</string>
+    <string name="ref_book">Buch</string>
+    <string name="ref_manual">Handbuch</string>
+
+    <!-- Autoren -->
+    <string name="author_aurel">Marc Aurel</string>
+    <string name="author_epiktet">Epiktet</string>
+    <string name="author_seneca">Seneca</string>
+    <string name="lang_la">Latein</string>
+    <string name="ench_title">Handbüchlein der Moral</string>
+    <string name="ench_sub">Encheiridion · Τὸ Ἐγχειρίδιον</string>
+    <string name="brev_title">Von der Kürze des Lebens</string>
+    <string name="brev_sub">De brevitate vitae · An Paulinus</string>
+
+    <!-- Zitat-Sprachen -->
+    <string name="lang_de">Deutsch</string>
+    <string name="lang_en">English</string>
+    <string name="lang_grc">Altgriechisch</string>
+
+    <!-- Themen -->
+    <string name="topic_tod">Tod &amp; Vergänglichkeit</string>
+    <string name="topic_wut">Wut &amp; Vergebung</string>
+    <string name="topic_trauer">Trauer &amp; Trost</string>
+    <string name="topic_angst">Angst &amp; Mut</string>
+    <string name="topic_familie">Familie &amp; Mitmenschen</string>
+    <string name="topic_besitz">Besitz &amp; Ruhm</string>
+    <string name="topic_gelassenheit">Gelassenheit &amp; Widrigkeit</string>
+    <string name="topic_pflicht">Pflicht &amp; Handeln</string>
+    <string name="topic_natur">Natur &amp; Schicksal</string>
+
+    <!-- Fehler -->
+    <string name="err_offline">Keine Verbindung — die Erklärung braucht Internet.</string>
+    <string name="err_auth">Der API-Key wurde abgelehnt. Prüfe ihn in den Einstellungen.</string>
+    <string name="err_rate">Gerade ausgelastet. Versuch es gleich nochmal — oder hinterlege einen eigenen Key.</string>
+    <string name="err_not_configured">Der Gratis-Modus ist noch nicht eingerichtet. Hinterlege deinen eigenen Claude-API-Key in den Einstellungen.</string>
+    <string name="err_server">Da ging etwas schief. Versuch es nochmal.</string>
+
+    <!-- Einstellungen -->
+    <string name="set_title">Einstellungen</string>
+    <string name="set_done">Fertig</string>
+    <string name="set_ui_lang">App-Sprache</string>
+    <string name="set_quote_lang">Zitat-Sprache</string>
+    <string name="set_appearance">Erscheinungsbild</string>
+    <string name="set_light">Hell</string>
+    <string name="set_dark">Dunkel</string>
+    <string name="set_system">System</string>
+    <string name="set_ai">KI-Erklärung</string>
+    <string name="set_ai_hint">Mit eigenem Anthropic-API-Key nutzt die App Claude direkt von deinem Gerät. Ohne Key springt der eingebaute Gratis-Modus ein (sofern verfügbar).</string>
+    <string name="set_key_stored">Key hinterlegt ✓</string>
+    <string name="set_key_delete">Löschen</string>
+    <string name="set_key_save">Key speichern</string>
+    <string name="set_key_saved">Gespeichert.</string>
+    <string name="set_sources">Quellen</string>
+    <string name="set_sources_text">Deutsch: Albert Wittstock (1879, gemeinfrei) · Englisch: George Long (1862, gemeinfrei) · Altgriechisch: Perseus Digital Library / PerseusDL canonical-greekLit, Lizenz CC BY-SA 4.0. Details: data/SOURCES.md im Repository.</string>
+
+    <!-- Ausgewählt -->
+    <string name="fav_title">Ausgewählte Gedanken</string>
+    <string name="fav_one">Abschnitt</string>
+    <string name="fav_many">Abschnitte</string>
+    <string name="fav_empty_title">Noch nichts ausgewählt</string>
+    <string name="fav_empty_text">Tippe beim Lesen auf den Stern, um einen Gedanken hier abzulegen.</string>
+    <string name="fav_add">Zur Auswahl hinzufügen</string>
+    <string name="fav_remove">Aus Auswahl entfernen</string>
+
+    <!-- Bücher -->
+    <string name="books_title">Die zwölf Bücher</string>
+    <string name="books_sub">Selbstbetrachtungen · Τὰ εἰς ἑαυτόν</string>
+    <string name="sections">Abschnitte</string>
+    <string name="lib_title">Stoische Bibliothek</string>
+    <string name="lib_sub">Zum Weiterlesen — von der Antike bis heute</string>
+    <string name="era_ancient">Antike</string>
+    <string name="era_modern">Modern</string>
+    <string name="back">Zurück</string>
+    <string name="book_not_found">Buch nicht gefunden.</string>
+    <string name="section_not_found">Abschnitt nicht gefunden.</string>
+
+    <!-- Marc Aurel -->
+    <string name="aurel_sub">121–180 n. Chr. · Römischer Kaiser und Stoiker</string>
+    <string name="aurel_s1_title">Der Kaiser</string>
+    <string name="aurel_s1">Marcus Aurelius Antoninus wurde 121 in Rom geboren, früh von Kaiser Hadrian gefördert und von Antoninus Pius adoptiert. Ab 161 regierte er das Römische Reich — in einer Zeit, die ihm wenig Ruhe ließ: die Markomannenkriege an der Donau, eine verheerende Seuche, Missernten und Aufstände. Er starb 180 im Feldlager bei Vindobona, dem heutigen Wien.</string>
+    <string name="aurel_s2_title">Der Philosoph</string>
+    <string name="aurel_s2">Schon als Junge fühlte er sich der Stoa verbunden — er schlief zeitweise auf bloßen Brettern, sehr zum Ärger seiner Mutter. Sein Lehrer Junius Rusticus gab ihm die Lehrgespräche Epiktets in die Hand, die ihn nie wieder losließen. Die Nachwelt nannte ihn den „Philosophen auf dem Kaiserthron": ein Mann mit größter Macht, der täglich übte, sie nicht zu missbrauchen.</string>
+    <string name="aurel_s3_title">Die Selbstbetrachtungen</string>
+    <string name="aurel_s3">Sein Werk „Τὰ εἰς ἑαυτόν" — wörtlich „An sich selbst" — schrieb er auf Griechisch, abends im Feldlager, unter anderem in Carnuntum an der Donau. Es war nie zur Veröffentlichung gedacht: keine Lehre, sondern ein Selbstgespräch. Zwölf Bücher lang erinnert sich ein müder Mann daran, was er sein will — geduldig, gerecht, unbestechlich gegenüber Ruhm und Angst. Gerade weil er nur für sich schrieb, liest es sich bis heute, als spräche er mit uns.</string>
+    <string name="aurel_credit">Büste: Glyptothek München · Foto: Bibi Saint-Pol, Wikimedia Commons (gemeinfrei)</string>
+    <string name="acc_bust">Büste des Marc Aurel</string>
+    <string name="acc_settings">Einstellungen</string>
+
+    <!-- Epiktet -->
+    <string name="epik_sub">ca. 50–135 n. Chr. · Vom Sklaven zum Lehrer der Stoa</string>
+    <string name="epik_s1_title">Der Sklave</string>
+    <string name="epik_s1">Epiktet wurde um 50 n. Chr. in Hierapolis in Phrygien geboren und kam als Sklave nach Rom, in den Haushalt von Epaphroditos, einem Freigelassenen Neros. Sein lahmes Bein begleitete ihn ein Leben lang. Noch als Sklave durfte er beim Stoiker Musonius Rufus hören; später wurde er freigelassen — und aus dem Sklaven wurde einer der freiesten Menschen seiner Zeit.</string>
+    <string name="epik_s2_title">Der Lehrer</string>
+    <string name="epik_s2">Als Kaiser Domitian um 93 die Philosophen aus Rom verbannte, ging Epiktet nach Nikopolis in Griechenland und gründete dort seine Schule. Er selbst schrieb kein einziges Buch: Sein Schüler Arrian zeichnete die Lehrgespräche auf und verdichtete sie zum Handbüchlein. Besitz, Rang, der eigene Körper — für Epiktet alles „nicht in unserer Gewalt". Frei ist allein das Urteil.</string>
+    <string name="epik_s3_title">Das Handbüchlein</string>
+    <string name="epik_s3">Das Encheiridion — wörtlich „das Handliche" — verdichtet Epiktets Lehre in 53 Kapitel: kein System, sondern Übungen für den Tag, gedacht zum Bei-sich-Tragen wie ein Werkzeug. Es wurde einer der meistgelesenen Texte der Antike — und über seinen Lehrer Rusticus fanden Epiktets Worte auch zu Marc Aurel, der ihn in den Selbstbetrachtungen dankbar zitiert.</string>
+    <string name="epik_credit">Kupferstich: Frontispiz der Oxford-Ausgabe des Enchiridion (1715), Wikimedia Commons (gemeinfrei)</string>
+    <string name="acc_engraving">Kupferstich des Epiktet</string>
+
+    <!-- Seneca -->
+    <string name="seneca_sub">ca. 4 v. – 65 n. Chr. · Senator, Dichter, Lehrer Neros</string>
+    <string name="seneca_s1_title">Der Aufsteiger</string>
+    <string name="seneca_s1">Lucius Annaeus Seneca, geboren um 4 v. Chr. in Córdoba, kam als Kind nach Rom und wurde einer der glänzendsten Redner und Schriftsteller seiner Zeit. Sein Weg führte durch alle Höhen und Abgründe der Macht: Todesurteil unter Caligula (in letzter Minute abgewendet), acht Jahre Verbannung auf Korsika unter Claudius — dann die Rückkehr als Erzieher des jungen Nero.</string>
+    <string name="seneca_s2_title">Der Widerspruch</string>
+    <string name="seneca_s2">Als Neros Berater lenkte Seneca jahrelang faktisch das Reich — und wurde dabei einer der reichsten Männer Roms. Dem Vorwurf, ein Philosoph dürfe nicht im Palast wohnen, stellte er sich selbst: Nicht der Besitz sei das Problem, sondern das Hängen daran. Als Nero unerträglich wurde, zog er sich zurück; 65 n. Chr. zwang ihn der Kaiser nach einer aufgedeckten Verschwörung zum Suizid. Seneca starb, wie er es gelehrt hatte: gefasst.</string>
+    <string name="seneca_s3_title">Die Schrift an Paulinus</string>
+    <string name="seneca_s3">»Von der Kürze des Lebens« schrieb Seneca um 49 n. Chr. an Paulinus, den obersten Getreideverwalter Roms: eine Streitschrift gegen das verplante Leben. Nicht kurz sei das Leben, sondern verschwendet — von Geschäftigen, die für alle Zeit haben außer für sich selbst. Zwanzig Kapitel, die sich lesen, als wären sie gegen volle Terminkalender von heute geschrieben.</string>
+    <string name="seneca_credit">Büste (sog. Pseudo-Seneca): Museo Archeologico Nazionale, Neapel · Foto: Marie-Lan Nguyen, Wikimedia Commons (CC BY 2.5)</string>
+    <string name="acc_seneca_bust">Büste des Seneca</string>
+
+    <!-- Drei Stoiker — die Unterschiede -->
+    <string name="diff_title">Drei Stoiker — die Unterschiede</string>
+    <string name="diff1_title">Herkunft</string>
+    <string name="diff1">Größer könnte die Spannweite nicht sein: Epiktet war Sklave, Seneca Senator und einer der reichsten Männer Roms, Marc Aurel Kaiser. Dass alle drei dieselbe Philosophie lebten, ist das stärkste Argument der Stoa — Gelassenheit hängt nicht von den Umständen ab, sondern vom Urteil über sie.</string>
+    <string name="diff2_title">Form</string>
+    <string name="diff2">Epiktets Handbüchlein ist ein Lehrtext: aus dem Unterricht verdichtet, knapp, zum Weitergeben gemacht. Senecas Schriften sind elegante Essays und Briefe an Freunde — Literatur, die überzeugen will. Die Selbstbetrachtungen sind ein privates Notizbuch, nachts im Feldlager geschrieben, nie zur Veröffentlichung gedacht.</string>
+    <string name="diff3_title">Ton</string>
+    <string name="diff3">Epiktet befiehlt und übt: Verlange nicht, dass die Dinge geschehen, wie du willst. Seneca argumentiert und poliert — der Rhetor, der die Stoa in glänzende Sätze fasst. Marc Aurel erinnert und ermahnt sich selbst: zweifelnd, müde, immer wieder neu ansetzend. Lehrer, Schriftsteller, Kaiser — drei Stimmen, eine Schule.</string>
+
+    <!-- Konto -->
+    <string name="acc_title">Konto</string>
+    <string name="acc_hint">Mit einem Konto werden deine ausgewählten Gedanken geräteübergreifend gesichert — am Handy wie im Browser.</string>
+    <string name="acc_email">E-Mail</string>
+    <string name="acc_password">Passwort</string>
+    <string name="acc_register">Registrieren</string>
+    <string name="acc_login">Anmelden</string>
+    <string name="acc_logout">Abmelden</string>
+    <string name="acc_verify_sent">Bestätigungs-Mail verschickt — bitte den Link in der Mail öffnen, danach hier anmelden.</string>
+    <string name="acc_reset_sent">Mail zum Zurücksetzen verschickt — folge dem Link darin.</string>
+    <string name="acc_forgot">Passwort vergessen?</string>
+    <string name="acc_logged_in_as">Angemeldet als</string>
+    <string name="acc_synced">Deine Auswahl wird mit deinem Konto synchronisiert.</string>
+    <string name="acc_offline">Keine Verbindung zum Server.</string>
+    <string name="acc_no_server">Der Server ist in dieser Version noch nicht konfiguriert.</string>
+
+    <!-- Stoa -->
+    <string name="stoa_title">Die Stoa</string>
+    <string name="stoa_sub">Eine Schule der Gelassenheit · seit ca. 300 v. Chr.</string>
+    <string name="stoa_intro">Um 300 v. Chr. begann Zenon von Kition in Athen zu lehren — in der Stoa Poikile, der „bemalten Säulenhalle", die der Schule ihren Namen gab. Aus dem Kreis seiner Schüler wurde eine der einflussreichsten Philosophien der Antike: eine Anleitung, in einer Welt voller Zufälle ein aufrechtes, ruhiges Leben zu führen.</string>
+    <string name="stoa_i1_title">Unterscheide</string>
+    <string name="stoa_i1">Manches liegt in deiner Macht: dein Urteil, dein Wille, dein Handeln. Das meiste nicht: dein Ruf, Krankheit, das Verhalten anderer. Gelassenheit beginnt dort, wo man beides sauber auseinanderhält — und seine Kraft nur auf das Erste richtet.</string>
+    <string name="stoa_i2_title">Tugend genügt</string>
+    <string name="stoa_i2">Das einzige wirklich Gute ist der eigene Charakter: Weisheit, Gerechtigkeit, Mut und Maß. Reichtum, Gesundheit, Ansehen sind angenehm — aber weder gut noch schlecht. Wer das ernst nimmt, kann viel verlieren, ohne verloren zu sein.</string>
+    <string name="stoa_i3_title">Im Einklang mit der Natur</string>
+    <string name="stoa_i3">Die Stoiker sahen die Welt von Vernunft durchzogen — dem Logos. Gut leben heißt: der eigenen Vernunft folgen und sich als Teil eines Ganzen begreifen. Der Mensch ist für den Menschen da, „wie die Zähne der oberen und unteren Reihe füreinander".</string>
+    <string name="stoa_i4_title">Übung, nicht Theorie</string>
+    <string name="stoa_i4">Stoa ist tägliche Praxis: morgens sich vornehmen, wem man begegnen wird; abends den Tag prüfen; die Dinge betrachten, wie sie sind. Genau dafür schrieb Marc Aurel seine Notizen — nicht als Buch, sondern als Training.</string>
+    <string name="stoa_heads_title">Die Köpfe</string>
+    <string name="stoa_heads">Zenon begründete die Schule, Chrysipp gab ihr das System. In Rom wurde sie praktisch: Seneca, der Berater und Essayist. Epiktet, der freigelassene Sklave, dessen Lehrgespräche Marc Aurel prägten. Und Marc Aurel selbst — der Kaiser, der sie nachts im Feldlager übte.</string>
+    <string name="stoa_today_title">Und heute</string>
+    <string name="stoa_today">Die stoische Grundidee — nicht die Dinge beunruhigen uns, sondern unsere Urteile über sie — lebt in der modernen kognitiven Verhaltenstherapie weiter. Wer die Stoa liest, liest keine Ruinen: Sie ist eine Werkbank, und sie steht jedem offen.</string>
+</resources>

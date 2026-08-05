@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Adaptive-Icon-Hintergrund: Marken-Tinte (#0F151D), Parität zur Expo-App -->
+    <color name="ic_launcher_background">#0F151D</color>
+</resources>

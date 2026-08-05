@@ -1,0 +1,7 @@
+.gradle/
+build/
+local.properties
+.claude/
+.mcp.json
+*.keystore
+.kotlin/

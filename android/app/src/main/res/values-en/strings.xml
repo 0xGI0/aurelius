@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Aurelius</string>
+
+    <!-- Tabs -->
+    <string name="tab_quote">Quote</string>
+    <string name="tab_books">Books</string>
+    <string name="tab_favorites">Selected</string>
+    <string name="tab_aurel">The Stoics</string>
+    <string name="tab_stoa">Stoa</string>
+
+    <!-- Home -->
+    <string name="hint_tap">Tap the card for the next thought</string>
+    <string name="btn_next">New thought</string>
+    <string name="btn_explain">Explain</string>
+    <string name="topic_all">All</string>
+    <string name="ref_book">Book</string>
+    <string name="ref_manual">Manual</string>
+
+    <!-- Authors -->
+    <string name="author_aurel">Marcus Aurelius</string>
+    <string name="author_epiktet">Epictetus</string>
+    <string name="author_seneca">Seneca</string>
+    <string name="lang_la">Latin</string>
+    <string name="ench_title">The Enchiridion</string>
+    <string name="ench_sub">Encheiridion · Τὸ Ἐγχειρίδιον</string>
+    <string name="brev_title">On the Shortness of Life</string>
+    <string name="brev_sub">De brevitate vitae · To Paulinus</string>
+
+    <!-- Quote languages -->
+    <string name="lang_de">German</string>
+    <string name="lang_en">English</string>
+    <string name="lang_grc">Ancient Greek</string>
+
+    <!-- Topics -->
+    <string name="topic_tod">Death &amp; Impermanence</string>
+    <string name="topic_wut">Anger &amp; Forgiveness</string>
+    <string name="topic_trauer">Grief &amp; Consolation</string>
+    <string name="topic_angst">Fear &amp; Courage</string>
+    <string name="topic_familie">Family &amp; Fellow Humans</string>
+    <string name="topic_besitz">Possessions &amp; Fame</string>
+    <string name="topic_gelassenheit">Equanimity &amp; Adversity</string>
+    <string name="topic_pflicht">Duty &amp; Action</string>
+    <string name="topic_natur">Nature &amp; Fate</string>
+
+    <!-- Errors -->
+    <string name="err_offline">No connection — the explanation needs internet access.</string>
+    <string name="err_auth">The API key was rejected. Check it in the settings.</string>
+    <string name="err_rate">Busy right now. Try again in a moment — or add your own key.</string>
+    <string name="err_not_configured">The free mode is not set up yet. Add your own Claude API key in the settings.</string>
+    <string name="err_server">Something went wrong. Please try again.</string>
+
+    <!-- Settings -->
+    <string name="set_title">Settings</string>
+    <string name="set_done">Done</string>
+    <string name="set_ui_lang">App language</string>
+    <string name="set_quote_lang">Quote language</string>
+    <string name="set_appearance">Appearance</string>
+    <string name="set_light">Light</string>
+    <string name="set_dark">Dark</string>
+    <string name="set_system">System</string>
+    <string name="set_ai">AI explanation</string>
+    <string name="set_ai_hint">With your own Anthropic API key, the app talks to Claude directly from your device. Without a key, the built-in free mode steps in (if available).</string>
+    <string name="set_key_stored">Key stored ✓</string>
+    <string name="set_key_delete">Delete</string>
+    <string name="set_key_save">Save key</string>
+    <string name="set_key_saved">Saved.</string>
+    <string name="set_sources">Sources</string>
+    <string name="set_sources_text">German: Albert Wittstock (1879, public domain) · English: George Long (1862, public domain) · Ancient Greek: Perseus Digital Library / PerseusDL canonical-greekLit, licensed CC BY-SA 4.0. Details: data/SOURCES.md in the repository.</string>
+
+    <!-- Selected -->
+    <string name="fav_title">Selected thoughts</string>
+    <string name="fav_one">section</string>
+    <string name="fav_many">sections</string>
+    <string name="fav_empty_title">Nothing selected yet</string>
+    <string name="fav_empty_text">While reading, tap the star to keep a thought here.</string>
+    <string name="fav_add">Add to selection</string>
+    <string name="fav_remove">Remove from selection</string>
+
+    <!-- Books -->
+    <string name="books_title">The Twelve Books</string>
+    <string name="books_sub">Meditations · Τὰ εἰς ἑαυτόν</string>
+    <string name="sections">sections</string>
+    <string name="lib_title">Stoic Library</string>
+    <string name="lib_sub">Further reading — from antiquity to today</string>
+    <string name="era_ancient">Ancient</string>
+    <string name="era_modern">Modern</string>
+    <string name="back">Back</string>
+    <string name="book_not_found">Book not found.</string>
+    <string name="section_not_found">Section not found.</string>
+
+    <!-- Marcus Aurelius -->
+    <string name="aurel_sub">121–180 AD · Roman emperor and Stoic</string>
+    <string name="aurel_s1_title">The Emperor</string>
+    <string name="aurel_s1">Marcus Aurelius Antoninus was born in Rome in 121, noticed early by the emperor Hadrian and adopted by Antoninus Pius. From 161 he ruled the Roman Empire — through years that gave him little rest: the Marcomannic Wars on the Danube, a devastating plague, failed harvests and revolts. He died in 180 in the army camp at Vindobona, today’s Vienna.</string>
+    <string name="aurel_s2_title">The Philosopher</string>
+    <string name="aurel_s2">Even as a boy he was drawn to the Stoa — for a while he slept on bare boards, much to his mother’s dismay. His teacher Junius Rusticus put Epictetus’ Discourses into his hands, and they never let him go. Posterity called him the “philosopher on the throne”: a man of supreme power who practiced, daily, not to abuse it.</string>
+    <string name="aurel_s3_title">The Meditations</string>
+    <string name="aurel_s3">He wrote his work “Τὰ εἰς ἑαυτόν” — literally “To Himself” — in Greek, at night in army camps, among them Carnuntum on the Danube. It was never meant for publication: not a doctrine, but a conversation with himself. Across twelve books, a tired man keeps reminding himself of who he wants to be — patient, just, incorruptible by fame and fear. Precisely because he wrote only for himself, it still reads as if he were speaking to us.</string>
+    <string name="aurel_credit">Bust: Glyptothek Munich · Photo: Bibi Saint-Pol, Wikimedia Commons (public domain)</string>
+    <string name="acc_bust">Bust of Marcus Aurelius</string>
+    <string name="acc_settings">Settings</string>
+
+    <!-- Epictetus -->
+    <string name="epik_sub">c. 50–135 AD · From slave to teacher of the Stoa</string>
+    <string name="epik_s1_title">The Slave</string>
+    <string name="epik_s1">Epictetus was born around 50 AD in Hierapolis in Phrygia and came to Rome as a slave, into the household of Epaphroditus, a freedman of Nero. A lame leg accompanied him all his life. While still enslaved he was allowed to hear the Stoic Musonius Rufus; later he was freed — and the slave became one of the freest people of his age.</string>
+    <string name="epik_s2_title">The Teacher</string>
+    <string name="epik_s2">When the emperor Domitian banished the philosophers from Rome around 93, Epictetus went to Nicopolis in Greece and founded his school there. He himself never wrote a single book: his student Arrian recorded the Discourses and condensed them into the Enchiridion. Property, rank, even one’s own body — for Epictetus all of it “not in our power.” Only judgment is free.</string>
+    <string name="epik_s3_title">The Enchiridion</string>
+    <string name="epik_s3">The Encheiridion — literally “the thing held in the hand” — condenses Epictetus’ teaching into 53 chapters: not a system but exercises for the day, meant to be carried like a tool. It became one of the most-read texts of antiquity — and through his teacher Rusticus, Epictetus’ words also reached Marcus Aurelius, who quotes him gratefully in the Meditations.</string>
+    <string name="epik_credit">Engraving: frontispiece of the Oxford edition of the Enchiridion (1715), Wikimedia Commons (public domain)</string>
+    <string name="acc_engraving">Engraving of Epictetus</string>
+
+    <!-- Seneca -->
+    <string name="seneca_sub">c. 4 BC – 65 AD · Senator, playwright, tutor of Nero</string>
+    <string name="seneca_s1_title">The Riser</string>
+    <string name="seneca_s1">Lucius Annaeus Seneca, born around 4 BC in Córdoba, came to Rome as a child and became one of the most brilliant orators and writers of his age. His path led through every height and abyss of power: a death sentence under Caligula (averted at the last minute), eight years of exile on Corsica under Claudius — then the return as tutor to the young Nero.</string>
+    <string name="seneca_s2_title">The Contradiction</string>
+    <string name="seneca_s2">As Nero’s adviser Seneca effectively steered the empire for years — and became one of the richest men in Rome. He faced the charge that a philosopher should not live in a palace himself: the problem, he argued, is not possessing things but clinging to them. When Nero became unbearable he withdrew; in 65 AD, after a conspiracy was uncovered, the emperor forced him to take his own life. Seneca died as he had taught: composed.</string>
+    <string name="seneca_s3_title">The Letter to Paulinus</string>
+    <string name="seneca_s3">Seneca wrote “On the Shortness of Life” around 49 AD to Paulinus, Rome’s superintendent of the grain supply: a polemic against the over-scheduled life. Life is not short, he argues, but squandered — by busy people who have time for everything except themselves. Twenty chapters that read as if written against today’s crowded calendars.</string>
+    <string name="seneca_credit">Bust (so-called Pseudo-Seneca): Museo Archeologico Nazionale, Naples · Photo: Marie-Lan Nguyen, Wikimedia Commons (CC BY 2.5)</string>
+    <string name="acc_seneca_bust">Bust of Seneca</string>
+
+    <!-- Three Stoics — the differences -->
+    <string name="diff_title">Three Stoics — the differences</string>
+    <string name="diff1_title">Origins</string>
+    <string name="diff1">The range could not be wider: Epictetus was a slave, Seneca a senator and one of Rome’s richest men, Marcus Aurelius an emperor. That all three lived the same philosophy is Stoicism’s strongest argument — equanimity does not depend on circumstances, but on the judgment about them.</string>
+    <string name="diff2_title">Form</string>
+    <string name="diff2">Epictetus’ Enchiridion is a teaching text: condensed from the classroom, terse, made to be passed on. Seneca’s writings are elegant essays and letters to friends — literature that seeks to persuade. The Meditations are a private notebook, written at night in army camps, never meant for publication.</string>
+    <string name="diff3_title">Tone</string>
+    <string name="diff3">Epictetus commands and trains: do not demand that things happen as you wish. Seneca argues and polishes — the rhetorician who casts Stoicism in gleaming sentences. Marcus Aurelius reminds and admonishes himself: doubting, tired, beginning anew again and again. Teacher, writer, emperor — three voices, one school.</string>
+
+    <!-- Account -->
+    <string name="acc_title">Account</string>
+    <string name="acc_hint">With an account, your selected thoughts are kept in sync across devices — on your phone and in the browser.</string>
+    <string name="acc_email">Email</string>
+    <string name="acc_password">Password</string>
+    <string name="acc_register">Sign up</string>
+    <string name="acc_login">Sign in</string>
+    <string name="acc_logout">Sign out</string>
+    <string name="acc_verify_sent">Verification email sent — open the link in the email, then sign in here.</string>
+    <string name="acc_reset_sent">Reset email sent — follow the link inside.</string>
+    <string name="acc_forgot">Forgot password?</string>
+    <string name="acc_logged_in_as">Signed in as</string>
+    <string name="acc_synced">Your selection is synced with your account.</string>
+    <string name="acc_offline">No connection to the server.</string>
+    <string name="acc_no_server">The server is not configured in this build yet.</string>
+
+    <!-- Stoa -->
+    <string name="stoa_title">The Stoa</string>
+    <string name="stoa_sub">A school of equanimity · since ca. 300 BC</string>
+    <string name="stoa_intro">Around 300 BC, Zeno of Citium began teaching in Athens — in the Stoa Poikile, the “painted colonnade” that gave the school its name. From his circle of students grew one of the most influential philosophies of antiquity: a guide to living an upright, calm life in a world full of chance.</string>
+    <string name="stoa_i1_title">Distinguish</string>
+    <string name="stoa_i1">Some things are in your power: your judgment, your will, your actions. Most things are not: your reputation, illness, other people’s behavior. Equanimity begins where you keep the two cleanly apart — and spend your strength only on the first.</string>
+    <string name="stoa_i2_title">Virtue suffices</string>
+    <string name="stoa_i2">The only true good is your own character: wisdom, justice, courage and moderation. Wealth, health and standing are pleasant — but neither good nor bad. Whoever takes this seriously can lose much without being lost.</string>
+    <string name="stoa_i3_title">In accord with nature</string>
+    <string name="stoa_i3">The Stoics saw the world as pervaded by reason — the Logos. To live well means to follow your own reason and to understand yourself as part of a whole. We exist for one another, “like the rows of upper and lower teeth.”</string>
+    <string name="stoa_i4_title">Practice, not theory</string>
+    <string name="stoa_i4">Stoicism is daily practice: in the morning, anticipate whom you will meet; in the evening, review the day; see things as they are. This is exactly what Marcus Aurelius wrote his notes for — not as a book, but as training.</string>
+    <string name="stoa_heads_title">The Minds</string>
+    <string name="stoa_heads">Zeno founded the school, Chrysippus gave it its system. In Rome it became practical: Seneca, the adviser and essayist. Epictetus, the freed slave whose Discourses shaped Marcus Aurelius. And Marcus himself — the emperor who practiced it at night in army camps.</string>
+    <string name="stoa_today_title">And today</string>
+    <string name="stoa_today">The core Stoic idea — that it is not things that trouble us, but our judgments about them — lives on in modern cognitive behavioral therapy. Whoever reads the Stoics reads no ruins: it is a workbench, and it is open to everyone.</string>
+</resources>
