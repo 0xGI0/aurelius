@@ -38,11 +38,34 @@ export function mergeSections(sources: Record<Lang, Section[]>, remap: Remap): M
   return { quotes, missing };
 }
 
+export type Fixups = Partial<Record<Lang, Record<string, string>>>;
+
+/**
+ * Dokumentierte Text-Korrekturen (data-sources/overrides/fixups.json):
+ * Der PDF-Textlayer der Wittstock-Vorlage gibt in vier Abschnitten die
+ * letzte Zeile ZUERST aus (4-34, 6-5, 7-65, 8-42 — Befund 2026-08-06);
+ * die Overrides tragen den korrekt sortierten Wortlaut. Ein Fixup für
+ * eine unbekannte ID bricht ab, damit veraltete Einträge auffallen.
+ */
+export function applyFixups(quotes: MergeResult['quotes'], fixups: Fixups): MergeResult['quotes'] {
+  const byId = new Map(quotes.map((q) => [q.id, q]));
+  for (const lang of Object.keys(fixups) as Lang[]) {
+    for (const [id, text] of Object.entries(fixups[lang] ?? {})) {
+      const q = byId.get(id);
+      if (!q) throw new Error(`Fixup für unbekannte ID ${id} (${lang})`);
+      q.texts[lang] = text;
+    }
+  }
+  return quotes;
+}
+
 // CLI-Teil: nur ausführen, wenn direkt gestartet
 if (process.argv[1]?.endsWith('build-quotes.ts')) {
   const load = (l: Lang) => JSON.parse(readFileSync(`data-sources/extracted/${l}.json`, 'utf8')) as Section[];
   const remap = JSON.parse(readFileSync('data-sources/overrides/remap.json', 'utf8')) as Remap;
+  const fixups = JSON.parse(readFileSync('data-sources/overrides/fixups.json', 'utf8')) as Fixups;
   const { quotes, missing } = mergeSections({ de: load('de'), en: load('en'), grc: load('grc') }, remap);
+  applyFixups(quotes, fixups);
   writeFileSync('data/quotes.json', JSON.stringify(quotes));
   const report = [
     `Vollständige Abschnitte: ${quotes.length}`,

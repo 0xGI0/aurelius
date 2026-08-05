@@ -30,10 +30,27 @@ export default function Read() {
     void setQuoteLang(l);
   };
 
+  // Direkt aufgerufene Deep-Links haben keine History — dann „hoch" statt
+  // „zurück": Aurel → sein Buch, Seneca → sein Kapitel, Epiktet → Bücher-Tab.
+  const goBack = () => {
+    if (router.canGoBack()) {
+      router.back();
+      return;
+    }
+    if (!quote) {
+      router.replace('/');
+      return;
+    }
+    const a = authorOf(quote.id);
+    router.replace(
+      a === 'aurel' ? `/book/${quote.book}` : a === 'seneca' ? `/book/s-${quote.book}` : '/books',
+    );
+  };
+
   const header = (
     <View style={styles.header}>
       <Pressable
-        onPress={() => router.back()}
+        onPress={goBack}
         accessibilityRole="button"
         accessibilityLabel="Zurück"
         style={styles.back}

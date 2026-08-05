@@ -36,7 +36,7 @@ export default function Book() {
   const header = (
     <View style={styles.header}>
       <Pressable
-        onPress={() => router.back()}
+        onPress={() => (router.canGoBack() ? router.back() : router.replace('/books'))}
         accessibilityRole="button"
         accessibilityLabel="Zurück"
         style={styles.back}

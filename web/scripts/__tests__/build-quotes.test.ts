@@ -22,3 +22,22 @@ describe('mergeSections', () => {
     expect(quotes.find((q) => q.id === '1-2')?.texts.en).toBe('en-eigentlich-1-2');
   });
 });
+
+describe('applyFixups', () => {
+  const { applyFixups } = require('../build-quotes');
+  const quotes = [
+    { id: '6-5', book: 6, section: 5, texts: { de: 'wirkt. Kaputt', en: 'ok', grc: 'ok' } },
+    { id: '6-6', book: 6, section: 6, texts: { de: 'Unberührt.', en: 'ok', grc: 'ok' } },
+  ];
+
+  it('ersetzt nur die gelisteten Texte', () => {
+    const out = applyFixups(quotes, { de: { '6-5': 'Kaputt wirkt.' } });
+    expect(out[0].texts.de).toBe('Kaputt wirkt.');
+    expect(out[1].texts.de).toBe('Unberührt.');
+    expect(out[0].texts.en).toBe('ok');
+  });
+
+  it('wirft bei Fixup für unbekannte ID (Schutz gegen veraltete Einträge)', () => {
+    expect(() => applyFixups(quotes, { de: { '9-99': 'x' } })).toThrow();
+  });
+});
