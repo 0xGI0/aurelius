@@ -1,7 +1,9 @@
 package io.github.oxgi0.aurelius.net
 
+import io.github.oxgi0.aurelius.data.Author
 import io.github.oxgi0.aurelius.data.Quote
-import io.github.oxgi0.aurelius.data.formatReference
+import io.github.oxgi0.aurelius.data.authorOf
+import io.github.oxgi0.aurelius.data.referenceLabel
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.Dispatchers
@@ -43,42 +45,63 @@ class ExplainClient(
 
     fun explainStream(quote: Quote, quoteLang: String, uiLang: String, anthropicKey: String?): Flow<String> {
         val text = quote.texts[quoteLang] ?: quote.texts.getValue("de")
-        val reference = formatReference(quote, if (uiLang == "en") "Book" else "Buch")
-        return if (anthropicKey != null) {
-            anthropicStream(anthropicKey, text, reference, uiLang)
+        val author = authorOf(quote.id)
+        val reference = if (uiLang == "en") {
+            referenceLabel(quote, "Book", "Manual")
         } else {
-            geminiStream(text, reference, uiLang)
+            referenceLabel(quote, "Buch", "Handbuch")
+        }
+        return if (anthropicKey != null) {
+            anthropicStream(anthropicKey, text, reference, uiLang, author)
+        } else {
+            geminiStream(text, reference, uiLang, author)
         }
     }
 
-    // Prompts 1:1 aus aurelius/lib/ai/prompt.ts
-    private fun explainSystem(uiLang: String): String = if (uiLang == "en") {
-        "You are a knowledgeable, level-headed companion through Marcus Aurelius’ Meditations. " +
-            "You explain clearly, concretely and without kitsch — for interested lay readers."
-    } else {
-        "Du bist ein kundiger, nüchterner Begleiter durch Marc Aurels Selbstbetrachtungen. " +
-            "Du erklärst klar, konkret und ohne Kitsch — für interessierte Laien."
+    // Prompts 1:1 aus aurelius/lib/ai/prompt.ts (werk-bewusst)
+    private fun explainSystem(uiLang: String, author: Author): String = when {
+        uiLang == "en" && author == Author.Epiktet ->
+            "You are a knowledgeable, level-headed companion through Epictetus’ Enchiridion. " +
+                "You explain clearly, concretely and without kitsch — for interested lay readers."
+        uiLang == "en" ->
+            "You are a knowledgeable, level-headed companion through Marcus Aurelius’ Meditations. " +
+                "You explain clearly, concretely and without kitsch — for interested lay readers."
+        author == Author.Epiktet ->
+            "Du bist ein kundiger, nüchterner Begleiter durch Epiktets Handbüchlein der Moral. " +
+                "Du erklärst klar, konkret und ohne Kitsch — für interessierte Laien."
+        else ->
+            "Du bist ein kundiger, nüchterner Begleiter durch Marc Aurels Selbstbetrachtungen. " +
+                "Du erklärst klar, konkret und ohne Kitsch — für interessierte Laien."
     }
 
-    private fun buildExplainPrompt(text: String, reference: String, uiLang: String): String = if (uiLang == "en") {
-        "Passage from Marcus Aurelius’ “Meditations” ($reference):\n\n" +
-            "“$text”\n\n" +
-            "Explain this passage in English in 120–180 words: first the core idea in one sentence, " +
-            "then briefly the Stoic background, finally one concrete application to everyday life today. " +
-            "Answer directly, without preamble and without headings."
-    } else {
-        "Passage aus Marc Aurels »Selbstbetrachtungen« ($reference):\n\n" +
-            "»$text«\n\n" +
-            "Erkläre diese Passage auf Deutsch in 120–180 Wörtern: zuerst in einem Satz den Kerngedanken, " +
-            "dann kurz den stoischen Hintergrund, zuletzt eine konkrete Anwendung im heutigen Alltag. " +
-            "Antworte direkt ohne Vorspann und ohne Überschriften."
+    private fun buildExplainPrompt(text: String, reference: String, uiLang: String, author: Author): String {
+        val source = when {
+            uiLang == "en" && author == Author.Epiktet -> "Passage from Epictetus’ “Enchiridion” ($reference):"
+            uiLang == "en" -> "Passage from Marcus Aurelius’ “Meditations” ($reference):"
+            author == Author.Epiktet -> "Passage aus Epiktets »Handbüchlein der Moral« ($reference):"
+            else -> "Passage aus Marc Aurels »Selbstbetrachtungen« ($reference):"
+        }
+        return if (uiLang == "en") {
+            "$source\n\n" +
+                "“$text”\n\n" +
+                "Explain this passage in English in 120–180 words: first the core idea in one sentence, " +
+                "then briefly the Stoic background, finally one concrete application to everyday life today. " +
+                "Answer directly, without preamble and without headings."
+        } else {
+            "$source\n\n" +
+                "»$text«\n\n" +
+                "Erkläre diese Passage auf Deutsch in 120–180 Wörtern: zuerst in einem Satz den Kerngedanken, " +
+                "dann kurz den stoischen Hintergrund, zuletzt eine konkrete Anwendung im heutigen Alltag. " +
+                "Antworte direkt ohne Vorspann und ohne Überschriften."
+        }
     }
 
-    private fun geminiStream(text: String, reference: String, uiLang: String): Flow<String> = flow {
+    private fun geminiStream(text: String, reference: String, uiLang: String, author: Author): Flow<String> = flow {
         val payload = buildJsonObject {
             put("text", text)
             put("reference", reference)
             put("uiLang", uiLang)
+            put("author", if (author == Author.Epiktet) "epiktet" else "aurel")
         }.toString()
         val request = Request.Builder().url(explainUrl).post(payload.toRequestBody(media)).build()
         val response = try {
@@ -109,16 +132,16 @@ class ExplainClient(
         }
     }.flowOn(Dispatchers.IO)
 
-    private fun anthropicStream(key: String, text: String, reference: String, uiLang: String): Flow<String> = flow {
+    private fun anthropicStream(key: String, text: String, reference: String, uiLang: String, author: Author): Flow<String> = flow {
         val payload = buildJsonObject {
             put("model", "claude-opus-5")
             put("max_tokens", 1024)
             put("stream", true)
-            put("system", explainSystem(uiLang))
+            put("system", explainSystem(uiLang, author))
             put("messages", buildJsonArray {
                 add(buildJsonObject {
                     put("role", "user")
-                    put("content", buildExplainPrompt(text, reference, uiLang))
+                    put("content", buildExplainPrompt(text, reference, uiLang, author))
                 })
             })
         }.toString()

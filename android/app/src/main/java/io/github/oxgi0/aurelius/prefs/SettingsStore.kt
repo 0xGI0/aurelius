@@ -17,10 +17,12 @@ class SettingsStore(internal val dataStore: DataStore<Preferences>) {
         val UI_LANG = stringPreferencesKey("aurelius.uiLang")
         val QUOTE_LANG = stringPreferencesKey("aurelius.quoteLang")
         val THEME = stringPreferencesKey("aurelius.theme")
+        val AUTHOR = stringPreferencesKey("aurelius.author")
 
         private val UI_LANGS = setOf("de", "en")
         private val QUOTE_LANGS = setOf("de", "en", "grc")
         private val THEMES = setOf("light", "dark", "system")
+        private val AUTHORS = setOf("aurel", "epiktet")
     }
 
     val uiLang: Flow<String> =
@@ -42,5 +44,12 @@ class SettingsStore(internal val dataStore: DataStore<Preferences>) {
 
     suspend fun setThemePref(v: String) {
         if (v in THEMES) dataStore.edit { it[THEME] = v }
+    }
+
+    val author: Flow<String> =
+        dataStore.data.map { p -> p[AUTHOR].takeIf { it in AUTHORS } ?: "aurel" }
+
+    suspend fun setAuthor(v: String) {
+        if (v in AUTHORS) dataStore.edit { it[AUTHOR] = v }
     }
 }

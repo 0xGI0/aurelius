@@ -12,7 +12,11 @@ internal fun readResource(name: String): String =
     }.readText()
 
 class QuoteRepositoryTest {
-    private val repo = QuoteRepository(readResource("quotes.json"), readResource("topics.json"))
+    private val repo = QuoteRepository(
+        readResource("quotes.json"),
+        readResource("topics.json"),
+        readResource("enchiridion.json"),
+    )
 
     @Test
     fun `laedt alle 486 zitate mit drei sprachen`() {
@@ -44,5 +48,31 @@ class QuoteRepositoryTest {
         assertEquals(12, books.size)
         assertEquals(4 to 51, books[3])
         assertEquals(12 to 35, books[11])
+    }
+
+    @Test
+    fun `enchiridion hat 53 kapitel in drei sprachen`() {
+        assertEquals(53, repo.enchiridion.size)
+        repo.enchiridion.forEach { q ->
+            assertTrue(q.id.startsWith("e-"))
+            listOf("de", "en", "grc").forEach { assertTrue(q.texts.getValue(it).isNotBlank()) }
+        }
+        assertNotNull(repo.byId("e-1"))
+        assertTrue(repo.byId("e-53")!!.texts.getValue("de").contains("Zeus"))
+    }
+
+    @Test
+    fun `poolFor trennt autoren und respektiert themen`() {
+        assertEquals(486, repo.poolFor(Author.Aurel, null).size)
+        assertEquals(53, repo.poolFor(Author.Epiktet, null).size)
+        val pflichtEpiktet = repo.poolFor(Author.Epiktet, "pflicht")
+        assertTrue(pflichtEpiktet.isNotEmpty())
+        assertTrue(pflichtEpiktet.all { it.startsWith("e-") })
+    }
+
+    @Test
+    fun `referenceLabel unterscheidet die werke`() {
+        assertEquals("Handbuch, 5", referenceLabel(repo.byId("e-5")!!, "Buch", "Handbuch"))
+        assertEquals("Buch IV, 7", referenceLabel(repo.byId("4-7")!!, "Buch", "Handbuch"))
     }
 }

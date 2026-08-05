@@ -6,7 +6,7 @@
     <string name="tab_quote">Quote</string>
     <string name="tab_books">Books</string>
     <string name="tab_favorites">Selected</string>
-    <string name="tab_aurel">Marcus Aurelius</string>
+    <string name="tab_aurel">The Stoics</string>
     <string name="tab_stoa">Stoa</string>
 
     <!-- Home -->
@@ -15,6 +15,13 @@
     <string name="btn_explain">Explain</string>
     <string name="topic_all">All</string>
     <string name="ref_book">Book</string>
+    <string name="ref_manual">Manual</string>
+
+    <!-- Authors -->
+    <string name="author_aurel">Marcus Aurelius</string>
+    <string name="author_epiktet">Epictetus</string>
+    <string name="ench_title">The Enchiridion</string>
+    <string name="ench_sub">Encheiridion · Τὸ Ἐγχειρίδιον</string>
 
     <!-- Quote languages -->
     <string name="lang_de">German</string>
@@ -89,6 +96,26 @@
     <string name="aurel_credit">Bust: Glyptothek Munich · Photo: Bibi Saint-Pol, Wikimedia Commons (public domain)</string>
     <string name="acc_bust">Bust of Marcus Aurelius</string>
     <string name="acc_settings">Settings</string>
+
+    <!-- Epictetus -->
+    <string name="epik_sub">c. 50–135 AD · From slave to teacher of the Stoa</string>
+    <string name="epik_s1_title">The Slave</string>
+    <string name="epik_s1">Epictetus was born around 50 AD in Hierapolis in Phrygia and came to Rome as a slave, into the household of Epaphroditus, a freedman of Nero. A lame leg accompanied him all his life. While still enslaved he was allowed to hear the Stoic Musonius Rufus; later he was freed — and the slave became one of the freest people of his age.</string>
+    <string name="epik_s2_title">The Teacher</string>
+    <string name="epik_s2">When the emperor Domitian banished the philosophers from Rome around 93, Epictetus went to Nicopolis in Greece and founded his school there. He himself never wrote a single book: his student Arrian recorded the Discourses and condensed them into the Enchiridion. Property, rank, even one’s own body — for Epictetus all of it “not in our power.” Only judgment is free.</string>
+    <string name="epik_s3_title">The Enchiridion</string>
+    <string name="epik_s3">The Encheiridion — literally “the thing held in the hand” — condenses Epictetus’ teaching into 53 chapters: not a system but exercises for the day, meant to be carried like a tool. It became one of the most-read texts of antiquity — and through his teacher Rusticus, Epictetus’ words also reached Marcus Aurelius, who quotes him gratefully in the Meditations.</string>
+    <string name="epik_credit">Engraving: frontispiece of the Oxford edition of the Enchiridion (1715), Wikimedia Commons (public domain)</string>
+    <string name="acc_engraving">Engraving of Epictetus</string>
+
+    <!-- Two Stoics — the differences -->
+    <string name="diff_title">Two Stoics — the differences</string>
+    <string name="diff1_title">Origins</string>
+    <string name="diff1">The distance could not be greater: Epictetus was a slave, Marcus Aurelius an emperor. That both lived the same philosophy is Stoicism’s strongest argument — equanimity does not depend on circumstances, but on the judgment about them.</string>
+    <string name="diff2_title">Form</string>
+    <string name="diff2">The Enchiridion is a teaching text: condensed from the classroom, terse, direct, made to be passed on. The Meditations are the opposite — a private notebook, written at night in army camps, never meant for publication.</string>
+    <string name="diff3_title">Tone</string>
+    <string name="diff3">Epictetus commands and trains: do not demand that things happen as you wish. Marcus Aurelius reminds and admonishes himself — doubting, tired, beginning anew again and again. The teacher speaks to students, the emperor to himself. The slave’s voice accompanied the emperor for a lifetime.</string>
 
     <!-- Account -->
     <string name="acc_title">Account</string>

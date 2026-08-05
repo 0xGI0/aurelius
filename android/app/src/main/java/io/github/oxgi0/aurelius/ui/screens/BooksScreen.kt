@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronRight
@@ -43,7 +44,45 @@ fun BooksScreen(nav: NavHostController) {
     val colors = LocalColors.current
     val container = (LocalContext.current.applicationContext as AureliusApp).container
     val uiLang by container.settings.uiLang.collectAsState(initial = "de")
+    val quoteLang by container.settings.quoteLang.collectAsState(initial = "de")
+    val author by container.settings.author.collectAsState(initial = "aurel")
     val cardShape = RoundedCornerShape(14.dp)
+
+    if (author == "epiktet") {
+        Screen {
+            H1(stringResource(R.string.ench_title))
+            SubLine(stringResource(R.string.ench_sub))
+
+            Column(verticalArrangement = Arrangement.spacedBy(14.dp), modifier = Modifier.fillMaxWidth()) {
+                container.quotes.enchiridion.forEach { q ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth().clickable { nav.navigate("read/${q.id}") },
+                    ) {
+                        Text(
+                            text = q.section.toString(),
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = colors.accent,
+                            textAlign = androidx.compose.ui.text.style.TextAlign.End,
+                            modifier = Modifier.widthIn(min = 24.dp).padding(end = 10.dp),
+                        )
+                        Text(
+                            text = q.texts[quoteLang] ?: q.texts.getValue("de"),
+                            fontFamily = FrauncesMedium,
+                            fontSize = 15.sp,
+                            lineHeight = 22.sp,
+                            color = colors.text,
+                            maxLines = 2,
+                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+                        )
+                    }
+                }
+            }
+
+            LibrarySection(uiLang)
+        }
+        return
+    }
 
     Screen {
         H1(stringResource(R.string.books_title))
@@ -83,44 +122,52 @@ fun BooksScreen(nav: NavHostController) {
             }
         }
 
-        H1(stringResource(R.string.lib_title))
-        SubLine(stringResource(R.string.lib_sub))
+        LibrarySection(uiLang)
+    }
+}
 
-        Column(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
-            READING_LIST.forEach { item ->
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clip(cardShape)
-                        .background(colors.card)
-                        .border(1.dp, colors.border, cardShape)
-                        .padding(horizontal = 18.dp, vertical = 14.dp),
-                ) {
-                    val eraLabel = stringResource(
-                        if (item.era == "Antike") R.string.era_ancient else R.string.era_modern
-                    )
-                    Text(
-                        text = "${item.author} · $eraLabel".uppercase(),
-                        color = colors.accent,
-                        fontSize = 11.sp,
-                        letterSpacing = 2.sp,
-                        fontWeight = FontWeight.SemiBold,
-                    )
-                    Text(
-                        text = if (uiLang == "en") item.titleEn else item.title,
-                        fontFamily = FrauncesMedium,
-                        fontSize = 18.sp,
-                        color = colors.text,
-                        modifier = Modifier.padding(top = 4.dp),
-                    )
-                    Text(
-                        text = if (uiLang == "en") item.noteEn else item.note,
-                        fontSize = 14.sp,
-                        lineHeight = 21.sp,
-                        color = colors.textSoft,
-                        modifier = Modifier.padding(top = 4.dp),
-                    )
-                }
+/** Stoische Bibliothek — für beide Autoren-Ansichten identisch. */
+@Composable
+private fun LibrarySection(uiLang: String) {
+    val colors = LocalColors.current
+    val cardShape = RoundedCornerShape(14.dp)
+    H1(stringResource(R.string.lib_title))
+    SubLine(stringResource(R.string.lib_sub))
+
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
+        READING_LIST.forEach { item ->
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(cardShape)
+                    .background(colors.card)
+                    .border(1.dp, colors.border, cardShape)
+                    .padding(horizontal = 18.dp, vertical = 14.dp),
+            ) {
+                val eraLabel = stringResource(
+                    if (item.era == "Antike") R.string.era_ancient else R.string.era_modern
+                )
+                Text(
+                    text = "${item.author} · $eraLabel".uppercase(),
+                    color = colors.accent,
+                    fontSize = 11.sp,
+                    letterSpacing = 2.sp,
+                    fontWeight = FontWeight.SemiBold,
+                )
+                Text(
+                    text = if (uiLang == "en") item.titleEn else item.title,
+                    fontFamily = FrauncesMedium,
+                    fontSize = 18.sp,
+                    color = colors.text,
+                    modifier = Modifier.padding(top = 4.dp),
+                )
+                Text(
+                    text = if (uiLang == "en") item.noteEn else item.note,
+                    fontSize = 14.sp,
+                    lineHeight = 21.sp,
+                    color = colors.textSoft,
+                    modifier = Modifier.padding(top = 4.dp),
+                )
             }
         }
     }

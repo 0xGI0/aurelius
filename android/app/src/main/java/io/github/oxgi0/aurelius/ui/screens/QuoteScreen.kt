@@ -91,14 +91,19 @@ fun QuoteScreen(nav: NavHostController) {
             )
         }
 
-        // Medaillon ragt 44dp in die Karte hinein
+        // Medaillon ragt 44dp in die Karte hinein — wechselt mit dem Autor
         Column(
             modifier = Modifier.alpha(alpha.value),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
+            val isEpiktet = state.author == io.github.oxgi0.aurelius.data.Author.Epiktet
             Image(
-                painter = painterResource(R.drawable.marcus_medallion),
-                contentDescription = stringResource(R.string.acc_bust),
+                painter = painterResource(
+                    if (isEpiktet) R.drawable.epictetus else R.drawable.marcus_medallion
+                ),
+                contentDescription = stringResource(
+                    if (isEpiktet) R.string.acc_engraving else R.string.acc_bust
+                ),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(88.dp)
@@ -120,6 +125,18 @@ fun QuoteScreen(nav: NavHostController) {
             verticalArrangement = Arrangement.spacedBy(14.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
+            Segmented(
+                listOf(
+                    stringResource(R.string.author_aurel),
+                    stringResource(R.string.author_epiktet),
+                ),
+                if (state.author == io.github.oxgi0.aurelius.data.Author.Epiktet) 1 else 0,
+            ) { i ->
+                vm.selectAuthor(
+                    if (i == 1) io.github.oxgi0.aurelius.data.Author.Epiktet
+                    else io.github.oxgi0.aurelius.data.Author.Aurel
+                )
+            }
             TopicChips(container.quotes.topics, state.topicId) { vm.selectTopic(it) }
 
             Row(

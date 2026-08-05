@@ -7,7 +7,7 @@
     <string name="tab_quote">Zitat</string>
     <string name="tab_books">Bücher</string>
     <string name="tab_favorites">Ausgewählt</string>
-    <string name="tab_aurel">Marc Aurel</string>
+    <string name="tab_aurel">Die Stoiker</string>
     <string name="tab_stoa">Stoa</string>
 
     <!-- Home -->
@@ -16,6 +16,13 @@
     <string name="btn_explain">Erklären</string>
     <string name="topic_all">Alle</string>
     <string name="ref_book">Buch</string>
+    <string name="ref_manual">Handbuch</string>
+
+    <!-- Autoren -->
+    <string name="author_aurel">Marc Aurel</string>
+    <string name="author_epiktet">Epiktet</string>
+    <string name="ench_title">Handbüchlein der Moral</string>
+    <string name="ench_sub">Encheiridion · Τὸ Ἐγχειρίδιον</string>
 
     <!-- Zitat-Sprachen -->
     <string name="lang_de">Deutsch</string>
@@ -90,6 +97,26 @@
     <string name="aurel_credit">Büste: Glyptothek München · Foto: Bibi Saint-Pol, Wikimedia Commons (gemeinfrei)</string>
     <string name="acc_bust">Büste des Marc Aurel</string>
     <string name="acc_settings">Einstellungen</string>
+
+    <!-- Epiktet -->
+    <string name="epik_sub">ca. 50–135 n. Chr. · Vom Sklaven zum Lehrer der Stoa</string>
+    <string name="epik_s1_title">Der Sklave</string>
+    <string name="epik_s1">Epiktet wurde um 50 n. Chr. in Hierapolis in Phrygien geboren und kam als Sklave nach Rom, in den Haushalt von Epaphroditos, einem Freigelassenen Neros. Sein lahmes Bein begleitete ihn ein Leben lang. Noch als Sklave durfte er beim Stoiker Musonius Rufus hören; später wurde er freigelassen — und aus dem Sklaven wurde einer der freiesten Menschen seiner Zeit.</string>
+    <string name="epik_s2_title">Der Lehrer</string>
+    <string name="epik_s2">Als Kaiser Domitian um 93 die Philosophen aus Rom verbannte, ging Epiktet nach Nikopolis in Griechenland und gründete dort seine Schule. Er selbst schrieb kein einziges Buch: Sein Schüler Arrian zeichnete die Lehrgespräche auf und verdichtete sie zum Handbüchlein. Besitz, Rang, der eigene Körper — für Epiktet alles „nicht in unserer Gewalt". Frei ist allein das Urteil.</string>
+    <string name="epik_s3_title">Das Handbüchlein</string>
+    <string name="epik_s3">Das Encheiridion — wörtlich „das Handliche" — verdichtet Epiktets Lehre in 53 Kapitel: kein System, sondern Übungen für den Tag, gedacht zum Bei-sich-Tragen wie ein Werkzeug. Es wurde einer der meistgelesenen Texte der Antike — und über seinen Lehrer Rusticus fanden Epiktets Worte auch zu Marc Aurel, der ihn in den Selbstbetrachtungen dankbar zitiert.</string>
+    <string name="epik_credit">Kupferstich: Frontispiz der Oxford-Ausgabe des Enchiridion (1715), Wikimedia Commons (gemeinfrei)</string>
+    <string name="acc_engraving">Kupferstich des Epiktet</string>
+
+    <!-- Zwei Stoiker — die Unterschiede -->
+    <string name="diff_title">Zwei Stoiker — die Unterschiede</string>
+    <string name="diff1_title">Herkunft</string>
+    <string name="diff1">Größer könnte der Abstand nicht sein: Epiktet war Sklave, Marc Aurel Kaiser. Dass beide dieselbe Philosophie lebten, ist das stärkste Argument der Stoa — Gelassenheit hängt nicht von den Umständen ab, sondern vom Urteil über sie.</string>
+    <string name="diff2_title">Form</string>
+    <string name="diff2">Das Handbüchlein ist ein Lehrtext: aus dem Unterricht verdichtet, knapp, direkt, zum Weitergeben gemacht. Die Selbstbetrachtungen sind das Gegenteil — ein privates Notizbuch, nachts im Feldlager geschrieben, nie zur Veröffentlichung gedacht.</string>
+    <string name="diff3_title">Ton</string>
+    <string name="diff3">Epiktet befiehlt und übt: Verlange nicht, dass die Dinge geschehen, wie du willst. Marc Aurel erinnert und ermahnt sich selbst — zweifelnd, müde, immer wieder neu ansetzend. Der Lehrer spricht zu Schülern, der Kaiser mit sich selbst. Die Stimme des Sklaven begleitete den Kaiser ein Leben lang.</string>
 
     <!-- Konto -->
     <string name="acc_title">Konto</string>

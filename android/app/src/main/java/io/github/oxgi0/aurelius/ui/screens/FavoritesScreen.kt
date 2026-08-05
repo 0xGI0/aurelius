@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import io.github.oxgi0.aurelius.AureliusApp
 import io.github.oxgi0.aurelius.R
-import io.github.oxgi0.aurelius.data.formatReference
+import io.github.oxgi0.aurelius.data.referenceLabel
 import io.github.oxgi0.aurelius.ui.components.FavoriteStar
 import io.github.oxgi0.aurelius.ui.components.H1
 import io.github.oxgi0.aurelius.ui.components.Screen
@@ -100,7 +100,11 @@ fun FavoritesScreen(nav: NavHostController) {
                 ) {
                     Column(Modifier.weight(1f)) {
                         Text(
-                            text = formatReference(q, stringResource(R.string.ref_book)).uppercase(),
+                            text = referenceLabel(
+                                q,
+                                stringResource(R.string.ref_book),
+                                stringResource(R.string.ref_manual),
+                            ).uppercase(),
                             color = colors.accent,
                             fontSize = 11.sp,
                             letterSpacing = 2.sp,

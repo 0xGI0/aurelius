@@ -2,6 +2,7 @@ package io.github.oxgi0.aurelius.ui.screens
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import io.github.oxgi0.aurelius.data.Author
 import io.github.oxgi0.aurelius.data.Quote
 import io.github.oxgi0.aurelius.data.QuoteRepository
 import io.github.oxgi0.aurelius.data.ShuffleBag
@@ -9,6 +10,7 @@ import io.github.oxgi0.aurelius.prefs.SettingsStore
 import kotlin.random.Random
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -16,6 +18,7 @@ data class QuoteUiState(
     val quote: Quote,
     val topicId: String?,
     val quoteLang: String,
+    val author: Author = Author.Aurel,
 )
 
 class QuoteViewModel(
@@ -24,8 +27,7 @@ class QuoteViewModel(
     rng: Random = Random.Default,
 ) : ViewModel() {
     private val rng = rng
-    private val allIds = repo.quotes.map { it.id }
-    private var bag = ShuffleBag(allIds, rng)
+    private var bag = ShuffleBag(repo.poolFor(Author.Aurel, null), rng)
 
     private val _state = MutableStateFlow(
         QuoteUiState(quote = checkNotNull(repo.byId(bag.next())), topicId = null, quoteLang = "de")
@@ -34,7 +36,25 @@ class QuoteViewModel(
 
     init {
         viewModelScope.launch {
+            // Gespeicherten Autor einmalig anwenden
+            val saved = settings.author.first()
+            if (saved == "epiktet") applyAuthor(Author.Epiktet)
+        }
+        viewModelScope.launch {
             settings.quoteLang.collect { lang -> _state.update { it.copy(quoteLang = lang) } }
+        }
+    }
+
+    private fun applyAuthor(author: Author) {
+        bag = ShuffleBag(repo.poolFor(author, _state.value.topicId), rng)
+        _state.update { it.copy(author = author, quote = checkNotNull(repo.byId(bag.next()))) }
+    }
+
+    fun selectAuthor(author: Author) {
+        if (author == _state.value.author) return
+        applyAuthor(author)
+        viewModelScope.launch {
+            settings.setAuthor(if (author == Author.Epiktet) "epiktet" else "aurel")
         }
     }
 
@@ -45,8 +65,7 @@ class QuoteViewModel(
     /** Parität: gleiches Thema erneut → No-Op; sonst neuer Bag + Sofort-Swap. */
     fun selectTopic(id: String?) {
         if (id == _state.value.topicId) return
-        val pool = if (id == null) allIds else repo.topics.first { it.id == id }.quoteIds
-        bag = ShuffleBag(pool, rng)
+        bag = ShuffleBag(repo.poolFor(_state.value.author, id), rng)
         _state.update { it.copy(topicId = id, quote = checkNotNull(repo.byId(bag.next()))) }
     }
 

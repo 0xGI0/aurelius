@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.oxgi0.aurelius.R
 import io.github.oxgi0.aurelius.data.Quote
-import io.github.oxgi0.aurelius.data.formatReference
+import io.github.oxgi0.aurelius.data.referenceLabel
 import io.github.oxgi0.aurelius.ui.theme.FrauncesMedium
 import io.github.oxgi0.aurelius.ui.theme.GfsDidot
 import io.github.oxgi0.aurelius.ui.theme.LocalColors
@@ -114,7 +114,11 @@ fun QuoteCard(
             }
         }
         Text(
-            text = formatReference(quote, stringResource(R.string.ref_book)).uppercase(),
+            text = referenceLabel(
+                quote,
+                stringResource(R.string.ref_book),
+                stringResource(R.string.ref_manual),
+            ).uppercase(),
             color = colors.accent,
             fontSize = 12.sp,
             letterSpacing = 2.sp,
