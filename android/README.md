@@ -5,6 +5,7 @@ auf Deutsch, Englisch und Altgriechisch, mit Themen-Filtern, Favoriten
 (lokal oder per Konto synchronisiert) und optionalen KI-Erklärungen.
 
 Kotlin + Jetpack Compose · minSdk 26 · keine Google-Dienste, kein Tracking.
+Lizenz: **GPL-3.0-or-later** (siehe LICENSE).
 
 **Schwester-Projekte:** [aurelius](../../../aurelius) (Expo-Web-App) ·
 [aurelius-backend](../../../aurelius-backend) (Django-API für Konten & Sync)
