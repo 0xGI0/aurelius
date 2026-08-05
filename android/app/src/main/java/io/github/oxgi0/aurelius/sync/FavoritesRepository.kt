@@ -2,6 +2,8 @@ package io.github.oxgi0.aurelius.sync
 
 import io.github.oxgi0.aurelius.db.FavoriteDao
 import io.github.oxgi0.aurelius.db.FavoriteEntity
+import io.github.oxgi0.aurelius.net.BackendApi
+import java.time.OffsetDateTime
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -24,4 +26,23 @@ class FavoritesRepository(
 
     suspend fun isFavorite(quoteId: String): Boolean =
         dao.all().any { it.quoteId == quoteId }
+
+    /**
+     * Merge beim Login (Spec §6): erst alle lokalen Favoriten hochladen
+     * (PUT ist idempotent), dann die Server-Gesamtliste übernehmen —
+     * Vereinigung, nichts geht verloren.
+     */
+    suspend fun onLogin(api: BackendApi) {
+        dao.all().forEach { runCatching { api.putFavorite(it.quoteId) } }
+        val remote = api.favorites()
+        dao.replaceAll(
+            remote.mapIndexed { i, dto ->
+                FavoriteEntity(dto.quoteId, parseCreatedAt(dto.createdAt, fallbackOrder = i.toLong()))
+            }
+        )
+    }
+
+    private fun parseCreatedAt(iso: String, fallbackOrder: Long): Long =
+        runCatching { OffsetDateTime.parse(iso).toInstant().toEpochMilli() }
+            .getOrDefault(fallbackOrder)
 }

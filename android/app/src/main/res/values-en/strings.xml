@@ -90,6 +90,22 @@
     <string name="acc_bust">Bust of Marcus Aurelius</string>
     <string name="acc_settings">Settings</string>
 
+    <!-- Account -->
+    <string name="acc_title">Account</string>
+    <string name="acc_hint">With an account, your selected thoughts are kept in sync across devices — on your phone and in the browser.</string>
+    <string name="acc_email">Email</string>
+    <string name="acc_password">Password</string>
+    <string name="acc_register">Sign up</string>
+    <string name="acc_login">Sign in</string>
+    <string name="acc_logout">Sign out</string>
+    <string name="acc_verify_sent">Verification email sent — open the link in the email, then sign in here.</string>
+    <string name="acc_reset_sent">Reset email sent — follow the link inside.</string>
+    <string name="acc_forgot">Forgot password?</string>
+    <string name="acc_logged_in_as">Signed in as</string>
+    <string name="acc_synced">Your selection is synced with your account.</string>
+    <string name="acc_offline">No connection to the server.</string>
+    <string name="acc_no_server">The server is not configured in this build yet.</string>
+
     <!-- Stoa -->
     <string name="stoa_title">The Stoa</string>
     <string name="stoa_sub">A school of equanimity · since ca. 300 BC</string>

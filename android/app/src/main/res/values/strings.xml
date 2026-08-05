@@ -91,6 +91,22 @@
     <string name="acc_bust">Büste des Marc Aurel</string>
     <string name="acc_settings">Einstellungen</string>
 
+    <!-- Konto -->
+    <string name="acc_title">Konto</string>
+    <string name="acc_hint">Mit einem Konto werden deine ausgewählten Gedanken geräteübergreifend gesichert — am Handy wie im Browser.</string>
+    <string name="acc_email">E-Mail</string>
+    <string name="acc_password">Passwort</string>
+    <string name="acc_register">Registrieren</string>
+    <string name="acc_login">Anmelden</string>
+    <string name="acc_logout">Abmelden</string>
+    <string name="acc_verify_sent">Bestätigungs-Mail verschickt — bitte den Link in der Mail öffnen, danach hier anmelden.</string>
+    <string name="acc_reset_sent">Mail zum Zurücksetzen verschickt — folge dem Link darin.</string>
+    <string name="acc_forgot">Passwort vergessen?</string>
+    <string name="acc_logged_in_as">Angemeldet als</string>
+    <string name="acc_synced">Deine Auswahl wird mit deinem Konto synchronisiert.</string>
+    <string name="acc_offline">Keine Verbindung zum Server.</string>
+    <string name="acc_no_server">Der Server ist in dieser Version noch nicht konfiguriert.</string>
+
     <!-- Stoa -->
     <string name="stoa_title">Die Stoa</string>
     <string name="stoa_sub">Eine Schule der Gelassenheit · seit ca. 300 v. Chr.</string>

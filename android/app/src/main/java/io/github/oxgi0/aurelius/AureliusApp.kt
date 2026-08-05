@@ -6,6 +6,8 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import io.github.oxgi0.aurelius.data.QuoteRepository
 import io.github.oxgi0.aurelius.db.AppDatabase
+import io.github.oxgi0.aurelius.net.BackendApi
+import io.github.oxgi0.aurelius.net.BackendApiFactory
 import io.github.oxgi0.aurelius.prefs.EncryptedSecretsStore
 import io.github.oxgi0.aurelius.prefs.SecretsStore
 import io.github.oxgi0.aurelius.prefs.SettingsStore
@@ -24,6 +26,9 @@ class AppContainer(private val app: Application) {
         Room.databaseBuilder(app, AppDatabase::class.java, "aurelius.db").build()
     }
     val favorites: FavoritesRepository by lazy { FavoritesRepository(db.favoriteDao()) }
+    val api: BackendApi by lazy {
+        BackendApiFactory.create(BuildConfig.BACKEND_URL.ifBlank { "http://unkonfiguriert.invalid" }, secrets)
+    }
 
     private fun readAsset(name: String): String =
         app.assets.open(name).bufferedReader().use { it.readText() }

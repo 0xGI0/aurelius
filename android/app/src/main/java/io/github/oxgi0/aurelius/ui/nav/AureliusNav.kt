@@ -64,6 +64,7 @@ fun AureliusNav(navController: NavHostController = rememberNavController()) {
             composable("aurel") { io.github.oxgi0.aurelius.ui.screens.AurelScreen() }
             composable("stoa") { io.github.oxgi0.aurelius.ui.screens.StoaScreen() }
             composable("settings") { io.github.oxgi0.aurelius.ui.screens.SettingsScreen(navController) }
+            composable("account") { io.github.oxgi0.aurelius.ui.screens.AccountScreen(navController) }
             composable("book/{book}") { entry ->
                 val book = entry.arguments?.getString("book")?.toIntOrNull() ?: -1
                 io.github.oxgi0.aurelius.ui.screens.BookScreen(navController, book)

@@ -78,6 +78,19 @@ fun SettingsScreen(nav: NavHostController) {
             )
         }
     }) {
+        SectionTitle(stringResource(R.string.acc_title))
+        Row(
+            modifier = Modifier.fillMaxWidth().clickable { nav.navigate("account") },
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = secrets.email.takeIf { secrets.token != null }
+                    ?: stringResource(R.string.acc_login),
+                color = if (secrets.token != null) colors.text else colors.accent,
+                fontWeight = FontWeight.SemiBold,
+            )
+        }
+
         SectionTitle(stringResource(R.string.set_ui_lang))
         // Labels hart wie im Original (nicht übersetzt)
         Segmented(listOf("Deutsch", "English"), if (uiLang == "en") 1 else 0) { i ->
