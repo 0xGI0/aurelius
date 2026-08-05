@@ -21,22 +21,30 @@ export function QuoteCard({ quote, lang, onPress, topInset = 0 }: Props) {
   const t = useT();
   const isGreek = lang === 'grc';
 
-  // Scroll-Hinweis: Verlauf am unteren/oberen Rand, solange dort Text wartet
+  // Scroll-Hinweis: Kanten-Verlauf + immer sichtbare schmale Scroll-Leiste
   const [fadeTop, setFadeTop] = useState(false);
   const [fadeBottom, setFadeBottom] = useState(false);
-  const layoutH = useRef(0);
-  const contentH = useRef(0);
+  const [scrollY, setScrollY] = useState(0);
+  const [layoutH, setLayoutH] = useState(0);
+  const [contentH, setContentH] = useState(0);
   const lastY = useRef(0);
 
-  const update = useCallback(() => {
+  const update = useCallback((viewH: number, fullH: number) => {
     setFadeTop(lastY.current > 1);
-    setFadeBottom(lastY.current + layoutH.current < contentH.current - 1);
+    setFadeBottom(lastY.current + viewH < fullH - 1);
   }, []);
 
   const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     lastY.current = e.nativeEvent.contentOffset.y;
-    update();
+    setScrollY(lastY.current);
+    update(layoutH, contentH);
   };
+
+  const scrollable = contentH > layoutH + 1;
+  const barH = scrollable ? Math.max(24, (layoutH / contentH) * layoutH) : 0;
+  const barTop = scrollable
+    ? Math.min(layoutH - barH, (scrollY / (contentH - layoutH)) * (layoutH - barH))
+    : 0;
 
   const transparent = `${colors.card}00`;
 
@@ -59,12 +67,12 @@ export function QuoteCard({ quote, lang, onPress, topInset = 0 }: Props) {
           onScroll={onScroll}
           scrollEventThrottle={16}
           onLayout={(e) => {
-            layoutH.current = e.nativeEvent.layout.height;
-            update();
+            setLayoutH(e.nativeEvent.layout.height);
+            update(e.nativeEvent.layout.height, contentH);
           }}
           onContentSizeChange={(_, h) => {
-            contentH.current = h;
-            update();
+            setContentH(h);
+            update(layoutH, h);
           }}
         >
           <Text
@@ -94,6 +102,15 @@ export function QuoteCard({ quote, lang, onPress, topInset = 0 }: Props) {
             pointerEvents="none"
           />
         )}
+        {scrollable && (
+          <View
+            pointerEvents="none"
+            style={[
+              styles.scrollbar,
+              { backgroundColor: `${colors.accent}66`, height: barH, top: barTop },
+            ]}
+          />
+        )}
       </View>
       <Text style={[styles.ref, { color: colors.accent }]}>
         {formatReference(quote, t('refBook')).toUpperCase()}
@@ -115,4 +132,5 @@ const styles = StyleSheet.create({
   },
   fadeBottom: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 36 },
   fadeTop: { position: 'absolute', left: 0, right: 0, top: 0, height: 36 },
+  scrollbar: { position: 'absolute', right: -14, width: 3, borderRadius: 2 },
 });
