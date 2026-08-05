@@ -84,6 +84,19 @@ fun QuoteCard(
                             ),
                         )
                     }
+                    // Immer sichtbare schmale Scroll-Leiste rechts vom Text
+                    if (scroll.maxValue > 0) {
+                        val viewH = size.height
+                        val total = viewH + scroll.maxValue
+                        val barH = kotlin.math.max(24.dp.toPx(), viewH * viewH / total)
+                        val barY = (scroll.value.toFloat() / scroll.maxValue) * (viewH - barH)
+                        drawRoundRect(
+                            color = colors.accent.copy(alpha = 0.4f),
+                            topLeft = androidx.compose.ui.geometry.Offset(size.width - 3.dp.toPx(), barY),
+                            size = androidx.compose.ui.geometry.Size(3.dp.toPx(), barH),
+                            cornerRadius = androidx.compose.ui.geometry.CornerRadius(2.dp.toPx()),
+                        )
+                    }
                 }
                 .verticalScroll(scroll),
             horizontalAlignment = Alignment.CenterHorizontally,
