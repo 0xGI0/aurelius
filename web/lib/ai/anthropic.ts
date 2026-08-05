@@ -2,7 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { fetch as expoFetch } from 'expo/fetch';
 import { Platform } from 'react-native';
 import type { Quote, QuoteLang } from '../quotes';
-import { formatReference } from '../quotes';
+import { authorOf, referenceLabel } from '../corpus';
 import { buildExplainPrompt, explainSystem, type ExplainLang } from './prompt';
 import { ExplainError } from './errors';
 
@@ -19,17 +19,21 @@ export async function* explainWithClaude(
     fetch: (Platform.OS === 'web' ? globalThis.fetch : (expoFetch as unknown)) as typeof globalThis.fetch,
   });
   try {
+    const author = authorOf(quote.id);
     const stream = client.messages.stream({
       model: 'claude-opus-5',
       max_tokens: 1024,
-      system: explainSystem(uiLang),
+      system: explainSystem(uiLang, author),
       messages: [
         {
           role: 'user',
           content: buildExplainPrompt(
             quote.texts[lang],
-            formatReference(quote, uiLang === 'en' ? 'Book' : 'Buch'),
+            uiLang === 'en'
+              ? referenceLabel(quote, 'Book', 'Manual')
+              : referenceLabel(quote, 'Buch', 'Handbuch'),
             uiLang,
+            author,
           ),
         },
       ],

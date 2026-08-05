@@ -2,11 +2,11 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Animated, Image, Pressable, Text, View, StyleSheet } from 'react-native';
 import { Link } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import quotesData from '../../data/quotes.json';
 import topicsData from '../../data/topics.json';
-import type { Quote, QuoteLang } from '../../lib/quotes';
+import type { Author, Quote, QuoteLang } from '../../lib/quotes';
 import { ShuffleBag } from '../../lib/quotes';
-import { getQuoteLang, setQuoteLang } from '../../lib/settings';
+import { byId, idsFor, isEpiktetId } from '../../lib/corpus';
+import { getAuthor, getQuoteLang, setAuthor, setQuoteLang } from '../../lib/settings';
 import { useTheme } from '../../theme/ThemeContext';
 import { Screen } from '../../components/Screen';
 import { QuoteCard } from '../../components/QuoteCard';
@@ -16,12 +16,14 @@ import { FavoriteStar } from '../../components/FavoriteStar';
 import { TopicChips } from '../../components/TopicChips';
 import { useT, type StringKey } from '../../lib/i18n';
 
-const QUOTES = quotesData as Quote[];
 const TOPICS = topicsData as Array<{ id: string; label: string; quoteIds: string[] }>;
-
 const TOPIC_IDS = new Map(TOPICS.map((t) => [t.id, t.quoteIds]));
-const ALL_IDS = QUOTES.map((q) => q.id);
-const BY_ID = new Map(QUOTES.map((q) => [q.id, q]));
+
+/** Zieh-Pool für Autor × Thema. */
+function poolFor(author: Author, topic: string): string[] {
+  const base = topic === 'alle' ? idsFor(author) : (TOPIC_IDS.get(topic) ?? idsFor(author));
+  return base.filter((id) => isEpiktetId(id) === (author === 'epiktet'));
+}
 
 export default function Home() {
   const { colors } = useTheme();
@@ -31,13 +33,21 @@ export default function Home() {
     ...TOPICS.map((tp) => ({ id: tp.id, label: t(`topic_${tp.id}` as StringKey) })),
   ];
   const [topic, setTopic] = useState('alle');
-  const bagRef = useRef(new ShuffleBag(ALL_IDS));
-  const [quote, setQuote] = useState<Quote>(() => BY_ID.get(bagRef.current.next())!);
+  const [author, setAuthorState] = useState<Author>('aurel');
+  const bagRef = useRef(new ShuffleBag(poolFor('aurel', 'alle')));
+  const [quote, setQuote] = useState<Quote>(() => byId(bagRef.current.next())!);
   const [lang, setLang] = useState<QuoteLang>('de');
   const fade = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     getQuoteLang().then(setLang);
+    getAuthor().then((a) => {
+      if (a !== 'aurel') {
+        setAuthorState(a);
+        bagRef.current = new ShuffleBag(poolFor(a, 'alle'));
+        setQuote(byId(bagRef.current.next())!);
+      }
+    });
   }, []);
 
   const swapTo = (nextQuote: Quote) => {
@@ -48,15 +58,22 @@ export default function Home() {
   };
 
   const drawNext = () => {
-    swapTo(BY_ID.get(bagRef.current.next())!);
+    swapTo(byId(bagRef.current.next())!);
   };
 
   const changeTopic = (id: string) => {
     if (id === topic) return;
     setTopic(id);
-    const pool = id === 'alle' ? ALL_IDS : (TOPIC_IDS.get(id) ?? ALL_IDS);
-    bagRef.current = new ShuffleBag(pool);
-    swapTo(BY_ID.get(bagRef.current.next())!);
+    bagRef.current = new ShuffleBag(poolFor(author, id));
+    swapTo(byId(bagRef.current.next())!);
+  };
+
+  const changeAuthor = (a: Author) => {
+    if (a === author) return;
+    setAuthorState(a);
+    void setAuthor(a);
+    bagRef.current = new ShuffleBag(poolFor(a, topic));
+    swapTo(byId(bagRef.current.next())!);
   };
 
   const changeLang = (l: QuoteLang) => {
@@ -81,9 +98,13 @@ export default function Home() {
       <Animated.View style={{ opacity: fade }}>
         <View style={styles.medallionWrap}>
           <Image
-            source={require('../../assets/images/marcus-medallion.jpg')}
+            source={
+              author === 'epiktet'
+                ? require('../../assets/images/epictetus.jpg')
+                : require('../../assets/images/marcus-medallion.jpg')
+            }
             style={[styles.medallion, { borderColor: colors.accent }]}
-            accessibilityLabel="Büste des Marc Aurel"
+            accessibilityLabel={author === 'epiktet' ? t('authorEpiktet') : t('authorAurel')}
           />
         </View>
         {/* Kein Tap-to-Next mehr: Text soll markier-/kopierbar sein (User-Wunsch) */}
@@ -91,6 +112,14 @@ export default function Home() {
       </Animated.View>
 
       <View style={styles.controls}>
+        <Segmented<Author>
+          options={[
+            { value: 'aurel', label: t('authorAurel') },
+            { value: 'epiktet', label: t('authorEpiktet') },
+          ]}
+          value={author}
+          onChange={changeAuthor}
+        />
         <TopicChips topics={topicOptions} value={topic} onChange={changeTopic} />
         <View style={styles.langRow}>
           <Segmented<QuoteLang>

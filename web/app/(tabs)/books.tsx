@@ -1,10 +1,12 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Pressable, Text, View, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import quotesData from '../../data/quotes.json';
-import type { Quote } from '../../lib/quotes';
+import type { Author, Quote, QuoteLang } from '../../lib/quotes';
 import { bookRoman } from '../../lib/quotes';
+import { EPIKTET_QUOTES } from '../../lib/corpus';
+import { getAuthor, getQuoteLang } from '../../lib/settings';
 import { READING_LIST } from '../../data/readingList';
 import { useTheme } from '../../theme/ThemeContext';
 import { Screen } from '../../components/Screen';
@@ -18,6 +20,19 @@ export default function Books() {
   const router = useRouter();
   const t = useT();
   const uiLang = useUiLang();
+  const [author, setAuthor] = useState<Author>('aurel');
+  const [lang, setLang] = useState<QuoteLang>('de');
+
+  useFocusEffect(
+    useCallback(() => {
+      let alive = true;
+      getAuthor().then((a) => alive && setAuthor(a));
+      getQuoteLang().then((l) => alive && setLang(l));
+      return () => {
+        alive = false;
+      };
+    }, []),
+  );
 
   const books = useMemo(() => {
     const counts = new Map<number, number>();
@@ -27,29 +42,57 @@ export default function Books() {
 
   return (
     <Screen>
-      <Text style={[styles.h1, { color: colors.text }]}>{t('booksTitle')}</Text>
-      <Text style={[styles.sub, { color: colors.textSoft }]}>{t('booksSub')}</Text>
+      {author === 'epiktet' ? (
+        <>
+          <Text style={[styles.h1, { color: colors.text }]}>{t('enchTitle')}</Text>
+          <Text style={[styles.sub, { color: colors.textSoft }]}>{t('enchSub')}</Text>
 
-      <View style={styles.list}>
-        {books.map(([book, count]) => (
-          <Pressable
-            key={book}
-            onPress={() => router.push(`/book/${book}`)}
-            accessibilityRole="button"
-            style={[styles.row, { backgroundColor: colors.card, borderColor: colors.border }]}
-          >
-            <Text style={[styles.rowTitle, { color: colors.text }]}>
-              {t('refBook')} {bookRoman(book)}
-            </Text>
-            <View style={styles.rowRight}>
-              <Text style={{ color: colors.textSoft, fontSize: 13 }}>
-                {count} {t('sections')}
-              </Text>
-              <Ionicons name="chevron-forward" size={16} color={colors.accent} />
-            </View>
-          </Pressable>
-        ))}
-      </View>
+          <View style={styles.list}>
+            {EPIKTET_QUOTES.map((q) => (
+              <Pressable
+                key={q.id}
+                onPress={() => router.push(`/read/${q.id}`)}
+                accessibilityRole="button"
+                style={styles.chapterRow}
+              >
+                <Text style={[styles.chapterNum, { color: colors.accent }]}>{q.section}</Text>
+                <Text
+                  numberOfLines={2}
+                  style={[styles.chapterPreview, { color: colors.text }]}
+                >
+                  {q.texts[lang]}
+                </Text>
+              </Pressable>
+            ))}
+          </View>
+        </>
+      ) : (
+        <>
+          <Text style={[styles.h1, { color: colors.text }]}>{t('booksTitle')}</Text>
+          <Text style={[styles.sub, { color: colors.textSoft }]}>{t('booksSub')}</Text>
+
+          <View style={styles.list}>
+            {books.map(([book, count]) => (
+              <Pressable
+                key={book}
+                onPress={() => router.push(`/book/${book}`)}
+                accessibilityRole="button"
+                style={[styles.row, { backgroundColor: colors.card, borderColor: colors.border }]}
+              >
+                <Text style={[styles.rowTitle, { color: colors.text }]}>
+                  {t('refBook')} {bookRoman(book)}
+                </Text>
+                <View style={styles.rowRight}>
+                  <Text style={{ color: colors.textSoft, fontSize: 13 }}>
+                    {count} {t('sections')}
+                  </Text>
+                  <Ionicons name="chevron-forward" size={16} color={colors.accent} />
+                </View>
+              </Pressable>
+            ))}
+          </View>
+        </>
+      )}
 
       <Text style={[styles.h1, styles.h1Second, { color: colors.text }]}>{t('libTitle')}</Text>
       <Text style={[styles.sub, { color: colors.textSoft }]}>{t('libSub')}</Text>
@@ -93,6 +136,9 @@ const styles = StyleSheet.create({
   },
   rowTitle: { fontFamily: fonts.quote, fontSize: 17 },
   rowRight: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  chapterRow: { flexDirection: 'row', gap: 10, alignItems: 'flex-start' },
+  chapterNum: { fontSize: 13, fontWeight: '700', minWidth: 24, textAlign: 'right' },
+  chapterPreview: { flex: 1, fontFamily: fonts.quote, fontSize: 15, lineHeight: 22 },
   bookCard: { borderWidth: 1, borderRadius: 14, padding: 18, gap: 6 },
   era: { fontSize: 11, letterSpacing: 2, fontWeight: '600' },
   bookTitle: { fontFamily: fonts.quote, fontSize: 18 },

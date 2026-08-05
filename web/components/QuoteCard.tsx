@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import type { Quote, QuoteLang } from '../lib/quotes';
-import { formatReference } from '../lib/quotes';
+import { referenceLabel } from '../lib/corpus';
 import { useTheme } from '../theme/ThemeContext';
 import { useT } from '../lib/i18n';
 import { fonts } from '../theme/tokens';
@@ -113,7 +113,7 @@ export function QuoteCard({ quote, lang, onPress, topInset = 0 }: Props) {
         )}
       </View>
       <Text style={[styles.ref, { color: colors.accent }]}>
-        {formatReference(quote, t('refBook')).toUpperCase()}
+        {referenceLabel(quote, t('refBook'), t('refManual')).toUpperCase()}
       </Text>
     </Pressable>
   );

@@ -2,9 +2,8 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { Pressable, Text, View, StyleSheet } from 'react-native';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import quotesData from '../../data/quotes.json';
 import type { Quote } from '../../lib/quotes';
-import { formatReference } from '../../lib/quotes';
+import { byId as corpusById, referenceLabel } from '../../lib/corpus';
 import { getFavorites } from '../../lib/favorites';
 import { useTheme } from '../../theme/ThemeContext';
 import { Screen } from '../../components/Screen';
@@ -12,13 +11,10 @@ import { FavoriteStar } from '../../components/FavoriteStar';
 import { fonts } from '../../theme/tokens';
 import { useT } from '../../lib/i18n';
 
-const QUOTES = quotesData as Quote[];
-
 export default function Favorites() {
   const { colors } = useTheme();
   const router = useRouter();
   const t = useT();
-  const byId = useMemo(() => new Map(QUOTES.map((q) => [q.id, q])), []);
   const [ids, setIds] = useState<string[]>([]);
 
   useFocusEffect(
@@ -33,7 +29,7 @@ export default function Favorites() {
     }, []),
   );
 
-  const favorites = ids.map((id) => byId.get(id)).filter((q): q is Quote => q !== undefined);
+  const favorites = ids.map((id) => corpusById(id)).filter((q): q is Quote => q !== undefined);
 
   return (
     <Screen center={favorites.length === 0}>
@@ -59,7 +55,7 @@ export default function Favorites() {
               >
                 <View style={styles.rowBody}>
                   <Text style={[styles.ref, { color: colors.accent }]}>
-                    {formatReference(q, t('refBook')).toUpperCase()}
+                    {referenceLabel(q, t('refBook'), t('refManual')).toUpperCase()}
                   </Text>
                   <Text numberOfLines={3} style={[styles.preview, { color: colors.text }]}>
                     {q.texts.de}

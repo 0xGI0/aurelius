@@ -2,8 +2,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Pressable, Text, View, StyleSheet } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import quotesData from '../../data/quotes.json';
-import type { Quote, QuoteLang } from '../../lib/quotes';
+import type { QuoteLang } from '../../lib/quotes';
+import { byId } from '../../lib/corpus';
 import { getQuoteLang, setQuoteLang } from '../../lib/settings';
 import { useTheme } from '../../theme/ThemeContext';
 import { Screen } from '../../components/Screen';
@@ -13,14 +13,12 @@ import { ExplainSection } from '../../components/ExplainSection';
 import { FavoriteStar } from '../../components/FavoriteStar';
 import { useT } from '../../lib/i18n';
 
-const QUOTES = quotesData as Quote[];
-
 export default function Read() {
   const { colors } = useTheme();
   const router = useRouter();
   const t = useT();
   const { id } = useLocalSearchParams<{ id: string }>();
-  const quote = useMemo(() => QUOTES.find((q) => q.id === id), [id]);
+  const quote = useMemo(() => (id ? byId(id) : undefined), [id]);
   const [lang, setLang] = useState<QuoteLang>('de');
 
   useEffect(() => {

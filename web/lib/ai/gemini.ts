@@ -1,7 +1,7 @@
 import { fetch as expoFetch } from 'expo/fetch';
 import { Platform } from 'react-native';
 import type { Quote, QuoteLang } from '../quotes';
-import { formatReference } from '../quotes';
+import { authorOf, referenceLabel } from '../corpus';
 import type { ExplainLang } from './prompt';
 import { ExplainError } from './errors';
 
@@ -20,8 +20,12 @@ export async function* explainWithGemini(
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         text: quote.texts[lang],
-        reference: formatReference(quote, uiLang === 'en' ? 'Book' : 'Buch'),
+        reference:
+          uiLang === 'en'
+            ? referenceLabel(quote, 'Book', 'Manual')
+            : referenceLabel(quote, 'Buch', 'Handbuch'),
         uiLang,
+        author: authorOf(quote.id),
       }),
     });
   } catch {

@@ -1,13 +1,24 @@
 import { getItem, setItem, deleteItem } from './storage';
-import type { QuoteLang } from './quotes';
+import type { Author, QuoteLang } from './quotes';
 import type { ThemePref } from '../theme/tokens';
 
 const K_LANG = 'aurelius.quoteLang';
 const K_THEME = 'aurelius.theme';
 const K_KEY = 'aurelius.anthropicKey';
+const K_AUTHOR = 'aurelius.author';
 
 const LANGS: QuoteLang[] = ['de', 'en', 'grc'];
 const THEMES: ThemePref[] = ['light', 'dark', 'system'];
+const AUTHORS: Author[] = ['aurel', 'epiktet'];
+
+export async function getAuthor(): Promise<Author> {
+  const v = (await getItem(K_AUTHOR)) as Author | null;
+  return v !== null && AUTHORS.includes(v) ? v : 'aurel';
+}
+
+export async function setAuthor(author: Author): Promise<void> {
+  if (AUTHORS.includes(author)) await setItem(K_AUTHOR, author);
+}
 
 export async function getQuoteLang(): Promise<QuoteLang> {
   const v = await getItem(K_LANG);

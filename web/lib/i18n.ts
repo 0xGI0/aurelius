@@ -47,8 +47,15 @@ const de = {
   tabQuote: 'Zitat',
   tabBooks: 'Bücher',
   tabFavorites: 'Ausgewählt',
-  tabAurel: 'Marc Aurel',
+  tabAurel: 'Die Stoiker',
   tabStoa: 'Stoa',
+  // Autoren-Umschalter
+  authorAurel: 'Marc Aurel',
+  authorEpiktet: 'Epiktet',
+  refManual: 'Handbuch',
+  enchTitle: 'Handbüchlein der Moral',
+  enchSub: 'Encheiridion · Τὸ Ἐγχειρίδιον',
+  chapterWord: 'Kapitel',
   // Home
   hintTap: 'Tippe auf die Karte für den nächsten Gedanken',
   btnNext: 'Neuer Gedanke',
@@ -142,6 +149,29 @@ const de = {
   aurelS3:
     'Sein Werk „Τὰ εἰς ἑαυτόν" — wörtlich „An sich selbst" — schrieb er auf Griechisch, abends im Feldlager, unter anderem in Carnuntum an der Donau. Es war nie zur Veröffentlichung gedacht: keine Lehre, sondern ein Selbstgespräch. Zwölf Bücher lang erinnert sich ein müder Mann daran, was er sein will — geduldig, gerecht, unbestechlich gegenüber Ruhm und Angst. Gerade weil er nur für sich schrieb, liest es sich bis heute, als spräche er mit uns.',
   aurelCredit: 'Büste: Glyptothek München · Foto: Bibi Saint-Pol, Wikimedia Commons (gemeinfrei)',
+  // Epiktet
+  epikSub: 'ca. 50–135 n. Chr. · Vom Sklaven zum Lehrer der Stoa',
+  epikS1Title: 'Der Sklave',
+  epikS1:
+    'Epiktet wurde um 50 n. Chr. in Hierapolis in Phrygien geboren und kam als Sklave nach Rom, in den Haushalt von Epaphroditos, einem Freigelassenen Neros. Sein lahmes Bein begleitete ihn ein Leben lang. Noch als Sklave durfte er beim Stoiker Musonius Rufus hören; später wurde er freigelassen — und aus dem Sklaven wurde einer der freiesten Menschen seiner Zeit.',
+  epikS2Title: 'Der Lehrer',
+  epikS2:
+    'Als Kaiser Domitian um 93 die Philosophen aus Rom verbannte, ging Epiktet nach Nikopolis in Griechenland und gründete dort seine Schule. Er selbst schrieb kein einziges Buch: Sein Schüler Arrian zeichnete die Lehrgespräche auf und verdichtete sie zum Handbüchlein. Besitz, Rang, der eigene Körper — für Epiktet alles „nicht in unserer Gewalt". Frei ist allein das Urteil.',
+  epikS3Title: 'Das Handbüchlein',
+  epikS3:
+    'Das Encheiridion — wörtlich „das Handliche" — verdichtet Epiktets Lehre in 53 Kapitel: kein System, sondern Übungen für den Tag, gedacht zum Bei-sich-Tragen wie ein Werkzeug. Es wurde einer der meistgelesenen Texte der Antike — und über seinen Lehrer Rusticus fanden Epiktets Worte auch zu Marc Aurel, der ihn in den Selbstbetrachtungen dankbar zitiert.',
+  epikCredit: 'Kupferstich: Frontispiz der Oxford-Ausgabe des Enchiridion (1715), Wikimedia Commons (gemeinfrei)',
+  // Zwei Stoiker — die Unterschiede
+  diffTitle: 'Zwei Stoiker — die Unterschiede',
+  diff1Title: 'Herkunft',
+  diff1:
+    'Größer könnte der Abstand nicht sein: Epiktet war Sklave, Marc Aurel Kaiser. Dass beide dieselbe Philosophie lebten, ist das stärkste Argument der Stoa — Gelassenheit hängt nicht von den Umständen ab, sondern vom Urteil über sie.',
+  diff2Title: 'Form',
+  diff2:
+    'Das Handbüchlein ist ein Lehrtext: aus dem Unterricht verdichtet, knapp, direkt, zum Weitergeben gemacht. Die Selbstbetrachtungen sind das Gegenteil — ein privates Notizbuch, nachts im Feldlager geschrieben, nie zur Veröffentlichung gedacht.',
+  diff3Title: 'Ton',
+  diff3:
+    'Epiktet befiehlt und übt: Verlange nicht, dass die Dinge geschehen, wie du willst. Marc Aurel erinnert und ermahnt sich selbst — zweifelnd, müde, immer wieder neu ansetzend. Der Lehrer spricht zu Schülern, der Kaiser mit sich selbst. Die Stimme des Sklaven begleitete den Kaiser ein Leben lang.',
   // Stoa
   stoaTitle: 'Die Stoa',
   stoaSub: 'Eine Schule der Gelassenheit · seit ca. 300 v. Chr.',
@@ -171,8 +201,14 @@ const en: typeof de = {
   tabQuote: 'Quote',
   tabBooks: 'Books',
   tabFavorites: 'Selected',
-  tabAurel: 'Marcus Aurelius',
+  tabAurel: 'The Stoics',
   tabStoa: 'Stoa',
+  authorAurel: 'Marcus Aurelius',
+  authorEpiktet: 'Epictetus',
+  refManual: 'Manual',
+  enchTitle: 'The Enchiridion',
+  enchSub: 'Encheiridion · Τὸ Ἐγχειρίδιον',
+  chapterWord: 'chapters',
   hintTap: 'Tap the card for the next thought',
   btnNext: 'New thought',
   btnExplain: 'Explain',
@@ -256,6 +292,27 @@ const en: typeof de = {
   aurelS3:
     'He wrote his work “Τὰ εἰς ἑαυτόν” — literally “To Himself” — in Greek, at night in army camps, among them Carnuntum on the Danube. It was never meant for publication: not a doctrine, but a conversation with himself. Across twelve books, a tired man keeps reminding himself of who he wants to be — patient, just, incorruptible by fame and fear. Precisely because he wrote only for himself, it still reads as if he were speaking to us.',
   aurelCredit: 'Bust: Glyptothek Munich · Photo: Bibi Saint-Pol, Wikimedia Commons (public domain)',
+  epikSub: 'c. 50–135 AD · From slave to teacher of the Stoa',
+  epikS1Title: 'The Slave',
+  epikS1:
+    'Epictetus was born around 50 AD in Hierapolis in Phrygia and came to Rome as a slave, into the household of Epaphroditus, a freedman of Nero. A lame leg accompanied him all his life. While still enslaved he was allowed to hear the Stoic Musonius Rufus; later he was freed — and the slave became one of the freest people of his age.',
+  epikS2Title: 'The Teacher',
+  epikS2:
+    'When the emperor Domitian banished the philosophers from Rome around 93, Epictetus went to Nicopolis in Greece and founded his school there. He himself never wrote a single book: his student Arrian recorded the Discourses and condensed them into the Enchiridion. Property, rank, even one’s own body — for Epictetus all of it “not in our power.” Only judgment is free.',
+  epikS3Title: 'The Enchiridion',
+  epikS3:
+    'The Encheiridion — literally “the thing held in the hand” — condenses Epictetus’ teaching into 53 chapters: not a system but exercises for the day, meant to be carried like a tool. It became one of the most-read texts of antiquity — and through his teacher Rusticus, Epictetus’ words also reached Marcus Aurelius, who quotes him gratefully in the Meditations.',
+  epikCredit: 'Engraving: frontispiece of the Oxford edition of the Enchiridion (1715), Wikimedia Commons (public domain)',
+  diffTitle: 'Two Stoics — the differences',
+  diff1Title: 'Origins',
+  diff1:
+    'The distance could not be greater: Epictetus was a slave, Marcus Aurelius an emperor. That both lived the same philosophy is Stoicism’s strongest argument — equanimity does not depend on circumstances, but on the judgment about them.',
+  diff2Title: 'Form',
+  diff2:
+    'The Enchiridion is a teaching text: condensed from the classroom, terse, direct, made to be passed on. The Meditations are the opposite — a private notebook, written at night in army camps, never meant for publication.',
+  diff3Title: 'Tone',
+  diff3:
+    'Epictetus commands and trains: do not demand that things happen as you wish. Marcus Aurelius reminds and admonishes himself — doubting, tired, beginning anew again and again. The teacher speaks to students, the emperor to himself. The slave’s voice accompanied the emperor for a lifetime.',
   stoaTitle: 'The Stoa',
   stoaSub: 'A school of equanimity · since ca. 300 BC',
   stoaIntro:

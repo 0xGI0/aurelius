@@ -16,16 +16,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.status(405).json({ error: 'nur POST' });
     return;
   }
-  const { text, reference, uiLang } = (req.body ?? {}) as {
+  const { text, reference, uiLang, author } = (req.body ?? {}) as {
     text?: unknown;
     reference?: unknown;
     uiLang?: unknown;
+    author?: unknown;
   };
   if (typeof text !== 'string' || text.length === 0 || text.length > 8000 || typeof reference !== 'string') {
     res.status(400).json({ error: 'ungültiger Body' });
     return;
   }
   const lang: ExplainLang = uiLang === 'en' ? 'en' : 'de';
+  const work = author === 'epiktet' ? ('epiktet' as const) : ('aurel' as const);
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     res.status(500).json({ error: 'GEMINI_API_KEY fehlt' });
@@ -35,8 +37,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const stream = await ai.models.generateContentStream({
       model: 'gemini-flash-latest',
-      contents: buildExplainPrompt(text, reference, lang),
-      config: { systemInstruction: explainSystem(lang), maxOutputTokens: 1024 },
+      contents: buildExplainPrompt(text, reference, lang, work),
+      config: { systemInstruction: explainSystem(lang, work), maxOutputTokens: 1024 },
     });
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
     res.setHeader('Cache-Control', 'no-store');
