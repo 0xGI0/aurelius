@@ -128,23 +128,30 @@ export default function Home() {
     <Screen center header={header}>
       <Animated.View style={{ opacity: fade }}>
         <View style={styles.medallionWrap}>
-          <Image
-            source={
-              author === 'epiktet'
-                ? require('../../assets/images/epictetus.jpg')
-                : author === 'seneca'
-                  ? require('../../assets/images/seneca.jpg')
-                  : require('../../assets/images/marcus-medallion.jpg')
-            }
-            style={[styles.medallion, { borderColor: colors.accent }]}
-            accessibilityLabel={
+          {/* Tap aufs Medaillon zieht einen neuen Gedanken — wie der Knopf */}
+          <Pressable
+            onPress={drawNext}
+            accessibilityRole="button"
+            accessibilityLabel={`${
               author === 'epiktet'
                 ? t('authorEpiktet')
                 : author === 'seneca'
                   ? t('authorSeneca')
                   : t('authorAurel')
-            }
-          />
+            } — ${t('btnNext')}`}
+            style={({ pressed }) => ({ opacity: pressed ? 0.7 : 1 })}
+          >
+            <Image
+              source={
+                author === 'epiktet'
+                  ? require('../../assets/images/epictetus.jpg')
+                  : author === 'seneca'
+                    ? require('../../assets/images/seneca.jpg')
+                    : require('../../assets/images/marcus-medallion.jpg')
+              }
+              style={[styles.medallion, { borderColor: colors.accent }]}
+            />
+          </Pressable>
         </View>
         {/* Kein Tap-to-Next mehr: Text soll markier-/kopierbar sein (User-Wunsch) */}
         <QuoteCard quote={quote} lang={lang} topInset={64} />
