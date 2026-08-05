@@ -6,17 +6,20 @@
   <a href="#deutsch">Deutsch</a> · <a href="#english">English</a>
 </p>
 <p align="center">
-  <img src="assets/images/marcus-portrait.jpg" width="240" alt="Büste des Marc Aurel (Glyptothek München)">
+  <img src="assets/images/marcus-portrait.jpg" width="220" alt="Büste des Marc Aurel (Glyptothek München)">
+  &nbsp;&nbsp;
+  <img src="assets/images/epictetus.jpg" width="186" alt="Epiktet (Kupferstich, Oxford 1715)">
 </p>
 
 ---
 
 ## Deutsch
 
-Eine ruhige, zweisprachige App für Marc Aurels *Selbstbetrachtungen* — das
-komplette Werk (12 Bücher, **486 Abschnitte**) auf Deutsch, Englisch und
-Altgriechisch, mit Themen-Filtern, Favoriten und optionaler KI-Erklärung
-als Live-Stream.
+Eine ruhige, zweisprachige App für die **großen Stoiker**: Marc Aurels
+*Selbstbetrachtungen* (12 Bücher, **486 Abschnitte**) und Epiktets
+*Handbüchlein der Moral* (**53 Kapitel**) — jeweils auf Deutsch, Englisch
+und Altgriechisch, mit Themen-Filtern, Favoriten und optionaler
+KI-Erklärung als Live-Stream.
 
 **Live:** https://aurelius-rust.vercel.app
 
@@ -27,6 +30,7 @@ als Live-Stream.
 
 ### Features
 
+- **Zwei Autoren, ein Umschalter** — Marc Aurel oder Epiktet, die Wahl bleibt gespeichert; der Stoiker-Tab porträtiert beide und erklärt ihre Unterschiede
 - **Neuer Gedanke per Knopfdruck** — zufälliger Abschnitt (Shuffle ohne baldige Wiederholung), Zitattext markier- und kopierbar
 - **Themen-Filter** — Tod, Wut, Trauer, Angst, Familie, Besitz, Gelassenheit, Pflicht, Natur
 - **Drei Zitat-Sprachen** — Wittstock 1879 (de), George Long 1862 (en), griechischer Originaltext (grc), umschaltbar
@@ -79,9 +83,10 @@ gibt es dort unter [Releases](https://github.com/0xGI0/aurelius-android/releases
 
 ## English
 
-A calm, bilingual app for Marcus Aurelius' *Meditations* — the complete work
-(12 books, **486 sections**) in German, English and Ancient Greek, with topic
-filters, favorites and optional AI explanations streamed live.
+A calm, bilingual app for the **great Stoics**: Marcus Aurelius' *Meditations*
+(12 books, **486 sections**) and Epictetus' *Enchiridion* (**53 chapters**) —
+each in German, English and Ancient Greek, with topic filters, favorites and
+optional AI explanations streamed live.
 
 **Live:** https://aurelius-rust.vercel.app
 
@@ -92,6 +97,7 @@ filters, favorites and optional AI explanations streamed live.
 
 ### Features
 
+- **Two authors, one switch** — Marcus Aurelius or Epictetus, the choice is remembered; the Stoics tab portrays both and explains their differences
 - **New thought at the press of a button** — random section (shuffle without early repeats), quote text selectable and copyable
 - **Topic filters** — death, anger, grief, fear, family, possessions, equanimity, duty, nature
 - **Three quote languages** — Wittstock 1879 (de), George Long 1862 (en), the Greek original (grc), switchable
