@@ -4,7 +4,7 @@ from django.db import models
 
 # Marc Aurel: "buch-abschnitt" (5-23) · Epiktet: "e-kapitel" (e-53)
 QUOTE_ID_VALIDATOR = RegexValidator(
-    regex=r"^(\d{1,2}-\d{1,3}|e-\d{1,2})$",
+    regex=r"^(\d{1,2}-\d{1,3}|e-\d{1,2}|s-\d{1,2})$",
     message="quote_id muss dem Muster buch-abschnitt (5-23) oder e-kapitel (e-53) entsprechen",
 )
 

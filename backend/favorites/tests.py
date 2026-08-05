@@ -58,6 +58,11 @@ class FavoritesApiTests(TestCase):
         ids = [e["quote_id"] for e in self.client.get("/api/favorites/").json()]
         self.assertIn("e-53", ids)
 
+    def test_seneca_ids_werden_akzeptiert(self):
+        resp = self.client.put("/api/favorites/s-20/")
+        self.assertEqual(resp.status_code, 201)
+        self.assertEqual(self.client.put("/api/favorites/s-123/").status_code, 400)
+
     def test_userdaten_sind_getrennt(self):
         self.client.put("/api/favorites/5-23/")
         anderer = _make_user("kaiserin@example.com")

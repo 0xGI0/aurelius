@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from .models import Favorite
 
 # Marc Aurel: "buch-abschnitt" (5-23) · Epiktet: "e-kapitel" (e-53)
-QUOTE_ID_RE = re.compile(r"^(\d{1,2}-\d{1,3}|e-\d{1,2})$")
+QUOTE_ID_RE = re.compile(r"^(\d{1,2}-\d{1,3}|e-\d{1,2}|s-\d{1,2})$")
 
 
 def _serialisiere(favorit):
