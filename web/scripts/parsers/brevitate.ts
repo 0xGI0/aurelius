@@ -68,7 +68,9 @@ export function parseBrevLaNumbered(html: string): BrevParagraph[] {
   for (const [, roman, block] of chapterBlocks) {
     const chapter = ROMAN_TO_NUM.get(roman);
     if (chapter === undefined) continue;
-    const pieces = block.split(/<span id="&#91;\d+&#93;"[^>]*>\[(\d+)\]<\/span>/);
+    // Kapitel XX schleppt sonst den Fußnoten-Apparat der Seite mit (↑ …)
+    const cleanBlock = block.split('\u2191')[0];
+    const pieces = cleanBlock.split(/<span id="&#91;\d+&#93;"[^>]*>\[(\d+)\]<\/span>/);
     // split liefert [vor, num1, text1, num2, text2, …]
     for (let i = 1; i < pieces.length; i += 2) {
       const text = pieces[i + 1]
