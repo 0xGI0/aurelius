@@ -23,6 +23,16 @@ export interface BrevEntry {
  * Hinweis: der 'grc'-Slot trägt bei Seneca das LATEINISCHE Original —
  * der Slot bedeutet app-weit "Originalsprache" (siehe data/SOURCES.md).
  */
+/**
+ * Inhaltlich verifizierte Ausreißer: Grenze stimmt (beide Nachbar-Anker
+ * geprüft), die Übersetzung ist an der Stelle nur ungewöhnlich frei.
+ * Ausnahmen überspringen NUR den Längenkorridor, nie Leer-/Folge-Checks.
+ */
+const RATIO_EXCEPTIONS = new Map<string, string>([
+  ['s-8-4', 'Basore übersetzt §8,4 stark expansiv (en/la 1,73); Grenzen via "Nec est tamen"/"Nemo restituet" verifiziert'],
+  ['s-12-1', 'Apelt löst die knappen Gerichts-Metaphern von §12,1 erklärend auf (de/la 2,02); Grenzen via "Quaeris fortasse"/"in villa" verifiziert'],
+]);
+
 export function buildBrevitate(chapters: AlignPara[][]): BrevEntry[] {
   const entries: BrevEntry[] = [];
   for (const paras of chapters) {
@@ -36,8 +46,10 @@ export function buildBrevitate(chapters: AlignPara[][]): BrevEntry[] {
       }
       const rDe = p.de.length / p.la.length;
       const rEn = p.en.length / p.la.length;
-      if (rDe < 1.1 || rDe > 2.0) throw new GateError(`${p.id}: de/la=${rDe.toFixed(2)}`);
-      if (rEn < 1.1 || rEn > 1.7) throw new GateError(`${p.id}: en/la=${rEn.toFixed(2)}`);
+      if (!RATIO_EXCEPTIONS.has(p.id)) {
+        if (rDe < 1.1 || rDe > 2.0) throw new GateError(`${p.id}: de/la=${rDe.toFixed(2)}`);
+        if (rEn < 1.1 || rEn > 1.7) throw new GateError(`${p.id}: en/la=${rEn.toFixed(2)}`);
+      }
       entries.push({
         id: p.id,
         chapter: Number(chap),
