@@ -6,20 +6,23 @@ describe('corpus', () => {
   it('enthält alle drei Werke vollständig', () => {
     expect(AUREL_QUOTES).toHaveLength(486);
     expect(EPIKTET_QUOTES).toHaveLength(53);
-    expect(SENECA_QUOTES).toHaveLength(20);
+    expect(SENECA_QUOTES).toHaveLength(104);
   });
 
-  it('Seneca-Kapitel haben de/en und Latein im Original-Slot', () => {
+  it('Seneca-Paragraphen haben de/en und Latein im Original-Slot', () => {
     for (const q of SENECA_QUOTES) {
-      expect(q.id).toMatch(/^s-\d{1,2}$/);
+      expect(q.id).toMatch(/^s-\d{1,2}-\d{1,2}$/);
+      expect(q.book).toBeGreaterThanOrEqual(1); // Kapitel
+      expect(q.section).toBeGreaterThanOrEqual(1); // Paragraph
       expect(q.texts.de.length).toBeGreaterThan(0);
       expect(q.texts.en.length).toBeGreaterThan(0);
       expect(q.texts.grc.length).toBeGreaterThan(0); // Slot = Originalsprache (Latein)
     }
-    expect(byId('s-1')?.texts.grc).toContain('Maior pars mortalium');
-    expect(authorOf('s-5')).toBe('seneca');
-    expect(referenceLabel(byId('s-5')!, 'Buch', 'Handbuch')).toBe('De brevitate, 5');
-    expect(idsFor('seneca')).toHaveLength(20);
+    expect(byId('s-1-1')?.texts.grc).toContain('Maior pars mortalium');
+    expect(byId('s-4-2')?.texts.de).toContain('Der selige Augustus');
+    expect(authorOf('s-5-2')).toBe('seneca');
+    expect(referenceLabel(byId('s-4-2')!, 'Buch', 'Handbuch')).toBe('De brevitate 4,2');
+    expect(idsFor('seneca')).toHaveLength(104);
   });
 
   it('Epiktet-Kapitel haben alle drei Sprachen', () => {

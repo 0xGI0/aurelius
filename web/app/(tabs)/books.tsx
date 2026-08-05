@@ -39,6 +39,12 @@ export default function Books() {
     return [...counts.entries()].sort((a, b) => a[0] - b[0]);
   }, []);
 
+  const senecaChapters = useMemo(() => {
+    const counts = new Map<number, number>();
+    for (const q of SENECA_QUOTES) counts.set(q.book, (counts.get(q.book) ?? 0) + 1);
+    return [...counts.entries()].sort((a, b) => a[0] - b[0]);
+  }, []);
+
   const changeAuthor = (a: Author) => {
     setAuthor(a);
     void persistAuthor(a);
@@ -78,24 +84,48 @@ export default function Books() {
             {author === 'seneca' ? t('brevSub') : t('enchSub')}
           </Text>
 
-          <View style={styles.list}>
-            {(author === 'seneca' ? SENECA_QUOTES : EPIKTET_QUOTES).map((q) => (
-              <Pressable
-                key={q.id}
-                onPress={() => router.push(`/read/${q.id}`)}
-                accessibilityRole="button"
-                style={styles.chapterRow}
-              >
-                <Text style={[styles.chapterNum, { color: colors.accent }]}>{q.section}</Text>
-                <Text
-                  numberOfLines={2}
-                  style={[styles.chapterPreview, { color: colors.text }]}
+          {author === 'seneca' ? (
+            // Kapitel → Paragraphen, Bauart der Aurel-Bücher (klassische Zählung)
+            <View style={styles.list}>
+              {senecaChapters.map(([chapter, count]) => (
+                <Pressable
+                  key={chapter}
+                  onPress={() => router.push(`/book/s-${chapter}`)}
+                  accessibilityRole="button"
+                  style={[styles.row, { backgroundColor: colors.card, borderColor: colors.border }]}
                 >
-                  {q.texts[lang]}
-                </Text>
-              </Pressable>
-            ))}
-          </View>
+                  <Text style={[styles.rowTitle, { color: colors.text }]}>
+                    De brevitate {chapter}
+                  </Text>
+                  <View style={styles.rowRight}>
+                    <Text style={{ color: colors.textSoft, fontSize: 13 }}>
+                      {count} {t('sections')}
+                    </Text>
+                    <Ionicons name="chevron-forward" size={16} color={colors.accent} />
+                  </View>
+                </Pressable>
+              ))}
+            </View>
+          ) : (
+            <View style={styles.list}>
+              {EPIKTET_QUOTES.map((q) => (
+                <Pressable
+                  key={q.id}
+                  onPress={() => router.push(`/read/${q.id}`)}
+                  accessibilityRole="button"
+                  style={styles.chapterRow}
+                >
+                  <Text style={[styles.chapterNum, { color: colors.accent }]}>{q.section}</Text>
+                  <Text
+                    numberOfLines={2}
+                    style={[styles.chapterPreview, { color: colors.text }]}
+                  >
+                    {q.texts[lang]}
+                  </Text>
+                </Pressable>
+              ))}
+            </View>
+          )}
         </>
       ) : (
         <>

@@ -16,6 +16,12 @@ describe('pickQuote', () => {
     }
   });
 
+  it('Seneca liefert Paragraphen-IDs und ist unter maxLen 300 nicht leer', () => {
+    const q = pickQuote({ author: 'seneca', rng: () => 0.5 });
+    expect(q!.id).toMatch(/^s-\d{1,2}-\d{1,2}$/);
+    expect(pickQuote({ author: 'seneca', maxLen: 300, rng: () => 0.5 })).not.toBeNull();
+  });
+
   it('filtert auf maxLen in beiden Sprachen', () => {
     const q = pickQuote({ maxLen: 200, rng: () => 0.99 });
     expect(q!.texts.de.length).toBeLessThanOrEqual(200);

@@ -30,4 +30,16 @@ describe('migrateLegacyStorage', () => {
     await expect(migrateLegacyStorage()).resolves.toBeUndefined();
     expect(mockStore.size).toBe(0);
   });
+
+  it('hebt Seneca-Kapitel-Favoriten auf den ersten Paragraphen (s-N → s-N-1)', async () => {
+    mockStore.set('stoa.favorites', JSON.stringify(['s-4', '1-1', 'e-5', 's-20-3']));
+    await migrateLegacyStorage();
+    expect(JSON.parse(mockStore.get('stoa.favorites')!)).toEqual(['s-4-1', '1-1', 'e-5', 's-20-3']);
+  });
+
+  it('migriert Seneca-IDs auch aus alten aurelius-Keys in einem Zug', async () => {
+    mockStore.set('aurelius.favorites', JSON.stringify(['s-7', '2-2']));
+    await migrateLegacyStorage();
+    expect(JSON.parse(mockStore.get('stoa.favorites')!)).toEqual(['s-7-1', '2-2']);
+  });
 });

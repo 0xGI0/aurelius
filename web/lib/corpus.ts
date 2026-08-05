@@ -10,6 +10,10 @@ interface ChapterEntry {
   texts: Record<QuoteLang, string>;
 }
 
+interface ParagraphEntry extends ChapterEntry {
+  paragraph: number;
+}
+
 const asQuotes = (entries: ChapterEntry[]): Quote[] =>
   entries.map((c) => ({ id: c.id, book: 0, section: c.chapter, texts: c.texts }));
 
@@ -18,8 +22,17 @@ export const AUREL_QUOTES = quotesData as Quote[];
 /** Epiktets Encheiridion in Quote-Form: book 0, section = Kapitel. */
 export const EPIKTET_QUOTES: Quote[] = asQuotes(enchiridionData as ChapterEntry[]);
 
-/** Senecas De brevitate vitae — der 'grc'-Slot trägt hier das LATEINISCHE Original. */
-export const SENECA_QUOTES: Quote[] = asQuotes(debrevitateData as ChapterEntry[]);
+/**
+ * Senecas De brevitate vitae in Paragraphen-Einheiten (klassische Zählung,
+ * seit 2026-08-05): book = Kapitel, section = Paragraph. Der 'grc'-Slot
+ * trägt hier das LATEINISCHE Original.
+ */
+export const SENECA_QUOTES: Quote[] = (debrevitateData as ParagraphEntry[]).map((p) => ({
+  id: p.id,
+  book: p.chapter,
+  section: p.paragraph,
+  texts: p.texts,
+}));
 
 const INDEX = new Map<string, Quote>(
   [...AUREL_QUOTES, ...EPIKTET_QUOTES, ...SENECA_QUOTES].map((q) => [q.id, q]),
@@ -50,12 +63,13 @@ export function authorOf(id: string): Author {
 }
 
 /**
- * "Buch IV, 7" (Marc Aurel), "Handbuch, 5" (Epiktet), "De brevitate, 5"
- * (Seneca — lateinischer Titel, in beiden UI-Sprachen gleich).
+ * "Buch IV, 7" (Marc Aurel), "Handbuch, 5" (Epiktet), "De brevitate 4,2"
+ * (Seneca — lateinischer Titel + klassische Kapitel,Paragraph-Stelle,
+ * in beiden UI-Sprachen gleich).
  */
 export function referenceLabel(q: Quote, bookWord: string, manualWord: string): string {
   const author = authorOf(q.id);
   if (author === 'epiktet') return `${manualWord}, ${q.section}`;
-  if (author === 'seneca') return `De brevitate, ${q.section}`;
+  if (author === 'seneca') return `De brevitate ${q.book},${q.section}`;
   return formatReference(q, bookWord);
 }

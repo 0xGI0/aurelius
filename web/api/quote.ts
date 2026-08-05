@@ -70,12 +70,14 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     authorName: AUTHOR_NAME[a],
     work: WORK[a],
     // Neutral gegenüber dem Werktitel (der steht separat in `work`), damit
-    // Anzeigen wie „Werk, Referenz" sich nicht doppeln: Kapitel-Werke
-    // bekommen schlicht „Kap./Ch. n".
+    // Anzeigen wie „Werk, Referenz" sich nicht doppeln. Seneca seit dem
+    // Paragraphen-Umbau mit klassischer Stelle „Kap. 4,2".
     ref:
       a === 'aurel'
         ? { de: referenceLabel(q, 'Buch', ''), en: referenceLabel(q, 'Book', '') }
-        : { de: `Kap. ${q.section}`, en: `Ch. ${q.section}` },
+        : a === 'seneca'
+          ? { de: `Kap. ${q.book},${q.section}`, en: `Ch. ${q.book},${q.section}` }
+          : { de: `Kap. ${q.section}`, en: `Ch. ${q.section}` },
     // Datenformat der App: bei Seneca trägt der grc-Slot das Latein.
     texts: q.texts,
   });

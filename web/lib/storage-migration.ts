@@ -18,4 +18,19 @@ export async function migrateLegacyStorage(): Promise<void> {
     }
     await deleteItem(`aurelius.${suffix}`);
   }
+
+  // Seneca-Paragraphen-Umbau (2026-08-05): Kapitel-Favoriten s-N heben wir
+  // auf den ersten Paragraphen des Kapitels (s-N-1). Idempotent.
+  const favs = await getItem('stoa.favorites');
+  if (favs !== null) {
+    try {
+      const ids = JSON.parse(favs) as string[];
+      const migrated = ids.map((id) => (/^s-\d+$/.test(id) ? `${id}-1` : id));
+      if (migrated.some((id, i) => id !== ids[i])) {
+        await setItem('stoa.favorites', JSON.stringify(migrated));
+      }
+    } catch {
+      /* defektes JSON — Favoriten-Modul behandelt das selbst */
+    }
+  }
 }

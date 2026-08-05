@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import quotesData from '../../data/quotes.json';
 import type { Quote, QuoteLang } from '../../lib/quotes';
 import { bookRoman } from '../../lib/quotes';
+import { SENECA_QUOTES } from '../../lib/corpus';
 import { getQuoteLang } from '../../lib/settings';
 import { useTheme } from '../../theme/ThemeContext';
 import { Screen } from '../../components/Screen';
@@ -18,17 +19,19 @@ export default function Book() {
   const router = useRouter();
   const t = useT();
   const { book } = useLocalSearchParams<{ book: string }>();
-  const bookNumber = Number(book);
+  // "7" = Aurel Buch 7 · "s-7" = Seneca De brevitate Kapitel 7
+  const isSeneca = typeof book === 'string' && book.startsWith('s-');
+  const bookNumber = Number(isSeneca ? (book as string).slice(2) : book);
   const [lang, setLang] = useState<QuoteLang>('de');
 
   useEffect(() => {
     getQuoteLang().then(setLang);
   }, []);
 
-  const sections = useMemo(
-    () => QUOTES.filter((q) => q.book === bookNumber).sort((a, b) => a.section - b.section),
-    [bookNumber],
-  );
+  const sections = useMemo(() => {
+    const pool = isSeneca ? SENECA_QUOTES : QUOTES;
+    return pool.filter((q) => q.book === bookNumber).sort((a, b) => a.section - b.section);
+  }, [bookNumber, isSeneca]);
 
   const header = (
     <View style={styles.header}>
@@ -56,7 +59,7 @@ export default function Book() {
   return (
     <Screen header={header}>
       <Text style={[styles.h1, { color: colors.text }]}>
-        {t('refBook')} {bookRoman(bookNumber)}
+        {isSeneca ? `De brevitate ${bookNumber}` : `${t('refBook')} ${bookRoman(bookNumber)}`}
       </Text>
       <Text style={[styles.sub, { color: colors.textSoft }]}>
         {sections.length} {t('sections')}
