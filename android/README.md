@@ -41,9 +41,13 @@ in Vorbereitung.
     sha256sum -c SHA256SUMS.txt                      # Prüfsumme
     gh attestation verify aurelius-*.apk \
       --repo 0xGI0/aurelius-android                  # Sigstore-Build-Nachweis
+    curl -s https://tertlidis.com/pgp.asc | gpg --import
+    gpg --verify aurelius-*.apk.asc aurelius-*.apk   # PGP-Signatur des Maintainers
 
 Die Attestierung beweist, dass die APK von der öffentlichen GitHub-Actions-
-Pipeline aus genau diesem Quellcode gebaut wurde.
+Pipeline aus genau diesem Quellcode gebaut wurde; die PGP-Signatur
+(Fingerprint `D251 773E 1DF7 0C1D 0476 1CB0 F92A F40D 80E8 5351`) bestätigt
+zusätzlich die Freigabe durch den Maintainer.
 
 ### Selbst bauen
 
@@ -91,9 +95,13 @@ preparation.
     sha256sum -c SHA256SUMS.txt                      # checksum
     gh attestation verify aurelius-*.apk \
       --repo 0xGI0/aurelius-android                  # Sigstore build provenance
+    curl -s https://tertlidis.com/pgp.asc | gpg --import
+    gpg --verify aurelius-*.apk.asc aurelius-*.apk   # maintainer PGP signature
 
 The attestation proves the APK was built by the public GitHub Actions
-pipeline from exactly this source code.
+pipeline from exactly this source code; the PGP signature (fingerprint
+`D251 773E 1DF7 0C1D 0476 1CB0 F92A F40D 80E8 5351`) additionally confirms
+the maintainer's sign-off.
 
 ### Build it yourself
 
