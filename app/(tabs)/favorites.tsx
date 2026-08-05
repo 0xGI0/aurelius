@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import quotesData from '../../data/quotes.json';
 import type { Quote } from '../../lib/quotes';
 import { formatReference } from '../../lib/quotes';
-import { getFavorites } from '../../lib/settings';
+import { getFavorites } from '../../lib/favorites';
 import { useTheme } from '../../theme/ThemeContext';
 import { Screen } from '../../components/Screen';
 import { FavoriteStar } from '../../components/FavoriteStar';

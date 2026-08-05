@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { getFavorites, toggleFavorite } from '../lib/settings';
+import { getFavorites, toggleFavorite } from '../lib/favorites';
 import { useTheme } from '../theme/ThemeContext';
 import { useT } from '../lib/i18n';
 
