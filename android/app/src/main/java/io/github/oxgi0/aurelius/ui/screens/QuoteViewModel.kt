@@ -36,9 +36,11 @@ class QuoteViewModel(
 
     init {
         viewModelScope.launch {
-            // Gespeicherten Autor einmalig anwenden
-            val saved = settings.author.first()
-            if (saved == "epiktet") applyAuthor(Author.Epiktet)
+            // Autor dauerhaft beobachten — Wechsel auf anderen Tabs greifen sofort
+            settings.author.collect { saved ->
+                val author = if (saved == "epiktet") Author.Epiktet else Author.Aurel
+                if (author != _state.value.author) applyAuthor(author)
+            }
         }
         viewModelScope.launch {
             settings.quoteLang.collect { lang -> _state.update { it.copy(quoteLang = lang) } }
@@ -52,7 +54,7 @@ class QuoteViewModel(
 
     fun selectAuthor(author: Author) {
         if (author == _state.value.author) return
-        applyAuthor(author)
+        // Persistieren genügt — der author-Collector im init wendet den Wechsel an
         viewModelScope.launch {
             settings.setAuthor(if (author == Author.Epiktet) "epiktet" else "aurel")
         }
