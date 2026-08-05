@@ -58,7 +58,7 @@ fun AureliusNav(navController: NavHostController = rememberNavController()) {
             startDestination = "quote",
             modifier = Modifier.padding(bottom = padding.calculateBottomPadding()),
         ) {
-            composable("quote") { PlaceholderScreen(R.string.tab_quote) }
+            composable("quote") { io.github.oxgi0.aurelius.ui.screens.QuoteScreen(navController) }
             composable("books") { PlaceholderScreen(R.string.tab_books) }
             composable("favorites") { PlaceholderScreen(R.string.tab_favorites) }
             composable("aurel") { PlaceholderScreen(R.string.tab_aurel) }
