@@ -5,6 +5,14 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.cyclonedx)
+}
+
+// CycloneDX-SBOM über die Release-Laufzeitabhängigkeiten
+tasks.cyclonedxBom {
+    setIncludeConfigs(listOf("releaseRuntimeClasspath"))
+    setOutputFormat("json")
+    setOutputName("bom.cdx")
 }
 
 android {

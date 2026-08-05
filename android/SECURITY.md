@@ -25,6 +25,7 @@ Every release ships:
 - **SHA-256 checksums** (`SHA256SUMS.txt`),
 - a **Sigstore build-provenance attestation** (proves the APK was built by
   the public CI pipeline from this exact source),
-- **PGP signatures** (`*.asc`) made with the maintainer key above.
+- **PGP signatures** (`*.asc`) made with the maintainer key above,
+- a **CycloneDX SBOM** (`*-sbom.cdx.json`) listing all runtime dependencies.
 
 See "Verify your download" in the README for the exact commands.

@@ -37,6 +37,13 @@ jobs:
           mkdir dist
           cp app/build/outputs/apk/release/app-release.apk \
             "dist/aurelius-${{ github.ref_name }}.apk"
+      # SBOM aus den Release-Laufzeitabhängigkeiten — läuft in SHA256SUMS,
+      # Attestierung und Release mit
+      - name: SBOM erzeugen (CycloneDX)
+        run: |
+          ./gradlew :app:cyclonedxBom --no-daemon --console=plain
+          cp app/build/reports/bom.cdx.json \
+            "dist/aurelius-${{ github.ref_name }}-sbom.cdx.json"
       # Checksums-Notiz landet außerhalb von dist/, damit sie kein Asset wird
       - name: SHA256SUMS erzeugen
         run: |
@@ -54,7 +61,9 @@ jobs:
       - name: Build-Provenance attestieren
         uses: actions/attest-build-provenance@v4
         with:
-          subject-path: dist/*.apk
+          subject-path: |
+            dist/*.apk
+            dist/*.cdx.json
       - name: GitHub-Release erstellen
         uses: softprops/action-gh-release@v3
         with:
