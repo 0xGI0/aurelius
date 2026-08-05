@@ -59,13 +59,19 @@ fun AureliusNav(navController: NavHostController = rememberNavController()) {
             modifier = Modifier.padding(bottom = padding.calculateBottomPadding()),
         ) {
             composable("quote") { io.github.oxgi0.aurelius.ui.screens.QuoteScreen(navController) }
-            composable("books") { PlaceholderScreen(R.string.tab_books) }
+            composable("books") { io.github.oxgi0.aurelius.ui.screens.BooksScreen(navController) }
             composable("favorites") { PlaceholderScreen(R.string.tab_favorites) }
-            composable("aurel") { PlaceholderScreen(R.string.tab_aurel) }
-            composable("stoa") { PlaceholderScreen(R.string.tab_stoa) }
+            composable("aurel") { io.github.oxgi0.aurelius.ui.screens.AurelScreen() }
+            composable("stoa") { io.github.oxgi0.aurelius.ui.screens.StoaScreen() }
             composable("settings") { io.github.oxgi0.aurelius.ui.screens.SettingsScreen(navController) }
-            composable("book/{book}") { PlaceholderScreen(R.string.tab_books) }
-            composable("read/{id}") { PlaceholderScreen(R.string.tab_quote) }
+            composable("book/{book}") { entry ->
+                val book = entry.arguments?.getString("book")?.toIntOrNull() ?: -1
+                io.github.oxgi0.aurelius.ui.screens.BookScreen(navController, book)
+            }
+            composable("read/{id}") { entry ->
+                val id = entry.arguments?.getString("id") ?: ""
+                io.github.oxgi0.aurelius.ui.screens.ReadScreen(navController, id)
+            }
         }
     }
 }
