@@ -45,12 +45,13 @@ Editions-Eigenheiten (beim Alignment verifiziert):
 
 ## Seneca — Von der Kürze des Lebens (De brevitate vitae)
 
-Ergänzt am 2026-08-05 (dritter Autor). IDs `s-1` … `s-20` in `data/debrevitate.json`.
+Ergänzt am 2026-08-05 (dritter Autor); seit dem Paragraphen-Umbau vom selben Tag
+IDs `s-<kapitel>-<paragraph>` (z. B. `s-4-2`, klassische Zählung) in `data/debrevitate.json`.
 **Hinweis:** Der `grc`-Slot trägt bei Seneca das **lateinische** Original — der Slot bedeutet app-weit „Originalsprache"; die UI beschriftet ihn autorabhängig (Altgriechisch/Latein).
 
 | Sprache | Quelle | Nachweis |
 |---|---|---|
-| Deutsch | Otto Apelt (Übers.), 1923, Felix Meiner, Leipzig. Apelt † 1932 → gemeinfrei seit 2003. | Internet Archive `von-der-kuerze-des-lebens-seneca`, committet als `data-sources/seneca-brevitate-de.txt` (UTF-8-konvertiert); Einleitung/Anmerkungen des Herausgebers werden beim Parsen verworfen |
+| Deutsch | Otto Apelt (Übers.), 1923, Felix Meiner, Leipzig. Apelt † 1932 → gemeinfrei seit 2003. | Internet Archive `von-der-kuerze-des-lebens-seneca`, **HTML-Fassung** (die dortige txt-/DjVu-OCR-Fassung hat Textlücken in 11 Kapiteln — 2026-08-05 gegen das Latein nachgemessen); committet als `data-sources/seneca-brevitate-de.txt` (normalisiert: windows-1252→UTF-8, Kapitel als 'N. Text', Fußnotenmarken/Apparat entfernt) |
 | Englisch | John W. Basore (Übers.), Loeb 1932; US-Copyright nicht erneuert (PD-US-no-renewal, so auch Wikisource), Basore † 1949 → EU-gemeinfrei seit 2020. | en.wikisource „On the shortness of life", 20 Kapitelseiten, committet als `data-sources/seneca-brevitate-en.json` |
 | Latein | Original, la.wikisource „De brevitate vitae" (20 Kapitel-Absätze). | Committet als `data-sources/seneca-brevitate-la.html` |
 | Bild | Sog. Pseudo-Seneca-Büste, Museo Archeologico Nazionale Neapel; Foto **Marie-Lan Nguyen** (2011). | Wikimedia Commons, **CC BY 2.5** — Namensnennung erfolgt in App (Stoiker-Tab) und READMEs |
