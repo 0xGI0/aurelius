@@ -24,7 +24,7 @@ Moral* (**53 Kapitel**) und Senecas *Von der Kürze des Lebens*
 (Altgriechisch bzw. Latein), mit Themen-Filtern, Favoriten und
 optionaler KI-Erklärung als Live-Stream.
 
-**Live:** https://aurelius-rust.vercel.app
+**Live:** https://die-stoa.vercel.app
 
 **Schwester-Projekte:** [`android/`](../android/)
 (native Kotlin-App, GPL-3.0, F-Droid in Vorbereitung) ·
@@ -92,7 +92,7 @@ A calm, bilingual app for the **great Stoics**: Marcus Aurelius' *Meditations*
 the original (Ancient Greek or Latin), with topic filters, favorites and
 optional AI explanations streamed live.
 
-**Live:** https://aurelius-rust.vercel.app
+**Live:** https://die-stoa.vercel.app
 
 **Sister projects:** [`android/`](../android/)
 (native Kotlin app, GPL-3.0, F-Droid in preparation) ·

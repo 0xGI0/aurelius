@@ -168,7 +168,7 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 DEFAULT_FROM_EMAIL = "stoa@localhost"
 
 CORS_ALLOWED_ORIGINS = [
-    "https://aurelius-rust.vercel.app",  # Expo-Web (Produktion)
+    "https://die-stoa.vercel.app",  # Expo-Web (Produktion)
     "http://localhost:8081",             # Expo-Dev-Server
     "http://localhost:19006",            # Expo-Web-Dev (Legacy-Port)
 ]

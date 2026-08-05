@@ -682,7 +682,7 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Stoa] "
 DEFAULT_FROM_EMAIL = "stoa@localhost"
 ```
 
-Der CORS-Eintrag `https://aurelius-rust.vercel.app` bleibt vorerst — er wird in Task 8 Step 4 durch die echte neue Domain ersetzt (vorher unbekannt).
+Der CORS-Eintrag `https://die-stoa.vercel.app` bleibt vorerst — er wird in Task 8 Step 4 durch die echte neue Domain ersetzt (vorher unbekannt).
 
 - [ ] **Step 2: README.md** — Titel/Logo-Alt/Links auf Stoa bzw. `0xGI0/stoa` umstellen.
 

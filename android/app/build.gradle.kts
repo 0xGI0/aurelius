@@ -25,7 +25,7 @@ android {
         targetSdk = 36
         versionCode = 5
         versionName = "0.4.0"
-        buildConfigField("String", "EXPLAIN_URL", "\"https://aurelius-rust.vercel.app/api/explain\"")
+        buildConfigField("String", "EXPLAIN_URL", "\"https://die-stoa.vercel.app/api/explain\"")
     }
 
     // Signatur nur, wenn der lokale Schlüssel vorhanden ist (Env-Vars) —

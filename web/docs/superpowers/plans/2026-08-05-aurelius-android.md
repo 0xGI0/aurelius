@@ -21,7 +21,7 @@
 - **Kein** „Zitat des Tages" — Home = Zufalls-Shuffle-Bag wie im Original. Tabs (de): Zitat, Bücher, Ausgewählt, Marc Aurel, Stoa.
 - i18n: `values/strings.xml` = Deutsch (Default, KEIN Geräte-Locale-Fallback auf en — Parität), `values-en/` = Englisch; die 84 Key-Paare der Expo-App übernehmen (`lib/i18n.ts`), plus neue Konto-Strings.
 - Zitat-Quellen-Lizenzhinweis (Perseus CC BY-SA 4.0) muss in den Einstellungen bleiben.
-- Backend-URL als `BuildConfig.BACKEND_URL`: Debug `http://10.0.2.2:8000` (Emulator→Host), Release vorerst leer-konfigurierbar (VPS kommt in Teilprojekt 4). Explain-URL: `https://aurelius-rust.vercel.app/api/explain`.
+- Backend-URL als `BuildConfig.BACKEND_URL`: Debug `http://10.0.2.2:8000` (Emulator→Host), Release vorerst leer-konfigurierbar (VPS kommt in Teilprojekt 4). Explain-URL: `https://die-stoa.vercel.app/api/explain`.
 - Tests: reine JVM-Unit-Tests (`./gradlew test`) für Logik/Repos (Fakes + MockWebServer); UI wird per Emulator/Gerät am Ende jeder UI-Task von Hand geprüft (Kommandos stehen im Task).
 - Commits deutsch, Conventional Commits. `git commit` braucht Sandbox-Bypass (GPG); große Downloads ggf. auch (Netz).
 
@@ -90,7 +90,7 @@ yes | ~/Android/Sdk/cmdline-tools/latest/bin/sdkmanager --licenses
 ~/Android/Sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
 ```
 
-- [ ] **Step 3: Projekt-Gerüst anlegen** — Repo-Ordner, `.gitignore` (`.gradle/`, `build/`, `local.properties`, `.claude/`, `.mcp.json`, `*.keystore`), `local.properties` mit `sdk.dir=/home/x/Android/Sdk`, Gradle-Wrapper (per `gradle wrapper` aus einer heruntergeladenen Gradle-Distribution oder aus einem `gradle init`), `settings.gradle.kts` (Repos: google(), mavenCentral()), Version-Katalog mit: AGP, Kotlin + compose-plugin + serialization-plugin, compose-bom, activity-compose, navigation-compose, lifecycle-viewmodel-compose, kotlinx-serialization-json, retrofit + converter-kotlinx-serialization, okhttp + mockwebserver, room-runtime/ktx/compiler (+ ksp-Plugin), datastore-preferences, security-crypto, junit4. `app/build.gradle.kts`: `applicationId "io.github.oxgi0.aurelius"`, min 26 / target+compile 36, `buildConfigField("String","BACKEND_URL", …)` (debug `http://10.0.2.2:8000`, release `""`), `buildConfigField("String","EXPLAIN_URL","\"https://aurelius-rust.vercel.app/api/explain\"")`, Compose aktiviert. `MainActivity` zeigt `Text("Aurelius")`.
+- [ ] **Step 3: Projekt-Gerüst anlegen** — Repo-Ordner, `.gitignore` (`.gradle/`, `build/`, `local.properties`, `.claude/`, `.mcp.json`, `*.keystore`), `local.properties` mit `sdk.dir=/home/x/Android/Sdk`, Gradle-Wrapper (per `gradle wrapper` aus einer heruntergeladenen Gradle-Distribution oder aus einem `gradle init`), `settings.gradle.kts` (Repos: google(), mavenCentral()), Version-Katalog mit: AGP, Kotlin + compose-plugin + serialization-plugin, compose-bom, activity-compose, navigation-compose, lifecycle-viewmodel-compose, kotlinx-serialization-json, retrofit + converter-kotlinx-serialization, okhttp + mockwebserver, room-runtime/ktx/compiler (+ ksp-Plugin), datastore-preferences, security-crypto, junit4. `app/build.gradle.kts`: `applicationId "io.github.oxgi0.aurelius"`, min 26 / target+compile 36, `buildConfigField("String","BACKEND_URL", …)` (debug `http://10.0.2.2:8000`, release `""`), `buildConfigField("String","EXPLAIN_URL","\"https://die-stoa.vercel.app/api/explain\"")`, Compose aktiviert. `MainActivity` zeigt `Text("Aurelius")`.
 
 - [ ] **Step 4: Smoke-Test schreiben und alles bauen**
 

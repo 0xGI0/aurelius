@@ -664,7 +664,7 @@ git commit -m "feat: Favoriten-API — idempotentes Setzen/Entfernen, strikte qu
 
 **Interfaces:**
 - Consumes: Endpunkte aus Task 2/4.
-- Produces: CORS-Freigabe exakt für `https://aurelius-rust.vercel.app` und lokale Dev-Origins; global 60 Anfragen/min für anonyme Aufrufer (Login-Bruteforce-Bremse).
+- Produces: CORS-Freigabe exakt für `https://die-stoa.vercel.app` und lokale Dev-Origins; global 60 Anfragen/min für anonyme Aufrufer (Login-Bruteforce-Bremse).
 
 - [ ] **Step 1: Failing Tests schreiben** — in `favorites/tests.py` anhängen:
 
@@ -676,10 +676,10 @@ from django.test import override_settings
 class CorsTests(TestCase):
     def test_erlaubte_origin_bekommt_cors_header(self):
         resp = APIClient().get(
-            "/api/favorites/", HTTP_ORIGIN="https://aurelius-rust.vercel.app"
+            "/api/favorites/", HTTP_ORIGIN="https://die-stoa.vercel.app"
         )
         self.assertEqual(
-            resp["Access-Control-Allow-Origin"], "https://aurelius-rust.vercel.app"
+            resp["Access-Control-Allow-Origin"], "https://die-stoa.vercel.app"
         )
 
     def test_fremde_origin_bekommt_keinen_cors_header(self):
@@ -724,7 +724,7 @@ Am Dateiende anfügen:
 
 ```python
 CORS_ALLOWED_ORIGINS = [
-    "https://aurelius-rust.vercel.app",  # Expo-Web (Produktion)
+    "https://die-stoa.vercel.app",  # Expo-Web (Produktion)
     "http://localhost:8081",             # Expo-Dev-Server
     "http://localhost:19006",            # Expo-Web-Dev (Legacy-Port)
 ]

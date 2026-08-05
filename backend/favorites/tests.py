@@ -82,10 +82,10 @@ from django.test import override_settings
 class CorsTests(TestCase):
     def test_erlaubte_origin_bekommt_cors_header(self):
         resp = APIClient().get(
-            "/api/favorites/", HTTP_ORIGIN="https://aurelius-rust.vercel.app"
+            "/api/favorites/", HTTP_ORIGIN="https://die-stoa.vercel.app"
         )
         self.assertEqual(
-            resp["Access-Control-Allow-Origin"], "https://aurelius-rust.vercel.app"
+            resp["Access-Control-Allow-Origin"], "https://die-stoa.vercel.app"
         )
 
     def test_fremde_origin_bekommt_keinen_cors_header(self):
