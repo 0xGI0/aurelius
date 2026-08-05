@@ -8,6 +8,12 @@ fun roman(n: Int): String = ROMAN[n]
 fun formatReference(q: Quote, bookWord: String): String =
     "$bookWord ${roman(q.book)}, ${q.section}"
 
-/** "Buch IV, 7" (Marc Aurel) bzw. "Handbuch, 5" (Epiktet). */
-fun referenceLabel(q: Quote, bookWord: String, manualWord: String): String =
-    if (authorOf(q.id) == Author.Epiktet) "$manualWord, ${q.section}" else formatReference(q, bookWord)
+/**
+ * "Buch IV, 7" (Marc Aurel), "Handbuch, 5" (Epiktet), "De brevitate, 5"
+ * (Seneca — lateinischer Titel, in beiden UI-Sprachen gleich).
+ */
+fun referenceLabel(q: Quote, bookWord: String, manualWord: String): String = when (authorOf(q.id)) {
+    Author.Epiktet -> "$manualWord, ${q.section}"
+    Author.Seneca -> "De brevitate, ${q.section}"
+    Author.Aurel -> formatReference(q, bookWord)
+}

@@ -22,7 +22,7 @@ class SettingsStore(internal val dataStore: DataStore<Preferences>) {
         private val UI_LANGS = setOf("de", "en")
         private val QUOTE_LANGS = setOf("de", "en", "grc")
         private val THEMES = setOf("light", "dark", "system")
-        private val AUTHORS = setOf("aurel", "epiktet")
+        private val AUTHORS = setOf("aurel", "epiktet", "seneca")
     }
 
     val uiLang: Flow<String> =

@@ -16,6 +16,7 @@ class QuoteRepositoryTest {
         readResource("quotes.json"),
         readResource("topics.json"),
         readResource("enchiridion.json"),
+        readResource("debrevitate.json"),
     )
 
     @Test
@@ -74,5 +75,17 @@ class QuoteRepositoryTest {
     fun `referenceLabel unterscheidet die werke`() {
         assertEquals("Handbuch, 5", referenceLabel(repo.byId("e-5")!!, "Buch", "Handbuch"))
         assertEquals("Buch IV, 7", referenceLabel(repo.byId("4-7")!!, "Buch", "Handbuch"))
+        assertEquals("De brevitate, 5", referenceLabel(repo.byId("s-5")!!, "Buch", "Handbuch"))
+    }
+
+    @Test
+    fun `debrevitate hat 20 kapitel mit latein im original-slot`() {
+        assertEquals(20, repo.debrevitate.size)
+        repo.debrevitate.forEach { q ->
+            assertTrue(q.id.startsWith("s-"))
+            listOf("de", "en", "grc").forEach { assertTrue(q.texts.getValue(it).isNotBlank()) }
+        }
+        assertTrue(repo.byId("s-1")!!.texts.getValue("grc").contains("Maior pars mortalium"))
+        assertEquals(20, repo.poolFor(Author.Seneca, null).size)
     }
 }

@@ -1,8 +1,8 @@
-Two Stoic classics in one app: all 486 sections of Marcus Aurelius' "Meditations" and Epictetus' "Enchiridion" (53 chapters) — each in German, English and the Ancient Greek original (Perseus Digital Library, CC BY-SA 4.0).
+Three Stoic classics in one app: Marcus Aurelius' "Meditations" (486 sections), Epictetus' "Enchiridion" (53 chapters) and Seneca's "On the Shortness of Life" (20 chapters) — each in German, English and the original (Ancient Greek or Latin).
 
 Features:
 
-• Author switch: Marcus Aurelius or Epictetus, with portraits and a comparison of the two
+• Author switch with portraits and a comparison of the three Stoics
 • A random thought at the press of a button — repetition-free shuffle
 • Nine topic filters: death, anger, grief, fear, family, possessions, equanimity, duty, nature
 • All twelve books to browse and read

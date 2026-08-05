@@ -21,8 +21,12 @@
     <!-- Autoren -->
     <string name="author_aurel">Marc Aurel</string>
     <string name="author_epiktet">Epiktet</string>
+    <string name="author_seneca">Seneca</string>
+    <string name="lang_la">Latein</string>
     <string name="ench_title">Handbüchlein der Moral</string>
     <string name="ench_sub">Encheiridion · Τὸ Ἐγχειρίδιον</string>
+    <string name="brev_title">Von der Kürze des Lebens</string>
+    <string name="brev_sub">De brevitate vitae · An Paulinus</string>
 
     <!-- Zitat-Sprachen -->
     <string name="lang_de">Deutsch</string>
@@ -109,14 +113,25 @@
     <string name="epik_credit">Kupferstich: Frontispiz der Oxford-Ausgabe des Enchiridion (1715), Wikimedia Commons (gemeinfrei)</string>
     <string name="acc_engraving">Kupferstich des Epiktet</string>
 
-    <!-- Zwei Stoiker — die Unterschiede -->
-    <string name="diff_title">Zwei Stoiker — die Unterschiede</string>
+    <!-- Seneca -->
+    <string name="seneca_sub">ca. 4 v. – 65 n. Chr. · Senator, Dichter, Lehrer Neros</string>
+    <string name="seneca_s1_title">Der Aufsteiger</string>
+    <string name="seneca_s1">Lucius Annaeus Seneca, geboren um 4 v. Chr. in Córdoba, kam als Kind nach Rom und wurde einer der glänzendsten Redner und Schriftsteller seiner Zeit. Sein Weg führte durch alle Höhen und Abgründe der Macht: Todesurteil unter Caligula (in letzter Minute abgewendet), acht Jahre Verbannung auf Korsika unter Claudius — dann die Rückkehr als Erzieher des jungen Nero.</string>
+    <string name="seneca_s2_title">Der Widerspruch</string>
+    <string name="seneca_s2">Als Neros Berater lenkte Seneca jahrelang faktisch das Reich — und wurde dabei einer der reichsten Männer Roms. Dem Vorwurf, ein Philosoph dürfe nicht im Palast wohnen, stellte er sich selbst: Nicht der Besitz sei das Problem, sondern das Hängen daran. Als Nero unerträglich wurde, zog er sich zurück; 65 n. Chr. zwang ihn der Kaiser nach einer aufgedeckten Verschwörung zum Suizid. Seneca starb, wie er es gelehrt hatte: gefasst.</string>
+    <string name="seneca_s3_title">Die Schrift an Paulinus</string>
+    <string name="seneca_s3">»Von der Kürze des Lebens« schrieb Seneca um 49 n. Chr. an Paulinus, den obersten Getreideverwalter Roms: eine Streitschrift gegen das verplante Leben. Nicht kurz sei das Leben, sondern verschwendet — von Geschäftigen, die für alle Zeit haben außer für sich selbst. Zwanzig Kapitel, die sich lesen, als wären sie gegen volle Terminkalender von heute geschrieben.</string>
+    <string name="seneca_credit">Büste (sog. Pseudo-Seneca): Museo Archeologico Nazionale, Neapel · Foto: Marie-Lan Nguyen, Wikimedia Commons (CC BY 2.5)</string>
+    <string name="acc_seneca_bust">Büste des Seneca</string>
+
+    <!-- Drei Stoiker — die Unterschiede -->
+    <string name="diff_title">Drei Stoiker — die Unterschiede</string>
     <string name="diff1_title">Herkunft</string>
-    <string name="diff1">Größer könnte der Abstand nicht sein: Epiktet war Sklave, Marc Aurel Kaiser. Dass beide dieselbe Philosophie lebten, ist das stärkste Argument der Stoa — Gelassenheit hängt nicht von den Umständen ab, sondern vom Urteil über sie.</string>
+    <string name="diff1">Größer könnte die Spannweite nicht sein: Epiktet war Sklave, Seneca Senator und einer der reichsten Männer Roms, Marc Aurel Kaiser. Dass alle drei dieselbe Philosophie lebten, ist das stärkste Argument der Stoa — Gelassenheit hängt nicht von den Umständen ab, sondern vom Urteil über sie.</string>
     <string name="diff2_title">Form</string>
-    <string name="diff2">Das Handbüchlein ist ein Lehrtext: aus dem Unterricht verdichtet, knapp, direkt, zum Weitergeben gemacht. Die Selbstbetrachtungen sind das Gegenteil — ein privates Notizbuch, nachts im Feldlager geschrieben, nie zur Veröffentlichung gedacht.</string>
+    <string name="diff2">Epiktets Handbüchlein ist ein Lehrtext: aus dem Unterricht verdichtet, knapp, zum Weitergeben gemacht. Senecas Schriften sind elegante Essays und Briefe an Freunde — Literatur, die überzeugen will. Die Selbstbetrachtungen sind ein privates Notizbuch, nachts im Feldlager geschrieben, nie zur Veröffentlichung gedacht.</string>
     <string name="diff3_title">Ton</string>
-    <string name="diff3">Epiktet befiehlt und übt: Verlange nicht, dass die Dinge geschehen, wie du willst. Marc Aurel erinnert und ermahnt sich selbst — zweifelnd, müde, immer wieder neu ansetzend. Der Lehrer spricht zu Schülern, der Kaiser mit sich selbst. Die Stimme des Sklaven begleitete den Kaiser ein Leben lang.</string>
+    <string name="diff3">Epiktet befiehlt und übt: Verlange nicht, dass die Dinge geschehen, wie du willst. Seneca argumentiert und poliert — der Rhetor, der die Stoa in glänzende Sätze fasst. Marc Aurel erinnert und ermahnt sich selbst: zweifelnd, müde, immer wieder neu ansetzend. Lehrer, Schriftsteller, Kaiser — drei Stimmen, eine Schule.</string>
 
     <!-- Konto -->
     <string name="acc_title">Konto</string>

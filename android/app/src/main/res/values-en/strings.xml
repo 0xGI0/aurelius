@@ -20,8 +20,12 @@
     <!-- Authors -->
     <string name="author_aurel">Marcus Aurelius</string>
     <string name="author_epiktet">Epictetus</string>
+    <string name="author_seneca">Seneca</string>
+    <string name="lang_la">Latin</string>
     <string name="ench_title">The Enchiridion</string>
     <string name="ench_sub">Encheiridion · Τὸ Ἐγχειρίδιον</string>
+    <string name="brev_title">On the Shortness of Life</string>
+    <string name="brev_sub">De brevitate vitae · To Paulinus</string>
 
     <!-- Quote languages -->
     <string name="lang_de">German</string>
@@ -108,14 +112,25 @@
     <string name="epik_credit">Engraving: frontispiece of the Oxford edition of the Enchiridion (1715), Wikimedia Commons (public domain)</string>
     <string name="acc_engraving">Engraving of Epictetus</string>
 
-    <!-- Two Stoics — the differences -->
-    <string name="diff_title">Two Stoics — the differences</string>
+    <!-- Seneca -->
+    <string name="seneca_sub">c. 4 BC – 65 AD · Senator, playwright, tutor of Nero</string>
+    <string name="seneca_s1_title">The Riser</string>
+    <string name="seneca_s1">Lucius Annaeus Seneca, born around 4 BC in Córdoba, came to Rome as a child and became one of the most brilliant orators and writers of his age. His path led through every height and abyss of power: a death sentence under Caligula (averted at the last minute), eight years of exile on Corsica under Claudius — then the return as tutor to the young Nero.</string>
+    <string name="seneca_s2_title">The Contradiction</string>
+    <string name="seneca_s2">As Nero’s adviser Seneca effectively steered the empire for years — and became one of the richest men in Rome. He faced the charge that a philosopher should not live in a palace himself: the problem, he argued, is not possessing things but clinging to them. When Nero became unbearable he withdrew; in 65 AD, after a conspiracy was uncovered, the emperor forced him to take his own life. Seneca died as he had taught: composed.</string>
+    <string name="seneca_s3_title">The Letter to Paulinus</string>
+    <string name="seneca_s3">Seneca wrote “On the Shortness of Life” around 49 AD to Paulinus, Rome’s superintendent of the grain supply: a polemic against the over-scheduled life. Life is not short, he argues, but squandered — by busy people who have time for everything except themselves. Twenty chapters that read as if written against today’s crowded calendars.</string>
+    <string name="seneca_credit">Bust (so-called Pseudo-Seneca): Museo Archeologico Nazionale, Naples · Photo: Marie-Lan Nguyen, Wikimedia Commons (CC BY 2.5)</string>
+    <string name="acc_seneca_bust">Bust of Seneca</string>
+
+    <!-- Three Stoics — the differences -->
+    <string name="diff_title">Three Stoics — the differences</string>
     <string name="diff1_title">Origins</string>
-    <string name="diff1">The distance could not be greater: Epictetus was a slave, Marcus Aurelius an emperor. That both lived the same philosophy is Stoicism’s strongest argument — equanimity does not depend on circumstances, but on the judgment about them.</string>
+    <string name="diff1">The range could not be wider: Epictetus was a slave, Seneca a senator and one of Rome’s richest men, Marcus Aurelius an emperor. That all three lived the same philosophy is Stoicism’s strongest argument — equanimity does not depend on circumstances, but on the judgment about them.</string>
     <string name="diff2_title">Form</string>
-    <string name="diff2">The Enchiridion is a teaching text: condensed from the classroom, terse, direct, made to be passed on. The Meditations are the opposite — a private notebook, written at night in army camps, never meant for publication.</string>
+    <string name="diff2">Epictetus’ Enchiridion is a teaching text: condensed from the classroom, terse, made to be passed on. Seneca’s writings are elegant essays and letters to friends — literature that seeks to persuade. The Meditations are a private notebook, written at night in army camps, never meant for publication.</string>
     <string name="diff3_title">Tone</string>
-    <string name="diff3">Epictetus commands and trains: do not demand that things happen as you wish. Marcus Aurelius reminds and admonishes himself — doubting, tired, beginning anew again and again. The teacher speaks to students, the emperor to himself. The slave’s voice accompanied the emperor for a lifetime.</string>
+    <string name="diff3">Epictetus commands and trains: do not demand that things happen as you wish. Seneca argues and polishes — the rhetorician who casts Stoicism in gleaming sentences. Marcus Aurelius reminds and admonishes himself: doubting, tired, beginning anew again and again. Teacher, writer, emperor — three voices, one school.</string>
 
     <!-- Account -->
     <string name="acc_title">Account</string>

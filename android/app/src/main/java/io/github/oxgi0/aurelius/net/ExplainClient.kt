@@ -59,26 +59,27 @@ class ExplainClient(
     }
 
     // Prompts 1:1 aus aurelius/lib/ai/prompt.ts (werk-bewusst)
-    private fun explainSystem(uiLang: String, author: Author): String = when {
-        uiLang == "en" && author == Author.Epiktet ->
-            "You are a knowledgeable, level-headed companion through Epictetus’ Enchiridion. " +
-                "You explain clearly, concretely and without kitsch — for interested lay readers."
-        uiLang == "en" ->
-            "You are a knowledgeable, level-headed companion through Marcus Aurelius’ Meditations. " +
-                "You explain clearly, concretely and without kitsch — for interested lay readers."
-        author == Author.Epiktet ->
-            "Du bist ein kundiger, nüchterner Begleiter durch Epiktets Handbüchlein der Moral. " +
-                "Du erklärst klar, konkret und ohne Kitsch — für interessierte Laien."
-        else ->
-            "Du bist ein kundiger, nüchterner Begleiter durch Marc Aurels Selbstbetrachtungen. " +
-                "Du erklärst klar, konkret und ohne Kitsch — für interessierte Laien."
+    private fun workName(uiLang: String, author: Author): String = when (author) {
+        Author.Epiktet -> if (uiLang == "en") "Epictetus’ Enchiridion" else "Epiktets Handbüchlein der Moral"
+        Author.Seneca -> if (uiLang == "en") "Seneca’s On the Shortness of Life" else "Senecas Schrift Von der Kürze des Lebens"
+        Author.Aurel -> if (uiLang == "en") "Marcus Aurelius’ Meditations" else "Marc Aurels Selbstbetrachtungen"
+    }
+
+    private fun explainSystem(uiLang: String, author: Author): String = if (uiLang == "en") {
+        "You are a knowledgeable, level-headed companion through ${workName(uiLang, author)}. " +
+            "You explain clearly, concretely and without kitsch — for interested lay readers."
+    } else {
+        "Du bist ein kundiger, nüchterner Begleiter durch ${workName(uiLang, author)}. " +
+            "Du erklärst klar, konkret und ohne Kitsch — für interessierte Laien."
     }
 
     private fun buildExplainPrompt(text: String, reference: String, uiLang: String, author: Author): String {
         val source = when {
             uiLang == "en" && author == Author.Epiktet -> "Passage from Epictetus’ “Enchiridion” ($reference):"
+            uiLang == "en" && author == Author.Seneca -> "Passage from Seneca’s “On the Shortness of Life” ($reference):"
             uiLang == "en" -> "Passage from Marcus Aurelius’ “Meditations” ($reference):"
             author == Author.Epiktet -> "Passage aus Epiktets »Handbüchlein der Moral« ($reference):"
+            author == Author.Seneca -> "Passage aus Senecas »Von der Kürze des Lebens« ($reference):"
             else -> "Passage aus Marc Aurels »Selbstbetrachtungen« ($reference):"
         }
         return if (uiLang == "en") {
@@ -101,7 +102,14 @@ class ExplainClient(
             put("text", text)
             put("reference", reference)
             put("uiLang", uiLang)
-            put("author", if (author == Author.Epiktet) "epiktet" else "aurel")
+            put(
+                "author",
+                when (author) {
+                    Author.Epiktet -> "epiktet"
+                    Author.Seneca -> "seneca"
+                    Author.Aurel -> "aurel"
+                },
+            )
         }.toString()
         val request = Request.Builder().url(explainUrl).post(payload.toRequestBody(media)).build()
         val response = try {

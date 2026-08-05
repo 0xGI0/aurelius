@@ -57,18 +57,23 @@ fun BooksScreen(nav: NavHostController) {
             horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp),
         ) {
+            val authorKeys = listOf("aurel", "epiktet", "seneca")
             Segmented(
-                listOf(stringResource(R.string.author_aurel), stringResource(R.string.author_epiktet)),
-                if (author == "epiktet") 1 else 0,
+                listOf(
+                    stringResource(R.string.author_aurel),
+                    stringResource(R.string.author_epiktet),
+                    stringResource(R.string.author_seneca),
+                ),
+                authorKeys.indexOf(author).coerceAtLeast(0),
             ) { i ->
-                scope.launch { container.settings.setAuthor(if (i == 1) "epiktet" else "aurel") }
+                scope.launch { container.settings.setAuthor(authorKeys[i]) }
             }
             val langs = listOf("de", "en", "grc")
             Segmented(
                 listOf(
                     stringResource(R.string.lang_de),
                     stringResource(R.string.lang_en),
-                    stringResource(R.string.lang_grc),
+                    stringResource(if (author == "seneca") R.string.lang_la else R.string.lang_grc),
                 ),
                 langs.indexOf(quoteLang),
             ) { i ->
@@ -77,14 +82,14 @@ fun BooksScreen(nav: NavHostController) {
         }
     }
 
-    if (author == "epiktet") {
+    if (author != "aurel") {
         Screen {
             switchers()
-            H1(stringResource(R.string.ench_title))
-            SubLine(stringResource(R.string.ench_sub))
+            H1(stringResource(if (author == "seneca") R.string.brev_title else R.string.ench_title))
+            SubLine(stringResource(if (author == "seneca") R.string.brev_sub else R.string.ench_sub))
 
             Column(verticalArrangement = Arrangement.spacedBy(14.dp), modifier = Modifier.fillMaxWidth()) {
-                container.quotes.enchiridion.forEach { q ->
+                (if (author == "seneca") container.quotes.debrevitate else container.quotes.enchiridion).forEach { q ->
                     Row(
                         modifier = Modifier.fillMaxWidth().clickable { nav.navigate("read/${q.id}") },
                     ) {

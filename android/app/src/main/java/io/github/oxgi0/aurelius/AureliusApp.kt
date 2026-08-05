@@ -21,7 +21,12 @@ class AppContainer(private val app: Application) {
     val settings: SettingsStore by lazy { SettingsStore(app.settingsDataStore) }
     val secrets: SecretsStore by lazy { EncryptedSecretsStore(app) }
     val quotes: QuoteRepository by lazy {
-        QuoteRepository(readAsset("quotes.json"), readAsset("topics.json"), readAsset("enchiridion.json"))
+        QuoteRepository(
+            readAsset("quotes.json"),
+            readAsset("topics.json"),
+            readAsset("enchiridion.json"),
+            readAsset("debrevitate.json"),
+        )
     }
     val db: AppDatabase by lazy {
         Room.databaseBuilder(app, AppDatabase::class.java, "aurelius.db").build()

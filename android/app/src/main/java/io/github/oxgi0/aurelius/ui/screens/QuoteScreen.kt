@@ -69,7 +69,6 @@ fun QuoteScreen(nav: NavHostController) {
 
     Screen {
         // Header: die Wortmarke ist der Autoren-Umschalter (aktiv = Akzent)
-        val isEpiktet = state.author == io.github.oxgi0.aurelius.data.Author.Epiktet
         Row(
             modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -80,32 +79,29 @@ fun QuoteScreen(nav: NavHostController) {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text(
-                    text = "AURELIUS",
-                    fontSize = 13.sp,
-                    letterSpacing = 5.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = if (!isEpiktet) colors.accent else colors.textSoft,
-                    modifier = Modifier.clickable {
-                        vm.selectAuthor(io.github.oxgi0.aurelius.data.Author.Aurel)
-                    },
+                val brands = listOf(
+                    "AURELIUS" to io.github.oxgi0.aurelius.data.Author.Aurel,
+                    "EPIKTET" to io.github.oxgi0.aurelius.data.Author.Epiktet,
+                    "SENECA" to io.github.oxgi0.aurelius.data.Author.Seneca,
                 )
-                Text(
-                    text = "·",
-                    fontSize = 13.sp,
-                    color = colors.textSoft,
-                    modifier = Modifier.padding(horizontal = 10.dp),
-                )
-                Text(
-                    text = "EPIKTET",
-                    fontSize = 13.sp,
-                    letterSpacing = 5.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = if (isEpiktet) colors.accent else colors.textSoft,
-                    modifier = Modifier.clickable {
-                        vm.selectAuthor(io.github.oxgi0.aurelius.data.Author.Epiktet)
-                    },
-                )
+                brands.forEachIndexed { i, (label, a) ->
+                    if (i > 0) {
+                        Text(
+                            text = "·",
+                            fontSize = 12.sp,
+                            color = colors.textSoft,
+                            modifier = Modifier.padding(horizontal = 7.dp),
+                        )
+                    }
+                    Text(
+                        text = label,
+                        fontSize = 12.sp,
+                        letterSpacing = 3.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = if (state.author == a) colors.accent else colors.textSoft,
+                        modifier = Modifier.clickable { vm.selectAuthor(a) },
+                    )
+                }
             }
             Icon(
                 Icons.Outlined.Settings,
@@ -120,13 +116,20 @@ fun QuoteScreen(nav: NavHostController) {
             modifier = Modifier.alpha(alpha.value),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            val isEpiktet = state.author == io.github.oxgi0.aurelius.data.Author.Epiktet
             Image(
                 painter = painterResource(
-                    if (isEpiktet) R.drawable.epictetus else R.drawable.marcus_medallion
+                    when (state.author) {
+                        io.github.oxgi0.aurelius.data.Author.Epiktet -> R.drawable.epictetus
+                        io.github.oxgi0.aurelius.data.Author.Seneca -> R.drawable.seneca
+                        else -> R.drawable.marcus_medallion
+                    }
                 ),
                 contentDescription = stringResource(
-                    if (isEpiktet) R.string.acc_engraving else R.string.acc_bust
+                    when (state.author) {
+                        io.github.oxgi0.aurelius.data.Author.Epiktet -> R.string.acc_engraving
+                        io.github.oxgi0.aurelius.data.Author.Seneca -> R.string.acc_seneca_bust
+                        else -> R.string.acc_bust
+                    }
                 ),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -160,7 +163,10 @@ fun QuoteScreen(nav: NavHostController) {
                     listOf(
                         stringResource(R.string.lang_de),
                         stringResource(R.string.lang_en),
-                        stringResource(R.string.lang_grc),
+                        stringResource(
+                            if (state.author == io.github.oxgi0.aurelius.data.Author.Seneca)
+                                R.string.lang_la else R.string.lang_grc
+                        ),
                     ),
                     langs.indexOf(state.quoteLang),
                 ) { i -> vm.setQuoteLang(langs[i]) }

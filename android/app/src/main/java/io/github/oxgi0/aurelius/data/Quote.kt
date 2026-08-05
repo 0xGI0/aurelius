@@ -25,6 +25,10 @@ data class EnchEntry(
     val texts: Map<String, String>,
 )
 
-enum class Author { Aurel, Epiktet }
+enum class Author { Aurel, Epiktet, Seneca }
 
-fun authorOf(id: String): Author = if (id.startsWith("e-")) Author.Epiktet else Author.Aurel
+fun authorOf(id: String): Author = when {
+    id.startsWith("e-") -> Author.Epiktet
+    id.startsWith("s-") -> Author.Seneca
+    else -> Author.Aurel
+}

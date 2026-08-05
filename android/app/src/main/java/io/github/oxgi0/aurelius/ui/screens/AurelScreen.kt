@@ -41,23 +41,37 @@ fun AurelScreen() {
     val container = (LocalContext.current.applicationContext as AureliusApp).container
     val author by container.settings.author.collectAsState(initial = "aurel")
     val scope = rememberCoroutineScope()
-    val isEpiktet = author == "epiktet"
     val shape = RoundedCornerShape(16.dp)
     val cardShape = RoundedCornerShape(14.dp)
 
     Screen {
+        val authorKeys = listOf("aurel", "epiktet", "seneca")
         Segmented(
-            listOf(stringResource(R.string.author_aurel), stringResource(R.string.author_epiktet)),
-            if (isEpiktet) 1 else 0,
+            listOf(
+                stringResource(R.string.author_aurel),
+                stringResource(R.string.author_epiktet),
+                stringResource(R.string.author_seneca),
+            ),
+            authorKeys.indexOf(author).coerceAtLeast(0),
         ) { i ->
-            scope.launch {
-                container.settings.setAuthor(if (i == 1) "epiktet" else "aurel")
-            }
+            scope.launch { container.settings.setAuthor(authorKeys[i]) }
         }
 
         Image(
-            painter = painterResource(if (isEpiktet) R.drawable.epictetus else R.drawable.marcus_portrait),
-            contentDescription = stringResource(if (isEpiktet) R.string.acc_engraving else R.string.acc_bust),
+            painter = painterResource(
+                when (author) {
+                    "epiktet" -> R.drawable.epictetus
+                    "seneca" -> R.drawable.seneca
+                    else -> R.drawable.marcus_portrait
+                }
+            ),
+            contentDescription = stringResource(
+                when (author) {
+                    "epiktet" -> R.string.acc_engraving
+                    "seneca" -> R.string.acc_seneca_bust
+                    else -> R.string.acc_bust
+                }
+            ),
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .padding(top = 16.dp)
@@ -68,7 +82,11 @@ fun AurelScreen() {
                 .border(1.dp, colors.border, shape),
         )
         Text(
-            text = if (isEpiktet) "Epiktet" else "Marc Aurel",
+            text = when (author) {
+                "epiktet" -> "Epiktet"
+                "seneca" -> "Seneca"
+                else -> "Marc Aurel"
+            },
             fontSize = 30.sp,
             fontFamily = FrauncesSemiBold,
             color = colors.text,
@@ -76,7 +94,13 @@ fun AurelScreen() {
             modifier = Modifier.fillMaxWidth().padding(top = 20.dp),
         )
         Text(
-            text = stringResource(if (isEpiktet) R.string.epik_sub else R.string.aurel_sub),
+            text = stringResource(
+                when (author) {
+                    "epiktet" -> R.string.epik_sub
+                    "seneca" -> R.string.seneca_sub
+                    else -> R.string.aurel_sub
+                }
+            ),
             fontSize = 13.sp,
             letterSpacing = 1.sp,
             color = colors.textSoft,
@@ -84,14 +108,22 @@ fun AurelScreen() {
             modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
         )
 
-        if (isEpiktet) {
-            Section(R.string.epik_s1_title, R.string.epik_s1)
-            Section(R.string.epik_s2_title, R.string.epik_s2)
-            Section(R.string.epik_s3_title, R.string.epik_s3)
-        } else {
-            Section(R.string.aurel_s1_title, R.string.aurel_s1)
-            Section(R.string.aurel_s2_title, R.string.aurel_s2)
-            Section(R.string.aurel_s3_title, R.string.aurel_s3)
+        when (author) {
+            "epiktet" -> {
+                Section(R.string.epik_s1_title, R.string.epik_s1)
+                Section(R.string.epik_s2_title, R.string.epik_s2)
+                Section(R.string.epik_s3_title, R.string.epik_s3)
+            }
+            "seneca" -> {
+                Section(R.string.seneca_s1_title, R.string.seneca_s1)
+                Section(R.string.seneca_s2_title, R.string.seneca_s2)
+                Section(R.string.seneca_s3_title, R.string.seneca_s3)
+            }
+            else -> {
+                Section(R.string.aurel_s1_title, R.string.aurel_s1)
+                Section(R.string.aurel_s2_title, R.string.aurel_s2)
+                Section(R.string.aurel_s3_title, R.string.aurel_s3)
+            }
         }
 
         H1(stringResource(R.string.diff_title), size = 24)
@@ -127,7 +159,13 @@ fun AurelScreen() {
         }
 
         Text(
-            text = stringResource(if (isEpiktet) R.string.epik_credit else R.string.aurel_credit),
+            text = stringResource(
+                when (author) {
+                    "epiktet" -> R.string.epik_credit
+                    "seneca" -> R.string.seneca_credit
+                    else -> R.string.aurel_credit
+                }
+            ),
             fontSize = 11.sp,
             color = colors.textSoft,
             textAlign = TextAlign.Center,
