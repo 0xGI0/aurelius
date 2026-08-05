@@ -42,3 +42,15 @@ Editions-Eigenheiten (beim Alignment verifiziert):
 | Bild | Quelle | Lizenz |
 |---|---|---|
 | Epiktet-Porträt (Kupferstich-Frontispiz, 18. Jh.) | Wikimedia Commons | Gemeinfrei (ein antikes Porträt Epiktets existiert nicht) |
+
+## Seneca — Von der Kürze des Lebens (De brevitate vitae)
+
+Ergänzt am 2026-08-05 (dritter Autor). IDs `s-1` … `s-20` in `data/debrevitate.json`.
+**Hinweis:** Der `grc`-Slot trägt bei Seneca das **lateinische** Original — der Slot bedeutet app-weit „Originalsprache"; die UI beschriftet ihn autorabhängig (Altgriechisch/Latein).
+
+| Sprache | Quelle | Nachweis |
+|---|---|---|
+| Deutsch | Otto Apelt (Übers.), 1923, Felix Meiner, Leipzig. Apelt † 1932 → gemeinfrei seit 2003. | Internet Archive `von-der-kuerze-des-lebens-seneca`, committet als `data-sources/seneca-brevitate-de.txt` (UTF-8-konvertiert); Einleitung/Anmerkungen des Herausgebers werden beim Parsen verworfen |
+| Englisch | John W. Basore (Übers.), Loeb 1932; US-Copyright nicht erneuert (PD-US-no-renewal, so auch Wikisource), Basore † 1949 → EU-gemeinfrei seit 2020. | en.wikisource „On the shortness of life", 20 Kapitelseiten, committet als `data-sources/seneca-brevitate-en.json` |
+| Latein | Original, la.wikisource „De brevitate vitae" (20 Kapitel-Absätze). | Committet als `data-sources/seneca-brevitate-la.html` |
+| Bild | Sog. Pseudo-Seneca-Büste, Museo Archeologico Nazionale Neapel; Foto **Marie-Lan Nguyen** (2011). | Wikimedia Commons, **CC BY 2.5** — Namensnennung erfolgt in App (Stoiker-Tab) und READMEs |
