@@ -10,22 +10,27 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
+# Produktion setzt alles per Env-Var (Teilprojekt 4); die Fallbacks hier
+# sind reine Entwicklungswerte. Der Dev-Key ist bewusst öffentlich und
+# wird in Produktion NIE verwendet (Deploy bricht ohne echten Key ab).
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY',
+    'django-insecure-t)2np0y0aw2v%c65ipxkalhvbcr6iqzj2g$n8=0e+wu))qud(=',
+)
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-t)2np0y0aw2v%c65ipxkalhvbcr6iqzj2g$n8=0e+wu))qud(='
+DEBUG = os.environ.get('DJANGO_DEBUG', '1') == '1'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if not DEBUG and 'DJANGO_SECRET_KEY' not in os.environ:
+    raise RuntimeError('Produktion ohne DJANGO_SECRET_KEY — Deploy abgebrochen.')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [h for h in os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',') if h]
 
 
 # Application definition
