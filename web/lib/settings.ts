@@ -2,10 +2,10 @@ import { getItem, setItem, deleteItem } from './storage';
 import type { Author, QuoteLang } from './quotes';
 import type { ThemePref } from '../theme/tokens';
 
-const K_LANG = 'aurelius.quoteLang';
-const K_THEME = 'aurelius.theme';
-const K_KEY = 'aurelius.anthropicKey';
-const K_AUTHOR = 'aurelius.author';
+const K_LANG = 'stoa.quoteLang';
+const K_THEME = 'stoa.theme';
+const K_KEY = 'stoa.anthropicKey';
+const K_AUTHOR = 'stoa.author';
 
 const LANGS: QuoteLang[] = ['de', 'en', 'grc'];
 const THEMES: ThemePref[] = ['light', 'dark', 'system'];
@@ -51,7 +51,7 @@ export async function deleteAnthropicKey(): Promise<void> {
   await deleteItem(K_KEY);
 }
 
-const K_FAVS = 'aurelius.favorites';
+const K_FAVS = 'stoa.favorites';
 
 export async function getFavorites(): Promise<string[]> {
   const v = await getItem(K_FAVS);

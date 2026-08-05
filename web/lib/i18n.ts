@@ -3,7 +3,7 @@ import { getItem, setItem } from './storage';
 
 export type UiLang = 'de' | 'en';
 
-const K_UI_LANG = 'aurelius.uiLang';
+const K_UI_LANG = 'stoa.uiLang';
 
 // Kleiner externer Store statt React-Context: Subscriptions über
 // useSyncExternalStore erreichen jede Komponente unabhängig von ihrer

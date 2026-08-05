@@ -29,7 +29,7 @@ describe('settings', () => {
   });
 
   it('ignoriert ungültige gespeicherte Werte (Default)', async () => {
-    mockStore.set('aurelius.quoteLang', 'xx');
+    mockStore.set('stoa.quoteLang', 'xx');
     expect(await getQuoteLang()).toBe('de');
   });
 

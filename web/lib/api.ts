@@ -1,7 +1,7 @@
 import { deleteItem, getItem, setItem } from './storage';
 
-const K_TOKEN = 'aurelius.token';
-const K_EMAIL = 'aurelius.email';
+const K_TOKEN = 'stoa.token';
+const K_EMAIL = 'stoa.email';
 
 /** Leer ⇒ kein Backend konfiguriert (Konto-Bereich zeigt nur einen Hinweis). */
 export const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL ?? '';

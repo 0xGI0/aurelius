@@ -37,7 +37,7 @@ describe('api', () => {
   });
 
   it('setzt Authorization-Header wenn Token vorhanden', async () => {
-    mockStore.set('aurelius.token', 'tok123');
+    mockStore.set('stoa.token', 'tok123');
     fetchMock.mockResolvedValueOnce(jsonResponse(200, []));
     await getServerFavorites();
     const [, init] = fetchMock.mock.calls[0];
@@ -61,8 +61,8 @@ describe('api', () => {
   });
 
   it('401 wird zu unauthorized und beendet die Session', async () => {
-    mockStore.set('aurelius.token', 'alt');
-    mockStore.set('aurelius.email', 'marc@example.com');
+    mockStore.set('stoa.token', 'alt');
+    mockStore.set('stoa.email', 'marc@example.com');
     fetchMock.mockResolvedValueOnce(jsonResponse(401, { detail: 'nope' }));
     await expect(getServerFavorites()).rejects.toMatchObject({ kind: 'unauthorized' });
     expect(await getToken()).toBeNull();
@@ -74,7 +74,7 @@ describe('api', () => {
   });
 
   it('logout beendet die Session auch wenn der Server nicht erreichbar ist', async () => {
-    mockStore.set('aurelius.token', 'tok');
+    mockStore.set('stoa.token', 'tok');
     fetchMock.mockRejectedValueOnce(new TypeError('Failed to fetch'));
     await logout();
     expect(await getToken()).toBeNull();

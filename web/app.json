@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Aurelius",
-    "slug": "aurelius",
+    "name": "Stoa",
+    "slug": "stoa",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "aurelius",
+    "scheme": "stoa",
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon"

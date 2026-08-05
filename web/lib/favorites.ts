@@ -2,8 +2,8 @@ import { ApiError, deleteFavorite, getServerFavorites, getToken, putFavorite } f
 import { getFavorites as getLocalFavorites, toggleFavorite as toggleLocalFavorite } from './settings';
 import { getItem, setItem } from './storage';
 
-const K_FAVS = 'aurelius.favorites';
-const K_QUEUE = 'aurelius.pendingOps';
+const K_FAVS = 'stoa.favorites';
+const K_QUEUE = 'stoa.pendingOps';
 
 type PendingOp = { quoteId: string; op: 'add' | 'remove' };
 

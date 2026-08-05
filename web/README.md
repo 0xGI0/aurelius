@@ -1,7 +1,7 @@
 <p align="center">
-  <img src="docs/logo.png" width="140" alt="Aurelius-Logo: Lorbeerkranz mit A">
+  <img src="docs/logo.png" width="140" alt="Stoa-Logo: Lorbeerkranz">
 </p>
-<h1 align="center">Aurelius</h1>
+<h1 align="center">Stoa</h1>
 <p align="center">
   <a href="#deutsch">Deutsch</a> · <a href="#english">English</a>
 </p>
@@ -26,9 +26,9 @@ optionaler KI-Erklärung als Live-Stream.
 
 **Live:** https://aurelius-rust.vercel.app
 
-**Schwester-Projekte:** [aurelius-android](https://github.com/0xGI0/aurelius-android)
+**Schwester-Projekte:** [`android/`](../android/)
 (native Kotlin-App, GPL-3.0, F-Droid in Vorbereitung) ·
-[aurelius-backend](https://github.com/0xGI0/aurelius-backend)
+[`backend/`](../backend/)
 (Konto- & Favoriten-Sync-Server, Django)
 
 ### Features
@@ -53,7 +53,7 @@ npm test              # Jest
 npx tsc --noEmit      # Typprüfung
 ```
 
-Konto-Funktionen lokal testen: [aurelius-backend](https://github.com/0xGI0/aurelius-backend)
+Konto-Funktionen lokal testen: [`backend/`](../backend/)
 starten und den Dev-Server mit `EXPO_PUBLIC_BACKEND_URL=http://127.0.0.1:8000` aufrufen.
 
 ### Daten-Pipeline
@@ -79,8 +79,8 @@ liefert den Gemini-Fallback. Env-Vars: `GEMINI_API_KEY`,
 ### Android
 
 Die Android-App ist eine **eigene native Kotlin-App**:
-[aurelius-android](https://github.com/0xGI0/aurelius-android) — signierte APKs
-gibt es dort unter [Releases](https://github.com/0xGI0/aurelius-android/releases).
+[`android/`](../android/) — signierte APKs
+gibt es dort unter [Releases](https://github.com/0xGI0/stoa/releases).
 
 ---
 
@@ -94,9 +94,9 @@ optional AI explanations streamed live.
 
 **Live:** https://aurelius-rust.vercel.app
 
-**Sister projects:** [aurelius-android](https://github.com/0xGI0/aurelius-android)
+**Sister projects:** [`android/`](../android/)
 (native Kotlin app, GPL-3.0, F-Droid in preparation) ·
-[aurelius-backend](https://github.com/0xGI0/aurelius-backend)
+[`backend/`](../backend/)
 (account & favorites sync server, Django)
 
 ### Features
@@ -122,14 +122,14 @@ npx tsc --noEmit      # type check
 ```
 
 To test account features locally, run
-[aurelius-backend](https://github.com/0xGI0/aurelius-backend) and start the
+[`backend/`](../backend/) and start the
 dev server with `EXPO_PUBLIC_BACKEND_URL=http://127.0.0.1:8000`.
 
 ### Android
 
 The Android app is its own **native Kotlin app**:
-[aurelius-android](https://github.com/0xGI0/aurelius-android) — signed APKs
-are available under [Releases](https://github.com/0xGI0/aurelius-android/releases).
+[`android/`](../android/) — signed APKs
+are available under [Releases](https://github.com/0xGI0/stoa/releases).
 
 ### Text licenses
 

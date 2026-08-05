@@ -28,9 +28,9 @@ describe('favorites', () => {
   });
 
   it('übersteht korrupte gespeicherte Daten', async () => {
-    mockStore.set('aurelius.favorites', 'kein-json{');
+    mockStore.set('stoa.favorites', 'kein-json{');
     expect(await getFavorites()).toEqual([]);
-    mockStore.set('aurelius.favorites', JSON.stringify([1, 'ok', null]));
+    mockStore.set('stoa.favorites', JSON.stringify([1, 'ok', null]));
     expect(await getFavorites()).toEqual(['ok']);
   });
 });

@@ -24,7 +24,7 @@ const mPut = jest.mocked(putFavorite);
 const mDelete = jest.mocked(deleteFavorite);
 const mServerFavs = jest.mocked(getServerFavorites);
 
-const queue = () => JSON.parse(mockStore.get('aurelius.pendingOps') ?? '[]');
+const queue = () => JSON.parse(mockStore.get('stoa.pendingOps') ?? '[]');
 
 beforeEach(() => {
   mockStore.clear();
@@ -60,7 +60,7 @@ describe('favorites sync', () => {
 
   it('flushQueue arbeitet ab und leert', async () => {
     mGetToken.mockResolvedValue('tok');
-    mockStore.set('aurelius.pendingOps', JSON.stringify([
+    mockStore.set('stoa.pendingOps', JSON.stringify([
       { quoteId: '4-7', op: 'add' },
       { quoteId: '2-1', op: 'remove' },
     ]));
@@ -73,7 +73,7 @@ describe('favorites sync', () => {
   it('flushQueue behält den Rest bei Fehlern', async () => {
     mGetToken.mockResolvedValue('tok');
     mPut.mockRejectedValue(new ApiError('offline'));
-    mockStore.set('aurelius.pendingOps', JSON.stringify([
+    mockStore.set('stoa.pendingOps', JSON.stringify([
       { quoteId: '4-7', op: 'add' },
       { quoteId: '2-1', op: 'remove' },
     ]));
@@ -83,7 +83,7 @@ describe('favorites sync', () => {
 
   it('onLogin vereinigt lokal und Server', async () => {
     mGetToken.mockResolvedValue('tok');
-    mockStore.set('aurelius.favorites', JSON.stringify(['4-7', '2-1']));
+    mockStore.set('stoa.favorites', JSON.stringify(['4-7', '2-1']));
     mServerFavs.mockResolvedValue(['4-7', '2-1', '9-1']);
     await onLogin();
     expect(mPut).toHaveBeenCalledWith('4-7');
