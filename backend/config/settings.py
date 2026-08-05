@@ -162,10 +162,10 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_LOGIN_METHODS = {"email"}
 ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Aurelius] "
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Stoa] "
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-DEFAULT_FROM_EMAIL = "aurelius@localhost"
+DEFAULT_FROM_EMAIL = "stoa@localhost"
 
 CORS_ALLOWED_ORIGINS = [
     "https://aurelius-rust.vercel.app",  # Expo-Web (Produktion)

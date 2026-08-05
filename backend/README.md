@@ -1,7 +1,7 @@
 <p align="center">
-  <img src="docs/logo.png" width="120" alt="Aurelius-Logo: Lorbeerkranz mit A">
+  <img src="docs/logo.png" width="120" alt="Stoa-Logo: Lorbeerkranz">
 </p>
-<h1 align="center">aurelius-backend</h1>
+<h1 align="center">Stoa Backend</h1>
 <p align="center">
   <a href="#deutsch">Deutsch</a> · <a href="#english">English</a>
 </p>
@@ -17,11 +17,11 @@
 
 ## Deutsch
 
-Selbst gehostetes Backend für [Aurelius](https://github.com/0xGI0/aurelius-android)
+Selbst gehostetes Backend für [Stoa](https://github.com/0xGI0/stoa)
 (Marc-Aurel-Zitate-App): Nutzerkonten (E-Mail + Passwort, Verifizierung,
 Token-Auth) und geräteübergreifende Zitat-Favoriten für die
-[Android-App](https://github.com/0xGI0/aurelius-android) und die
-[Web-App](https://github.com/0xGI0/aurelius). Django + Django REST Framework.
+[Android-App](../android/) und die
+[Web-App](../web/). Django + Django REST Framework.
 
 ### Entwicklung
 
@@ -57,11 +57,11 @@ Auth-Header: `Authorization: Token <key>` (Token kommt vom Login).
 
 ## English
 
-Self-hosted backend for [Aurelius](https://github.com/0xGI0/aurelius-android)
-(a Marcus Aurelius quotes app): user accounts (email + password, verification,
+Self-hosted backend for [Stoa](https://github.com/0xGI0/stoa)
+(a Stoic classics app): user accounts (email + password, verification,
 token auth) and cross-device quote favorites for the
-[Android app](https://github.com/0xGI0/aurelius-android) and the
-[web app](https://github.com/0xGI0/aurelius). Django + Django REST Framework.
+[Android app](../android/) and the
+[web app](../web/). Django + Django REST Framework.
 
 ### Development
 
