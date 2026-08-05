@@ -3,7 +3,7 @@ import { Pressable, Text, View, StyleSheet } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import type { QuoteLang } from '../../lib/quotes';
-import { byId } from '../../lib/corpus';
+import { authorOf, byId } from '../../lib/corpus';
 import { getQuoteLang, setQuoteLang } from '../../lib/settings';
 import { useTheme } from '../../theme/ThemeContext';
 import { Screen } from '../../components/Screen';
@@ -62,7 +62,7 @@ export default function Read() {
             options={[
               { value: 'de', label: t('langDe') },
               { value: 'en', label: t('langEn') },
-              { value: 'grc', label: t('langGrc') },
+              { value: 'grc', label: authorOf(quote.id) === 'seneca' ? t('langLa') : t('langGrc') },
             ]}
             value={lang}
             onChange={changeLang}

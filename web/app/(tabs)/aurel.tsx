@@ -21,6 +21,12 @@ const EPIKTET_SECTIONS: Array<{ title: StringKey; body: StringKey }> = [
   { title: 'epikS3Title', body: 'epikS3' },
 ];
 
+const SENECA_SECTIONS: Array<{ title: StringKey; body: StringKey }> = [
+  { title: 'senecaS1Title', body: 'senecaS1' },
+  { title: 'senecaS2Title', body: 'senecaS2' },
+  { title: 'senecaS3Title', body: 'senecaS3' },
+];
+
 const DIFF_SECTIONS: Array<{ title: StringKey; body: StringKey }> = [
   { title: 'diff1Title', body: 'diff1' },
   { title: 'diff2Title', body: 'diff2' },
@@ -47,8 +53,9 @@ export default function Stoics() {
     void setAuthor(a);
   };
 
-  const isEpiktet = author === 'epiktet';
-  const sections = isEpiktet ? EPIKTET_SECTIONS : AUREL_SECTIONS;
+  const sections =
+    author === 'epiktet' ? EPIKTET_SECTIONS : author === 'seneca' ? SENECA_SECTIONS : AUREL_SECTIONS;
+  const displayName = author === 'epiktet' ? 'Epiktet' : author === 'seneca' ? 'Seneca' : 'Marc Aurel';
 
   return (
     <Screen>
@@ -57,6 +64,7 @@ export default function Stoics() {
           options={[
             { value: 'aurel', label: t('authorAurel') },
             { value: 'epiktet', label: t('authorEpiktet') },
+            { value: 'seneca', label: t('authorSeneca') },
           ]}
           value={author}
           onChange={changeAuthor}
@@ -65,18 +73,18 @@ export default function Stoics() {
 
       <Image
         source={
-          isEpiktet
+          author === 'epiktet'
             ? require('../../assets/images/epictetus.jpg')
-            : require('../../assets/images/marcus-portrait.jpg')
+            : author === 'seneca'
+              ? require('../../assets/images/seneca.jpg')
+              : require('../../assets/images/marcus-portrait.jpg')
         }
         style={[styles.portrait, { borderColor: colors.border }]}
-        accessibilityLabel={isEpiktet ? t('authorEpiktet') : t('authorAurel')}
+        accessibilityLabel={displayName}
       />
-      <Text style={[styles.h1, { color: colors.text }]}>
-        {isEpiktet ? 'Epiktet' : 'Marc Aurel'}
-      </Text>
+      <Text style={[styles.h1, { color: colors.text }]}>{displayName}</Text>
       <Text style={[styles.sub, { color: colors.textSoft }]}>
-        {isEpiktet ? t('epikSub') : t('aurelSub')}
+        {author === 'epiktet' ? t('epikSub') : author === 'seneca' ? t('senecaSub') : t('aurelSub')}
       </Text>
 
       {sections.map((s) => (
@@ -102,7 +110,7 @@ export default function Stoics() {
       ))}
 
       <Text style={[styles.credit, { color: colors.textSoft }]}>
-        {isEpiktet ? t('epikCredit') : t('aurelCredit')}
+        {author === 'epiktet' ? t('epikCredit') : author === 'seneca' ? t('senecaCredit') : t('aurelCredit')}
       </Text>
     </Screen>
   );

@@ -52,9 +52,13 @@ const de = {
   // Autoren-Umschalter
   authorAurel: 'Marc Aurel',
   authorEpiktet: 'Epiktet',
+  authorSeneca: 'Seneca',
   refManual: 'Handbuch',
+  langLa: 'Latein',
   enchTitle: 'Handbüchlein der Moral',
   enchSub: 'Encheiridion · Τὸ Ἐγχειρίδιον',
+  brevTitle: 'Von der Kürze des Lebens',
+  brevSub: 'De brevitate vitae · An Paulinus',
   chapterWord: 'Kapitel',
   // Home
   hintTap: 'Tippe auf die Karte für den nächsten Gedanken',
@@ -161,17 +165,29 @@ const de = {
   epikS3:
     'Das Encheiridion — wörtlich „das Handliche" — verdichtet Epiktets Lehre in 53 Kapitel: kein System, sondern Übungen für den Tag, gedacht zum Bei-sich-Tragen wie ein Werkzeug. Es wurde einer der meistgelesenen Texte der Antike — und über seinen Lehrer Rusticus fanden Epiktets Worte auch zu Marc Aurel, der ihn in den Selbstbetrachtungen dankbar zitiert.',
   epikCredit: 'Kupferstich: Frontispiz der Oxford-Ausgabe des Enchiridion (1715), Wikimedia Commons (gemeinfrei)',
-  // Zwei Stoiker — die Unterschiede
-  diffTitle: 'Zwei Stoiker — die Unterschiede',
+  // Seneca
+  senecaSub: 'ca. 4 v. – 65 n. Chr. · Senator, Dichter, Lehrer Neros',
+  senecaS1Title: 'Der Aufsteiger',
+  senecaS1:
+    'Lucius Annaeus Seneca, geboren um 4 v. Chr. in Córdoba, kam als Kind nach Rom und wurde einer der glänzendsten Redner und Schriftsteller seiner Zeit. Sein Weg führte durch alle Höhen und Abgründe der Macht: Todesurteil unter Caligula (in letzter Minute abgewendet), acht Jahre Verbannung auf Korsika unter Claudius — dann die Rückkehr als Erzieher des jungen Nero.',
+  senecaS2Title: 'Der Widerspruch',
+  senecaS2:
+    'Als Neros Berater lenkte Seneca jahrelang faktisch das Reich — und wurde dabei einer der reichsten Männer Roms. Dem Vorwurf, ein Philosoph dürfe nicht im Palast wohnen, stellte er sich selbst: Nicht der Besitz sei das Problem, sondern das Hängen daran. Als Nero unerträglich wurde, zog er sich zurück; 65 n. Chr. zwang ihn der Kaiser nach einer aufgedeckten Verschwörung zum Suizid. Seneca starb, wie er es gelehrt hatte: gefasst.',
+  senecaS3Title: 'Die Schrift an Paulinus',
+  senecaS3:
+    '»Von der Kürze des Lebens« schrieb Seneca um 49 n. Chr. an seinen Schwiegervater(?) Paulinus, den obersten Getreideverwalter Roms: eine Streitschrift gegen das verplante Leben. Nicht kurz sei das Leben, sondern verschwendet — von Geschäftigen, die für alle Zeit haben außer für sich selbst. Zwanzig Kapitel, die sich lesen, als wären sie gegen volle Terminkalender von heute geschrieben.',
+  senecaCredit: 'Büste (sog. Pseudo-Seneca): Museo Archeologico Nazionale, Neapel · Foto: Marie-Lan Nguyen, Wikimedia Commons (CC BY 2.5)',
+  // Drei Stoiker — die Unterschiede
+  diffTitle: 'Drei Stoiker — die Unterschiede',
   diff1Title: 'Herkunft',
   diff1:
-    'Größer könnte der Abstand nicht sein: Epiktet war Sklave, Marc Aurel Kaiser. Dass beide dieselbe Philosophie lebten, ist das stärkste Argument der Stoa — Gelassenheit hängt nicht von den Umständen ab, sondern vom Urteil über sie.',
+    'Größer könnte die Spannweite nicht sein: Epiktet war Sklave, Seneca Senator und einer der reichsten Männer Roms, Marc Aurel Kaiser. Dass alle drei dieselbe Philosophie lebten, ist das stärkste Argument der Stoa — Gelassenheit hängt nicht von den Umständen ab, sondern vom Urteil über sie.',
   diff2Title: 'Form',
   diff2:
-    'Das Handbüchlein ist ein Lehrtext: aus dem Unterricht verdichtet, knapp, direkt, zum Weitergeben gemacht. Die Selbstbetrachtungen sind das Gegenteil — ein privates Notizbuch, nachts im Feldlager geschrieben, nie zur Veröffentlichung gedacht.',
+    'Epiktets Handbüchlein ist ein Lehrtext: aus dem Unterricht verdichtet, knapp, zum Weitergeben gemacht. Senecas Schriften sind elegante Essays und Briefe an Freunde — Literatur, die überzeugen will. Die Selbstbetrachtungen sind ein privates Notizbuch, nachts im Feldlager geschrieben, nie zur Veröffentlichung gedacht.',
   diff3Title: 'Ton',
   diff3:
-    'Epiktet befiehlt und übt: Verlange nicht, dass die Dinge geschehen, wie du willst. Marc Aurel erinnert und ermahnt sich selbst — zweifelnd, müde, immer wieder neu ansetzend. Der Lehrer spricht zu Schülern, der Kaiser mit sich selbst. Die Stimme des Sklaven begleitete den Kaiser ein Leben lang.',
+    'Epiktet befiehlt und übt: Verlange nicht, dass die Dinge geschehen, wie du willst. Seneca argumentiert und poliert — der Rhetor, der die Stoa in glänzende Sätze fasst. Marc Aurel erinnert und ermahnt sich selbst: zweifelnd, müde, immer wieder neu ansetzend. Lehrer, Schriftsteller, Kaiser — drei Stimmen, eine Schule.',
   // Stoa
   stoaTitle: 'Die Stoa',
   stoaSub: 'Eine Schule der Gelassenheit · seit ca. 300 v. Chr.',
@@ -205,9 +221,13 @@ const en: typeof de = {
   tabStoa: 'Stoa',
   authorAurel: 'Marcus Aurelius',
   authorEpiktet: 'Epictetus',
+  authorSeneca: 'Seneca',
   refManual: 'Manual',
+  langLa: 'Latin',
   enchTitle: 'The Enchiridion',
   enchSub: 'Encheiridion · Τὸ Ἐγχειρίδιον',
+  brevTitle: 'On the Shortness of Life',
+  brevSub: 'De brevitate vitae · To Paulinus',
   chapterWord: 'chapters',
   hintTap: 'Tap the card for the next thought',
   btnNext: 'New thought',
@@ -303,16 +323,27 @@ const en: typeof de = {
   epikS3:
     'The Encheiridion — literally “the thing held in the hand” — condenses Epictetus’ teaching into 53 chapters: not a system but exercises for the day, meant to be carried like a tool. It became one of the most-read texts of antiquity — and through his teacher Rusticus, Epictetus’ words also reached Marcus Aurelius, who quotes him gratefully in the Meditations.',
   epikCredit: 'Engraving: frontispiece of the Oxford edition of the Enchiridion (1715), Wikimedia Commons (public domain)',
-  diffTitle: 'Two Stoics — the differences',
+  senecaSub: 'c. 4 BC – 65 AD · Senator, playwright, tutor of Nero',
+  senecaS1Title: 'The Riser',
+  senecaS1:
+    'Lucius Annaeus Seneca, born around 4 BC in Córdoba, came to Rome as a child and became one of the most brilliant orators and writers of his age. His path led through every height and abyss of power: a death sentence under Caligula (averted at the last minute), eight years of exile on Corsica under Claudius — then the return as tutor to the young Nero.',
+  senecaS2Title: 'The Contradiction',
+  senecaS2:
+    'As Nero’s adviser Seneca effectively steered the empire for years — and became one of the richest men in Rome. He faced the charge that a philosopher should not live in a palace himself: the problem, he argued, is not possessing things but clinging to them. When Nero became unbearable he withdrew; in 65 AD, after a conspiracy was uncovered, the emperor forced him to take his own life. Seneca died as he had taught: composed.',
+  senecaS3Title: 'The Letter to Paulinus',
+  senecaS3:
+    'Seneca wrote “On the Shortness of Life” around 49 AD to Paulinus, Rome’s superintendent of the grain supply: a polemic against the over-scheduled life. Life is not short, he argues, but squandered — by busy people who have time for everything except themselves. Twenty chapters that read as if written against today’s crowded calendars.',
+  senecaCredit: 'Bust (so-called Pseudo-Seneca): Museo Archeologico Nazionale, Naples · Photo: Marie-Lan Nguyen, Wikimedia Commons (CC BY 2.5)',
+  diffTitle: 'Three Stoics — the differences',
   diff1Title: 'Origins',
   diff1:
-    'The distance could not be greater: Epictetus was a slave, Marcus Aurelius an emperor. That both lived the same philosophy is Stoicism’s strongest argument — equanimity does not depend on circumstances, but on the judgment about them.',
+    'The range could not be wider: Epictetus was a slave, Seneca a senator and one of Rome’s richest men, Marcus Aurelius an emperor. That all three lived the same philosophy is Stoicism’s strongest argument — equanimity does not depend on circumstances, but on the judgment about them.',
   diff2Title: 'Form',
   diff2:
-    'The Enchiridion is a teaching text: condensed from the classroom, terse, direct, made to be passed on. The Meditations are the opposite — a private notebook, written at night in army camps, never meant for publication.',
+    'Epictetus’ Enchiridion is a teaching text: condensed from the classroom, terse, made to be passed on. Seneca’s writings are elegant essays and letters to friends — literature that seeks to persuade. The Meditations are a private notebook, written at night in army camps, never meant for publication.',
   diff3Title: 'Tone',
   diff3:
-    'Epictetus commands and trains: do not demand that things happen as you wish. Marcus Aurelius reminds and admonishes himself — doubting, tired, beginning anew again and again. The teacher speaks to students, the emperor to himself. The slave’s voice accompanied the emperor for a lifetime.',
+    'Epictetus commands and trains: do not demand that things happen as you wish. Seneca argues and polishes — the rhetorician who casts Stoicism in gleaming sentences. Marcus Aurelius reminds and admonishes himself: doubting, tired, beginning anew again and again. Teacher, writer, emperor — three voices, one school.',
   stoaTitle: 'The Stoa',
   stoaSub: 'A school of equanimity · since ca. 300 BC',
   stoaIntro:

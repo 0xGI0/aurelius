@@ -75,9 +75,10 @@ const TOPICS: TopicDef[] = [
 ];
 
 const quotes = JSON.parse(readFileSync('data/quotes.json', 'utf8')) as Quote[];
-// Epiktets Encheiridion läuft durch dieselbe Heuristik (IDs e-1..e-53)
+// Epiktet (e-1..e-53) und Seneca (s-1..s-20) laufen durch dieselbe Heuristik
 const enchiridion = JSON.parse(readFileSync('data/enchiridion.json', 'utf8')) as Quote[];
-const all = [...quotes, ...enchiridion];
+const debrevitate = JSON.parse(readFileSync('data/debrevitate.json', 'utf8')) as Quote[];
+const all = [...quotes, ...enchiridion, ...debrevitate];
 
 const result = TOPICS.map((t) => {
   const quoteIds = all

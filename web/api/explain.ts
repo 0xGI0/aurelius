@@ -27,7 +27,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
   const lang: ExplainLang = uiLang === 'en' ? 'en' : 'de';
-  const work = author === 'epiktet' ? ('epiktet' as const) : ('aurel' as const);
+  const work =
+    author === 'epiktet' ? ('epiktet' as const) : author === 'seneca' ? ('seneca' as const) : ('aurel' as const);
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     res.status(500).json({ error: 'GEMINI_API_KEY fehlt' });

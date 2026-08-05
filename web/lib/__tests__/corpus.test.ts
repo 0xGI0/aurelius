@@ -1,11 +1,25 @@
 import {
-  AUREL_QUOTES, EPIKTET_QUOTES, byId, idsFor, isEpiktetId, authorOf, referenceLabel,
+  AUREL_QUOTES, EPIKTET_QUOTES, SENECA_QUOTES, byId, idsFor, isEpiktetId, authorOf, referenceLabel,
 } from '../corpus';
 
 describe('corpus', () => {
-  it('enthält beide Werke vollständig', () => {
+  it('enthält alle drei Werke vollständig', () => {
     expect(AUREL_QUOTES).toHaveLength(486);
     expect(EPIKTET_QUOTES).toHaveLength(53);
+    expect(SENECA_QUOTES).toHaveLength(20);
+  });
+
+  it('Seneca-Kapitel haben de/en und Latein im Original-Slot', () => {
+    for (const q of SENECA_QUOTES) {
+      expect(q.id).toMatch(/^s-\d{1,2}$/);
+      expect(q.texts.de.length).toBeGreaterThan(0);
+      expect(q.texts.en.length).toBeGreaterThan(0);
+      expect(q.texts.grc.length).toBeGreaterThan(0); // Slot = Originalsprache (Latein)
+    }
+    expect(byId('s-1')?.texts.grc).toContain('Maior pars mortalium');
+    expect(authorOf('s-5')).toBe('seneca');
+    expect(referenceLabel(byId('s-5')!, 'Buch', 'Handbuch')).toBe('De brevitate, 5');
+    expect(idsFor('seneca')).toHaveLength(20);
   });
 
   it('Epiktet-Kapitel haben alle drei Sprachen', () => {

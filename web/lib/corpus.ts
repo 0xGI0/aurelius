@@ -2,25 +2,27 @@ import type { Author, Quote, QuoteLang } from './quotes';
 import { formatReference } from './quotes';
 import quotesData from '../data/quotes.json';
 import enchiridionData from '../data/enchiridion.json';
+import debrevitateData from '../data/debrevitate.json';
 
-interface EnchEntry {
+interface ChapterEntry {
   id: string;
   chapter: number;
   texts: Record<QuoteLang, string>;
 }
 
+const asQuotes = (entries: ChapterEntry[]): Quote[] =>
+  entries.map((c) => ({ id: c.id, book: 0, section: c.chapter, texts: c.texts }));
+
 export const AUREL_QUOTES = quotesData as Quote[];
 
 /** Epiktets Encheiridion in Quote-Form: book 0, section = Kapitel. */
-export const EPIKTET_QUOTES: Quote[] = (enchiridionData as EnchEntry[]).map((c) => ({
-  id: c.id,
-  book: 0,
-  section: c.chapter,
-  texts: c.texts,
-}));
+export const EPIKTET_QUOTES: Quote[] = asQuotes(enchiridionData as ChapterEntry[]);
+
+/** Senecas De brevitate vitae — der 'grc'-Slot trägt hier das LATEINISCHE Original. */
+export const SENECA_QUOTES: Quote[] = asQuotes(debrevitateData as ChapterEntry[]);
 
 const INDEX = new Map<string, Quote>(
-  [...AUREL_QUOTES, ...EPIKTET_QUOTES].map((q) => [q.id, q]),
+  [...AUREL_QUOTES, ...EPIKTET_QUOTES, ...SENECA_QUOTES].map((q) => [q.id, q]),
 );
 
 export function byId(id: string): Quote | undefined {
@@ -28,7 +30,9 @@ export function byId(id: string): Quote | undefined {
 }
 
 export function quotesFor(author: Author): Quote[] {
-  return author === 'epiktet' ? EPIKTET_QUOTES : AUREL_QUOTES;
+  if (author === 'epiktet') return EPIKTET_QUOTES;
+  if (author === 'seneca') return SENECA_QUOTES;
+  return AUREL_QUOTES;
 }
 
 export function idsFor(author: Author): string[] {
@@ -40,10 +44,18 @@ export function isEpiktetId(id: string): boolean {
 }
 
 export function authorOf(id: string): Author {
-  return isEpiktetId(id) ? 'epiktet' : 'aurel';
+  if (id.startsWith('e-')) return 'epiktet';
+  if (id.startsWith('s-')) return 'seneca';
+  return 'aurel';
 }
 
-/** "Buch IV, 7" bzw. "Handbuch, 5" — Wörter kommen lokalisiert vom Aufrufer. */
+/**
+ * "Buch IV, 7" (Marc Aurel), "Handbuch, 5" (Epiktet), "De brevitate, 5"
+ * (Seneca — lateinischer Titel, in beiden UI-Sprachen gleich).
+ */
 export function referenceLabel(q: Quote, bookWord: string, manualWord: string): string {
-  return isEpiktetId(q.id) ? `${manualWord}, ${q.section}` : formatReference(q, bookWord);
+  const author = authorOf(q.id);
+  if (author === 'epiktet') return `${manualWord}, ${q.section}`;
+  if (author === 'seneca') return `De brevitate, ${q.section}`;
+  return formatReference(q, bookWord);
 }

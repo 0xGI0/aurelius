@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import topicsData from '../../data/topics.json';
 import type { Author, Quote, QuoteLang } from '../../lib/quotes';
 import { ShuffleBag } from '../../lib/quotes';
-import { byId, idsFor, isEpiktetId } from '../../lib/corpus';
+import { authorOf, byId, idsFor } from '../../lib/corpus';
 import { getAuthor, getQuoteLang, setAuthor, setQuoteLang } from '../../lib/settings';
 import { useTheme } from '../../theme/ThemeContext';
 import { Screen } from '../../components/Screen';
@@ -22,7 +22,7 @@ const TOPIC_IDS = new Map(TOPICS.map((t) => [t.id, t.quoteIds]));
 /** Zieh-Pool für Autor × Thema. */
 function poolFor(author: Author, topic: string): string[] {
   const base = topic === 'alle' ? idsFor(author) : (TOPIC_IDS.get(topic) ?? idsFor(author));
-  return base.filter((id) => isEpiktetId(id) === (author === 'epiktet'));
+  return base.filter((id) => authorOf(id) === author);
 }
 
 export default function Home() {
@@ -105,6 +105,16 @@ export default function Home() {
             EPIKTET
           </Text>
         </Pressable>
+        <Text style={[styles.brand, { color: colors.textSoft }]}>·</Text>
+        <Pressable
+          onPress={() => changeAuthor('seneca')}
+          accessibilityRole="button"
+          accessibilityState={{ selected: author === 'seneca' }}
+        >
+          <Text style={[styles.brand, { color: author === 'seneca' ? colors.accent : colors.textSoft }]}>
+            SENECA
+          </Text>
+        </Pressable>
       </View>
       <View style={styles.headerSide}>
         <Link href="/settings" accessibilityLabel="Einstellungen">
@@ -122,10 +132,18 @@ export default function Home() {
             source={
               author === 'epiktet'
                 ? require('../../assets/images/epictetus.jpg')
-                : require('../../assets/images/marcus-medallion.jpg')
+                : author === 'seneca'
+                  ? require('../../assets/images/seneca.jpg')
+                  : require('../../assets/images/marcus-medallion.jpg')
             }
             style={[styles.medallion, { borderColor: colors.accent }]}
-            accessibilityLabel={author === 'epiktet' ? t('authorEpiktet') : t('authorAurel')}
+            accessibilityLabel={
+              author === 'epiktet'
+                ? t('authorEpiktet')
+                : author === 'seneca'
+                  ? t('authorSeneca')
+                  : t('authorAurel')
+            }
           />
         </View>
         {/* Kein Tap-to-Next mehr: Text soll markier-/kopierbar sein (User-Wunsch) */}
@@ -139,7 +157,7 @@ export default function Home() {
             options={[
               { value: 'de', label: t('langDe') },
               { value: 'en', label: t('langEn') },
-              { value: 'grc', label: t('langGrc') },
+              { value: 'grc', label: author === 'seneca' ? t('langLa') : t('langGrc') },
             ]}
             value={lang}
             onChange={changeLang}
@@ -171,8 +189,8 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   headerSide: { width: 24, alignItems: 'flex-end' },
-  brandRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  brand: { fontSize: 13, letterSpacing: 5, fontWeight: '600' },
+  brandRow: { flexDirection: 'row', alignItems: 'center', gap: 7 },
+  brand: { fontSize: 12, letterSpacing: 3, fontWeight: '600' },
   medallionWrap: { alignItems: 'center', marginBottom: -44, zIndex: 2 },
   medallion: { width: 88, height: 88, borderRadius: 44, borderWidth: 2 },
   controls: { marginTop: 20, gap: 14, alignItems: 'center' },

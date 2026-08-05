@@ -9,7 +9,7 @@ const K_AUTHOR = 'aurelius.author';
 
 const LANGS: QuoteLang[] = ['de', 'en', 'grc'];
 const THEMES: ThemePref[] = ['light', 'dark', 'system'];
-const AUTHORS: Author[] = ['aurel', 'epiktet'];
+const AUTHORS: Author[] = ['aurel', 'epiktet', 'seneca'];
 
 export async function getAuthor(): Promise<Author> {
   const v = (await getItem(K_AUTHOR)) as Author | null;

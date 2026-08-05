@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import quotesData from '../../data/quotes.json';
 import type { Author, Quote, QuoteLang } from '../../lib/quotes';
 import { bookRoman } from '../../lib/quotes';
-import { EPIKTET_QUOTES } from '../../lib/corpus';
+import { EPIKTET_QUOTES, SENECA_QUOTES } from '../../lib/corpus';
 import { getAuthor, getQuoteLang, setAuthor as persistAuthor, setQuoteLang } from '../../lib/settings';
 import { READING_LIST } from '../../data/readingList';
 import { useTheme } from '../../theme/ThemeContext';
@@ -53,6 +53,7 @@ export default function Books() {
           options={[
             { value: 'aurel', label: t('authorAurel') },
             { value: 'epiktet', label: t('authorEpiktet') },
+            { value: 'seneca', label: t('authorSeneca') },
           ]}
           value={author}
           onChange={changeAuthor}
@@ -61,7 +62,7 @@ export default function Books() {
           options={[
             { value: 'de', label: t('langDe') },
             { value: 'en', label: t('langEn') },
-            { value: 'grc', label: t('langGrc') },
+            { value: 'grc', label: author === 'seneca' ? t('langLa') : t('langGrc') },
           ]}
           value={lang}
           onChange={(l) => {
@@ -70,13 +71,17 @@ export default function Books() {
           }}
         />
       </View>
-      {author === 'epiktet' ? (
+      {author !== 'aurel' ? (
         <>
-          <Text style={[styles.h1, { color: colors.text }]}>{t('enchTitle')}</Text>
-          <Text style={[styles.sub, { color: colors.textSoft }]}>{t('enchSub')}</Text>
+          <Text style={[styles.h1, { color: colors.text }]}>
+            {author === 'seneca' ? t('brevTitle') : t('enchTitle')}
+          </Text>
+          <Text style={[styles.sub, { color: colors.textSoft }]}>
+            {author === 'seneca' ? t('brevSub') : t('enchSub')}
+          </Text>
 
           <View style={styles.list}>
-            {EPIKTET_QUOTES.map((q) => (
+            {(author === 'seneca' ? SENECA_QUOTES : EPIKTET_QUOTES).map((q) => (
               <Pressable
                 key={q.id}
                 onPress={() => router.push(`/read/${q.id}`)}

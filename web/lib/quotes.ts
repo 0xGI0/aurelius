@@ -1,5 +1,5 @@
 export type QuoteLang = 'de' | 'en' | 'grc';
-export type Author = 'aurel' | 'epiktet';
+export type Author = 'aurel' | 'epiktet' | 'seneca';
 
 export interface Quote {
   id: string;
