@@ -60,7 +60,7 @@ describe('parseEnchEn (Long)', () => {
     ].join('\n');
     const result = parseEnchEn(raw);
     expect(result).toHaveLength(2);
-    expect(result[0].text).toBe('Of things some are in our power (), and others not.');
+    expect(result[0].text).toBe('Of things some are in our power, and others not.');
     expect(result[1].chapter).toBe(2);
   });
 
@@ -107,3 +107,23 @@ function toRoman(n: number): string {
   }
   return out;
 }
+
+describe('parseEnchGrc — vollständige Kapitel (Regression 2026-08-06)', () => {
+  const { readFileSync } = require('node:fs');
+  const grc = parseEnchGrc(readFileSync('data-sources/tlg0557.tlg002.xml', 'utf8'));
+  const en = parseEnchEn(readFileSync('data-sources/pg-long-enchiridion.txt', 'utf8'));
+
+  it('Kapitel 1 enthält auch die Abschnitte nach §1', () => {
+    const c1 = grc.find((c) => c.chapter === 1)!;
+    expect(c1.text).toContain('φύσει ἐλεύθερα'); // §2
+    expect(c1.text.length).toBeGreaterThan(1200);
+  });
+
+  it('kein Kapitel ist gegenüber dem Englischen verdächtig kurz', () => {
+    const enMap = new Map(en.map((c) => [c.chapter, c.text.length]));
+    for (const c of grc) {
+      const ratio = (enMap.get(c.chapter) ?? 0) / c.text.length;
+      expect(ratio).toBeLessThan(2.0);
+    }
+  });
+});

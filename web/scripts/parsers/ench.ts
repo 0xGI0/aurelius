@@ -85,6 +85,8 @@ export function parseEnchEn(raw: string): EnchChapter[] {
   let body = startIdx >= 0 ? raw.slice(startIdx) : raw;
   const endMatch = body.search(/^\s*(FOOTNOTES|\*\*\* END OF)/m);
   if (endMatch > 0) body = body.slice(0, endMatch);
+  // Glosse samt umgebender Klammer entfernen — sonst bleiben leere "()"
+  body = body.replace(/\s*\(\s*\[Greek:[^\]]*\]\s*\)/g, '');
   body = body.replace(/\[Greek:[^\]]*\]/g, '');
 
   const lines = body.split('\n');
@@ -138,19 +140,28 @@ export function parseEnchEn(raw: string): EnchChapter[] {
   return result;
 }
 
-/** PerseusDL TEI (tlg0557.tlg002): <div type="chapter" n="N">…</div>. */
+/**
+ * PerseusDL TEI (tlg0557.tlg002): <div type="chapter" n="N"> mit
+ * VERSCHACHTELTEN <div type="section">-Kindern. Ein non-greedy Match bis
+ * zum ersten </div> schnitt deshalb mehrteilige Kapitel nach §1 ab
+ * (Befund 2026-08-06, 18 von 53 Kapiteln betroffen) — daher wird von
+ * Kapitel-Öffnung zu Kapitel-Öffnung geschnitten; Rest-Tags entfernt
+ * ohnehin die Bereinigung.
+ */
 export function parseEnchGrc(xml: string): EnchChapter[] {
   const chapters: EnchChapter[] = [];
-  const re = /<div[^>]*type="chapter"[^>]*n="(\d+)"[^>]*>([\s\S]*?)<\/div>/g;
-  let m: RegExpExecArray | null;
-  while ((m = re.exec(xml)) !== null) {
-    const text = m[2]
+  const openings = [...xml.matchAll(/<div[^>]*type="chapter"[^>]*n="(\d+)"[^>]*>/g)];
+  for (let i = 0; i < openings.length; i++) {
+    const start = (openings[i].index ?? 0) + openings[i][0].length;
+    const end = i + 1 < openings.length ? openings[i + 1].index : xml.length;
+    const text = xml
+      .slice(start, end)
       .replace(/<note[\s\S]*?<\/note>/g, ' ')
       .replace(/<[^>]+>/g, ' ')
       .replace(/&amp;/g, '&')
       .replace(/\s+/g, ' ')
       .trim();
-    if (text) chapters.push({ chapter: Number(m[1]), text });
+    if (text) chapters.push({ chapter: Number(openings[i][1]), text });
   }
   return chapters.sort((a, b) => a.chapter - b.chapter);
 }
