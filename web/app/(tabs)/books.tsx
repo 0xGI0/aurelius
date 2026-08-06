@@ -113,7 +113,7 @@ export default function Books() {
                   key={q.id}
                   onPress={() => router.push(`/read/${q.id}`)}
                   accessibilityRole="button"
-                  style={styles.chapterRow}
+                  style={[styles.chapterCard, { backgroundColor: colors.card, borderColor: colors.border }]}
                 >
                   <Text style={[styles.chapterNum, { color: colors.accent }]}>{q.section}</Text>
                   <Text
@@ -177,6 +177,16 @@ const styles = StyleSheet.create({
   rowTitle: { fontFamily: fonts.quote, fontSize: 17 },
   rowRight: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   chapterRow: { flexDirection: 'row', gap: 10, alignItems: 'flex-start' },
+  // Kachel-Bauart der Abschnitts-Zeilen aus der Buch-Ansicht
+  chapterCard: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: 14,
+    borderWidth: 1,
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
   chapterNum: { fontSize: 13, fontWeight: '700', minWidth: 24, textAlign: 'right' },
   chapterPreview: { flex: 1, fontFamily: fonts.quote, fontSize: 15, lineHeight: 22 },
   bookCard: { borderWidth: 1, borderRadius: 14, padding: 18, gap: 6 },

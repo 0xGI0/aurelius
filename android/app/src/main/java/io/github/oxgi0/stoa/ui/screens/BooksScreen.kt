@@ -122,10 +122,17 @@ fun BooksScreen(nav: NavHostController) {
                 }
                 return@Screen
             }
-            Column(verticalArrangement = Arrangement.spacedBy(14.dp), modifier = Modifier.fillMaxWidth()) {
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
                 container.quotes.enchiridion.forEach { q ->
+                    // Kachel-Bauart der Abschnitts-Zeilen (wie Aurel-/Seneca-Karten)
                     Row(
-                        modifier = Modifier.fillMaxWidth().clickable { nav.navigate("read/${q.id}") },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(cardShape)
+                            .background(colors.card)
+                            .border(1.dp, colors.border, cardShape)
+                            .clickable { nav.navigate("read/${q.id}") }
+                            .padding(horizontal = 16.dp, vertical = 12.dp),
                     ) {
                         Text(
                             text = q.section.toString(),
