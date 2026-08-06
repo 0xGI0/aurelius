@@ -52,6 +52,10 @@ export default function TabsLayout() {
       <Tabs.Screen name="favorites" options={tab('star-outline', 'tabFavorites')} />
       <Tabs.Screen name="aurel" options={tab('medal-outline', 'tabAurel')} />
       <Tabs.Screen name="stoa" options={tab('business-outline', 'tabStoa')} />
+      {/* Lese-/Buch-Ansicht: kein eigener Tab, aber innerhalb des Navigators,
+          damit die Tab-Bar sichtbar bleibt (Owner-Wunsch 2026-08-06) */}
+      <Tabs.Screen name="book/[book]" options={{ href: null }} />
+      <Tabs.Screen name="read/[id]" options={{ href: null }} />
     </Tabs>
   );
 }

@@ -2,15 +2,15 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Pressable, Text, View, StyleSheet } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import quotesData from '../../data/quotes.json';
-import type { Quote, QuoteLang } from '../../lib/quotes';
-import { bookRoman } from '../../lib/quotes';
-import { SENECA_QUOTES } from '../../lib/corpus';
-import { getQuoteLang } from '../../lib/settings';
-import { useTheme } from '../../theme/ThemeContext';
-import { Screen } from '../../components/Screen';
-import { fonts } from '../../theme/tokens';
-import { useT } from '../../lib/i18n';
+import quotesData from '../../../data/quotes.json';
+import type { Quote, QuoteLang } from '../../../lib/quotes';
+import { bookRoman } from '../../../lib/quotes';
+import { SENECA_QUOTES } from '../../../lib/corpus';
+import { getQuoteLang } from '../../../lib/settings';
+import { useTheme } from '../../../theme/ThemeContext';
+import { Screen } from '../../../components/Screen';
+import { fonts } from '../../../theme/tokens';
+import { useT } from '../../../lib/i18n';
 
 const QUOTES = quotesData as Quote[];
 

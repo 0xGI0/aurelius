@@ -2,16 +2,16 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Pressable, Text, View, StyleSheet } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import type { QuoteLang } from '../../lib/quotes';
-import { authorOf, byId } from '../../lib/corpus';
-import { getQuoteLang, setQuoteLang } from '../../lib/settings';
-import { useTheme } from '../../theme/ThemeContext';
-import { Screen } from '../../components/Screen';
-import { QuoteCard } from '../../components/QuoteCard';
-import { Segmented } from '../../components/Segmented';
-import { ExplainSection } from '../../components/ExplainSection';
-import { FavoriteStar } from '../../components/FavoriteStar';
-import { useT } from '../../lib/i18n';
+import type { QuoteLang } from '../../../lib/quotes';
+import { authorOf, byId } from '../../../lib/corpus';
+import { getQuoteLang, setQuoteLang } from '../../../lib/settings';
+import { useTheme } from '../../../theme/ThemeContext';
+import { Screen } from '../../../components/Screen';
+import { QuoteCard } from '../../../components/QuoteCard';
+import { Segmented } from '../../../components/Segmented';
+import { ExplainSection } from '../../../components/ExplainSection';
+import { FavoriteStar } from '../../../components/FavoriteStar';
+import { useT } from '../../../lib/i18n';
 
 export default function Read() {
   const { colors } = useTheme();
