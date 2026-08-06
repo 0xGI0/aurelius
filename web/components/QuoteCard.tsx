@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import type { Quote, QuoteLang } from '../lib/quotes';
-import { referenceLabel } from '../lib/corpus';
+import { authorOf, referenceLabel } from '../lib/corpus';
 import { useTheme } from '../theme/ThemeContext';
 import { useT } from '../lib/i18n';
 import { fonts } from '../theme/tokens';
@@ -19,7 +19,9 @@ interface Props {
 export function QuoteCard({ quote, lang, onPress, topInset = 0 }: Props) {
   const { colors } = useTheme();
   const t = useT();
-  const isGreek = lang === 'grc';
+  // GFS Didot nur für echtes Griechisch — Senecas Original-Slot trägt
+  // Latein, und Didots Latein-Glyphen wirken deutlich dünner als Fraunces.
+  const isGreek = lang === 'grc' && authorOf(quote.id) !== 'seneca';
 
   // Scroll-Hinweis: Kanten-Verlauf + immer sichtbare schmale Scroll-Leiste
   const [fadeTop, setFadeTop] = useState(false);

@@ -28,6 +28,8 @@ import io.github.oxgi0.stoa.R
 import io.github.oxgi0.stoa.data.Quote
 import io.github.oxgi0.stoa.data.referenceLabel
 import io.github.oxgi0.stoa.ui.theme.FrauncesMedium
+import io.github.oxgi0.stoa.data.Author
+import io.github.oxgi0.stoa.data.authorOf
 import io.github.oxgi0.stoa.ui.theme.GfsDidot
 import io.github.oxgi0.stoa.ui.theme.LocalColors
 
@@ -45,7 +47,9 @@ fun QuoteCard(
 ) {
     val colors = LocalColors.current
     val shape = RoundedCornerShape(20.dp)
-    val greek = lang == "grc"
+    // GFS Didot nur für echtes Griechisch — Senecas Original-Slot trägt
+    // Latein, und Didots Latein-Glyphen wirken deutlich dünner als Fraunces.
+    val greek = lang == "grc" && authorOf(quote.id) != Author.Seneca
     val hint = stringResource(R.string.hint_tap)
 
     Column(
